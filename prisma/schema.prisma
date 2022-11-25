@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//npx prisma migrate dev --name tabelasRPG
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+
+  id              String @id @default(uuid())
+
+  nome            String
+  username        String @unique
+  email           String @unique
+  senha           String
+  created_at      DateTime @default(now())
+  
+  Fichas          Ficha[]
+  Sessoes         Sessao[]
+  souParticipante Participante[]
+
+  @@map("users")
+}
+
+model Ficha {
+
+  id              String @id @default(uuid())
+  created_at      DateTime @default(now())
+
+  userId          String
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  souParticipante Participante[]  
+  Dados           Dado[]
+
+  @@map("fichas")
+}
+
+model Sessao {
+
+  id              String @id @default(uuid())
+  nome            String
+  descricao       String
+  created_at      DateTime @default(now())
+
+  userId          String
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  Fichas          Ficha[]
+  Participantes   Participante[]
+  Anotacoes       Anotacao[]
+  Iniciativas     Iniciativa[]
+  Dados           Dado[]
+
+  @@map("sessoes")
+}
+
+model Participante {
+
+  id              String @id @default(uuid())
+  created_at      DateTime @default(now())
+
+  sessaoId        String
+  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  userId          String
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  username        String
+
+  @@map("participantes")
+
+}
+
+model Anotacao {
+
+  id              String @id @default(uuid())
+  nome            String
+  descricao       String
+  created_at      DateTime @default(now())
+
+  sessaoId        String
+  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("anotacoes")
+
+}
+
+model Iniciativa {
+
+  id              String @id @default(uuid())
+  posicao         Int
+  nome            String
+  iniciativa      Int
+  dano            Int
+  created_at      DateTime @default(now()) 
+
+  sessaoId        String
+  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("iniciativas")
+
+}
+
+model Dado {
+
+  id              String @id @default(uuid())
+  nome            String
+  valor           String
+  isDano          Boolean
+
+  fichaId         String?
+  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("dados")
+
+}
