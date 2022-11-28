@@ -2,56 +2,56 @@ const { hash, compare } = require("bcrypt");
 const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
-class EditIniciativaUseCase {
+class EditIniciativaByPosicaoUseCase {
   async execute({ id, posicao, nome, iniciativa, dano }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
     }
 
-    const iniciativaData = await prisma.iniciativa.findFirst({
+    const data = await prisma.iniciativa.findFirst({
       where: {
-        id,
+        posicao: Number(id)
       },
     });
 
-    if (!iniciativaData) {
+    if (!data) {
       throw new AppError("Iniciativa não existente.");
     }
 
     if (posicao == null || posicao == undefined || posicao == "") {
-      iniciativaData.posicao = iniciativaData.posicao;
+      data.posicao = data.posicao;
     } else {
-      iniciativaData.posicao = Number(posicao);
+      data.posicao = posicao;
     }
 
     if (nome == null || nome == undefined || nome == "") {
-      iniciativaData.nome = iniciativaData.nome;
+      data.nome = data.nome;
     } else {
-      iniciativaData.nome = nome;
+      data.nome = nome;
     }
 
     if (iniciativa == null || iniciativa == undefined || iniciativa == "") {
-      iniciativaData.iniciativa = iniciativaData.iniciativa;
+      data.iniciativa = data.iniciativa;
     } else {
-      iniciativaData.iniciativa = Number(iniciativa);
+      data.iniciativa = iniciativa;
     }
 
     if (dano == null || dano == undefined || dano == "") {
-      iniciativaData.dano = iniciativaData.dano;
+      data.dano = data.dano;
     } else {
-      iniciativaData.dano = Number(dano);
+      data.dano = dano;
     }
 
     const iniciativaAtualizada = await prisma.iniciativa.update({
       where: {
-        id,
+        id: data.id
       },
-      data: iniciativaData,
+      data: data,
     });
 
     return iniciativaAtualizada;
   }
 }
 
-module.exports = EditIniciativaUseCase;
+module.exports = EditIniciativaByPosicaoUseCase;

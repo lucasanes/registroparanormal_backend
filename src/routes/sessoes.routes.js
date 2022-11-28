@@ -70,10 +70,14 @@ const deleteIniciativaController = new DeleteIniciativaController();
 const EditIniciativaController = require("../modules/sessoes/iniciativa/EditIniciativa/EditIniciativaController");
 const editIniciativaController = new EditIniciativaController();
 
+const EditIniciativaByPosicaoController = require("../modules/sessoes/iniciativa/EditIniciativaByPosicao/EditIniciativaByPosicaoController");
+const editIniciativaByPosicaoController = new EditIniciativaByPosicaoController();
+
 sessoesRouters.get("/iniciativa/:id", getIniciativaBySessaoIdController.handle);
 sessoesRouters.post("/iniciativa", createIniciativaController.handle);
 sessoesRouters.delete("/iniciativa/:id", deleteIniciativaController.handle);
 sessoesRouters.put("/iniciativa/:id", editIniciativaController.handle)
+sessoesRouters.put("/iniciativa/posicao/:id", editIniciativaByPosicaoController.handle)
 
 //FIM INICIATIVA
 

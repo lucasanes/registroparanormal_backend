@@ -15,7 +15,7 @@ class EditSessaoUseCase {
     });
 
     if (!sessao) {
-      throw new AppError("Usuário não existente.");
+      throw new AppError("Sessão não existente.");
     }
 
     if (nome != undefined && nome != "") {
