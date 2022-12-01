@@ -1,7 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-//npx prisma migrate dev --name tabelasRPG
+//npx prisma migrate dev
 
 generator client {
   provider = "prisma-client-js"
@@ -85,7 +85,7 @@ model Anotacao {
 
   id              String @id @default(uuid())
   nome            String
-  descricao       String
+  descricao       String?
   created_at      DateTime @default(now())
 
   sessaoId        String

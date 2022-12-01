@@ -1,53 +1,60 @@
+const { hash, compare } = require("bcrypt");
 const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
-const { hash } = require("bcrypt");
 
-class CreateDadoUseCase {
-  async execute({ nome, valor, isDano, sessaoId }) {
+class EditDadoUseCase {
+  async execute({ id, nome, valor, isDano }) {
 
-    let valorDadoRegex;
-
-    const dados = await prisma.dado.findMany({
-      where: {
-        sessaoId
-      }
-    })
-
-    if (dados.length == 15) {
-      throw new AppError("Você só pode ter no máximo 15 dados customizados.")
+    if (!id) {
+      throw new AppError("ID não existente.");
     }
 
-    if (nome == undefined || nome == '') {
-      throw new AppError("Dados necessários não preenchidos.")
+    const data = await prisma.dado.findFirst({
+      where: {
+        id
+      },
+    });
+
+    if (!data) {
+      throw new AppError("Dado não existente.");
+    }
+
+    if (nome == null || nome == undefined || nome == "") {
+      throw new AppError("Seu dado deve ter um nome.")
     } else {
 
       if (nome.length > 10) {
         throw new AppError("O nome do seu dado deve ter no máximo 10 caracteres.")
       }
 
-      const dadoAlreadyExistsByName = await prisma.dado.findFirst({
+      const dadoAlreadyExistsByName = await prisma.dado.findMany({
         where: {
           nome
         }
       })
 
-      if (dadoAlreadyExistsByName) {
+      if (dadoAlreadyExistsByName.length == 1 && data.nome != nome) {
         throw new AppError("Você já tem um dado com este nome.")
       }
 
+      data.nome = nome
     }
 
-    if (valor == undefined || valor == '') {
-      throw new AppError("Dados necessários não preenchidos.")
+    if (valor == null || valor == undefined || valor == "") {
+      throw new AppError("Seu dado deve ter um valor.")
+    } else {
+      data.valor = valor
     }
 
-    if (isDano == undefined || isDano == null) {
-      throw new AppError("Dados necessários não preenchidos.")
+    if (isDano == null || isDano == undefined) {
+      data.isDano = data.isDano
+    } else {
+      data.isDano = isDano
     }
 
-    console.log(isDano)
+    if (!data.isDano) {
 
-    if (!isDano) {
+      let valorDadoRegex;
 
       if (valor.includes("+")) {
 
@@ -113,32 +120,15 @@ class CreateDadoUseCase {
 
     }
 
-    if (sessaoId != undefined && sessaoId != '') {
-      const sessaoIdAlreadyExists = await prisma.sessao.findFirst({
-        where: {
-          id: sessaoId,
-        },
-      });
-
-      if (!sessaoIdAlreadyExists) {
-        throw new AppError("Este ID de sessão não existe.");
-      }
-
-    } else {
-      throw new AppError("Dados necessários não preenchidos.")
-    }
-
-    const dado = await prisma.dado.create({
-      data: {
-        nome,
-        valor,
-        isDano,
-        sessaoId,
+    const dadoAtualizado = await prisma.dado.update({
+      where: {
+        id: data.id
       },
+      data: data
     });
 
-    return dado;
+    return dadoAtualizado;
   }
 }
 
-module.exports = CreateDadoUseCase;
+module.exports = EditDadoUseCase;
