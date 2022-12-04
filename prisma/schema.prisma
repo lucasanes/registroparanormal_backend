@@ -60,6 +60,8 @@ model Sessao {
   Anotacoes       Anotacao[]
   Iniciativas     Iniciativa[]
   Dados           Dado[]
+  Itens           Item[]
+  Armas           Arma[]
 
   @@map("sessoes")
 }
@@ -118,6 +120,8 @@ model Dado {
   valor           String
   isDano          Boolean
 
+  created_at      DateTime @default(now()) 
+
   fichaId         String?
   ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
@@ -125,5 +129,52 @@ model Dado {
   sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("dados")
+
+}
+
+model Item {
+
+  id              String @id @default(uuid())
+  nome            String
+  descricao       String?
+  espaco          Int
+  categoria       Int
+
+  imagem          String?
+
+  created_at      DateTime @default(now())
+
+  sessaoId        String
+  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("itens")
+
+}
+
+model Arma {
+
+  id              String @id @default(uuid())
+  nome            String
+  tipo            String
+  ataque          String
+  dano            String
+  margemCritico   Int
+  danoCritico     String
+  recarga         String?
+  alcance         String
+  especial        String?
+
+  descricao       String?
+  espaco          Int
+  categoria       Int
+
+  imagem          String?
+
+  created_at      DateTime @default(now())
+
+  sessaoId        String
+  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("armas")
 
 }

@@ -27,6 +27,8 @@ class EditAnotacaoUseCase {
 
     if (descricao != undefined && descricao != '') {
       data.descricao = descricao
+    } else {
+      data.descricao = null
     }
 
     const anotacaoAtualizada = await prisma.anotacao.update({

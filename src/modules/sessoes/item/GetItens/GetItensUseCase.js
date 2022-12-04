@@ -1,14 +1,14 @@
 const prisma = require("../../../database/prisma");
 const AppError = require("../../../../utils/AppError");
 
-class GetDadoBySessaoIdUseCase {
+class GetItensUseCase {
   async execute({ id }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
     }
 
-    const dados = await prisma.dado.findMany({
+    const itens = await prisma.item.findMany({
       where: {
         sessaoId: id,
       },
@@ -17,8 +17,8 @@ class GetDadoBySessaoIdUseCase {
       }
     });
 
-    return dados;
+    return itens;
   }
 }
 
-module.exports = GetDadoBySessaoIdUseCase;
+module.exports = GetItensUseCase;

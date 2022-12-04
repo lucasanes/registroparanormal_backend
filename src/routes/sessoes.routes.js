@@ -110,4 +110,30 @@ sessoesRouters.put("/anotacao/:id", editAnotacaoController.handle)
 
 //FIM ANOTACAO
 
+//ITEM
+
+const CreateItemController = require("../modules/sessoes/item/CreateItem/CreateItemController");
+const createItemController = new CreateItemController();
+
+const GetItensController = require("../modules/sessoes/item/GetItens/GetItensController");
+const getItensController = new GetItensController();
+
+sessoesRouters.post("/item", createItemController.handle);
+sessoesRouters.get("/item/:id", getItensController.handle)
+
+//FIM ITEM
+
+//ARMA
+
+const CreateArmaController = require("../modules/sessoes/arma/CreateArma/CreateArmaController");
+const createArmaController = new CreateArmaController();
+
+const GetArmasController = require("../modules/sessoes/arma/GetArmas/GetArmasController");
+const getArmasController = new GetArmasController();
+
+sessoesRouters.post("/arma", createArmaController.handle);
+sessoesRouters.get("/arma/:id", getArmasController.handle)
+
+//FIM ARMA
+
 module.exports = sessoesRouters;
