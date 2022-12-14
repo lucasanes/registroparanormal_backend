@@ -42,10 +42,10 @@ const editDadoController = new EditDadoController();
 
 fichasRouters.delete("/dado/:id", deleteDadoController.handle);
 fichasRouters.post("/dado", createDadoController.handle);
-fichasRouters.get("/dado/:id", getDadoBySessaoIdController.handle)
-fichasRouters.put("/dado/:id", editDadoController.handle)
+fichasRouters.get("/dado/:id", getDadoBySessaoIdController.handle);
+fichasRouters.put("/dado/:id", editDadoController.handle);
 
-//FIM DADO
+//FIM DADOa
 
 //ITEM
 
@@ -61,11 +61,10 @@ const deleteItemController = new DeleteItemController();
 const EditItemController = require("../modules/fichas/item/EditItem/EditItemController");
 const editItemController = new EditItemController();
 
-
 fichasRouters.post("/item", createItemController.handle);
-fichasRouters.get("/item/:id", getItensController.handle)
-fichasRouters.delete("/item/:id", deleteItemController.handle)
-fichasRouters.put("/item/:id", editItemController.handle)
+fichasRouters.get("/item/:id", getItensController.handle);
+fichasRouters.delete("/item/:id", deleteItemController.handle);
+fichasRouters.put("/item/:id", editItemController.handle);
 
 //FIM ITEM
 
@@ -84,9 +83,9 @@ const EditArmaController = require("../modules/fichas/arma/EditArma/EditArmaCont
 const editArmaController = new EditArmaController();
 
 fichasRouters.post("/arma", createArmaController.handle);
-fichasRouters.get("/arma/:id", getArmasController.handle)
-fichasRouters.delete("/arma/:id", deleteArmaController.handle)
-fichasRouters.put("/arma/:id", editArmaController.handle)
+fichasRouters.get("/arma/:id", getArmasController.handle);
+fichasRouters.delete("/arma/:id", deleteArmaController.handle);
+fichasRouters.put("/arma/:id", editArmaController.handle);
 
 //FIM ARMA
 
@@ -95,7 +94,7 @@ fichasRouters.put("/arma/:id", editArmaController.handle)
 const EditPortraitController = require("../modules/fichas/portrait/EditPortrait/EditPortraitController");
 const editPortraitController = new EditPortraitController();
 
-fichasRouters.put("/portrait/:id", editPortraitController.handle)
+fichasRouters.put("/portrait/:id", editPortraitController.handle);
 
 //FIM PORTRAIT
 
@@ -104,7 +103,7 @@ fichasRouters.put("/portrait/:id", editPortraitController.handle)
 const EditStatusController = require("../modules/fichas/status/EditStatus/EditStatusController");
 const editStatusController = new EditStatusController();
 
-fichasRouters.put("/status/:id", editStatusController.handle)
+fichasRouters.put("/status/:id", editStatusController.handle);
 
 //FIM STATUS
 
