@@ -12,7 +12,7 @@ routers.use("/usuarios", usersRouters);
 routers.use("/token", tokenRouters);
 routers.use("/sessoes", sessoesRouters);
 routers.use("/fichas", fichasRouters);
-routers.post("/", (request, response) => {
+routers.get("/", (request, response) => {
   const { user, password } = request.body;
 
   response.json({
