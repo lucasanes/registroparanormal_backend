@@ -45,7 +45,7 @@ fichasRouters.post("/dado", createDadoController.handle);
 fichasRouters.get("/dado/:id", getDadoBySessaoIdController.handle);
 fichasRouters.put("/dado/:id", editDadoController.handle);
 
-//FIM DADOa
+//FIM DADOss
 
 //ITEM
 
