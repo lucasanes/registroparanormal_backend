@@ -7,10 +7,10 @@ class CreateDadoController {
     const createDadoUseCase = new CreateDadoUseCase();
 
     const dado = await createDadoUseCase.execute({
-        nome, 
-        valor, 
-        isDano, 
-        fichaId,
+      nome,
+      valor,
+      isDano,
+      fichaId
     });
     response.status(201).json(dado);
   }

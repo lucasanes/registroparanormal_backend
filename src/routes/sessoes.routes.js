@@ -118,8 +118,17 @@ const createItemController = new CreateItemController();
 const GetItensController = require("../modules/sessoes/item/GetItens/GetItensController");
 const getItensController = new GetItensController();
 
+const DeleteItemController = require("../modules/sessoes/item/DeleteItem/DeleteItemController");
+const deleteItemController = new DeleteItemController();
+
+const EditItemController = require("../modules/sessoes/item/EditItem/EditItemController");
+const editItemController = new EditItemController();
+
+
 sessoesRouters.post("/item", createItemController.handle);
 sessoesRouters.get("/item/:id", getItensController.handle)
+sessoesRouters.delete("/item/:id", deleteItemController.handle)
+sessoesRouters.put("/item/:id", editItemController.handle)
 
 //FIM ITEM
 
@@ -131,9 +140,39 @@ const createArmaController = new CreateArmaController();
 const GetArmasController = require("../modules/sessoes/arma/GetArmas/GetArmasController");
 const getArmasController = new GetArmasController();
 
+const DeleteArmaController = require("../modules/sessoes/arma/DeleteArma/DeleteArmaController");
+const deleteArmaController = new DeleteArmaController();
+
+const EditArmaController = require("../modules/sessoes/arma/EditArma/EditArmaController");
+const editArmaController = new EditArmaController();
+
 sessoesRouters.post("/arma", createArmaController.handle);
 sessoesRouters.get("/arma/:id", getArmasController.handle)
+sessoesRouters.delete("/arma/:id", deleteArmaController.handle)
+sessoesRouters.put("/arma/:id", editArmaController.handle)
 
 //FIM ARMA
+
+//CONVITE
+
+
+const CreateConviteController = require("../modules/sessoes/convite/CreateConvite/CreateConviteController");
+const createConviteController = new CreateConviteController();
+
+const GetConviteController = require("../modules/sessoes/convite/GetConviteByEmail/GetConviteController");
+const getConviteController = new GetConviteController();
+
+const GetConviteByIdController = require("../modules/sessoes/convite/GetConviteById/GetConviteByIdController");
+const getConviteByIdController = new GetConviteByIdController();
+
+const DeleteConviteController = require("../modules/sessoes/convite/DeleteConvite/DeleteConviteController");
+const deleteConviteController = new DeleteConviteController();
+
+sessoesRouters.post("/convite", createConviteController.handle);
+sessoesRouters.get("/convite/:email", getConviteController.handle)
+sessoesRouters.get("/convite/id/:id", getConviteByIdController.handle)
+sessoesRouters.delete("/convite/:id", deleteConviteController.handle)
+
+//FIM CONVITE
 
 module.exports = sessoesRouters;

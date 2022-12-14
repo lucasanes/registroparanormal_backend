@@ -22,6 +22,19 @@ class EditAnotacaoUseCase {
     if (nome == null || nome == undefined || nome == "") {
       throw new AppError("Sua anotação deve ter um nome.")
     } else {
+
+      const alreadyExistsByName = await prisma.anotacao.findFirst({
+        where: {
+          nome
+        }
+      })
+
+      if (data.nome != nome) {
+        if (alreadyExistsByName) {
+          throw new AppError("Você já tem uma anotação com este nome.")
+        }
+      }
+
       data.nome = nome
     }
 

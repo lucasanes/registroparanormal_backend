@@ -2,15 +2,19 @@ const prisma = require("../../../database/prisma");
 const AppError = require("../../../../utils/AppError");
 
 class GetFichaByUserIdUseCase {
-  async execute({id}) {
+  async execute({ id }) {
+
     if (!id) {
       throw new AppError("ID não existente.")
     }
 
-    const ficha = await prisma.ficha.findFirst({
+    const ficha = await prisma.ficha.findMany({
       where: {
-        userId: id,
+        userId: id
       },
+      include: {
+        Principal: true,
+      }
     });
 
     if (!ficha) {

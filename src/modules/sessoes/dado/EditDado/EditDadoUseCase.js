@@ -29,7 +29,8 @@ class EditDadoUseCase {
 
       const dadoAlreadyExistsByName = await prisma.dado.findMany({
         where: {
-          nome
+          nome,
+          sessaoId: data.sessaoId
         }
       })
 
@@ -103,6 +104,10 @@ class EditDadoUseCase {
       }
 
       if (!valorDadoRegex.test(valor)) {
+        const valorSplit = valor.split('d')
+        if (valorSplit[0] > 5) {
+          throw new AppError("Você só pode rolar no máximo 5d20.")
+        }
         throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo e se o valor do dado é igual a 20.")
       }
 

@@ -25,24 +25,9 @@ model User {
   Fichas          Ficha[]
   Sessoes         Sessao[]
   souParticipante Participante[]
+  convites        Convite[]
 
   @@map("users")
-}
-
-model Ficha {
-
-  id              String @id @default(uuid())
-  created_at      DateTime @default(now())
-
-  userId          String
-  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
-
-  souParticipante Participante[]  
-  Dados           Dado[]
-
-  @@map("fichas")
 }
 
 model Sessao {
@@ -57,6 +42,7 @@ model Sessao {
 
   Fichas          Ficha[]
   Participantes   Participante[]
+  Convites        Convite[]
   Anotacoes       Anotacao[]
   Iniciativas     Iniciativa[]
   Dados           Dado[]
@@ -73,13 +59,29 @@ model Participante {
 
   sessaoId        String
   sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
   userId          String
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   fichaId         String
   ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
-  username        String
 
   @@map("participantes")
+
+}
+
+model Convite {
+
+  id              String @id @default(uuid())
+  created_at      DateTime @default(now())
+
+  sessaoId        String
+  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  userEmail       String
+  user            User @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+
+  @@map("convites")
 
 }
 
@@ -144,8 +146,11 @@ model Item {
 
   created_at      DateTime @default(now())
 
-  sessaoId        String
-  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  fichaId         String?
+  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("itens")
 
@@ -172,9 +177,210 @@ model Arma {
 
   created_at      DateTime @default(now())
 
-  sessaoId        String
-  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  fichaId         String?
+  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("armas")
 
 }
+
+model Ficha {
+
+  id              String @id @default(uuid())
+  created_at      DateTime @default(now())
+
+  userId          String
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  Principal       Principal[]
+  Atributos       Atributo[]
+  Status          Status[]
+  Pericias        Pericias[]
+  Defesas         Defesas[]
+  Personagem      Personagem[]
+  Dados           Dado[]
+  Itens           Item[]
+  Armas           Arma[]
+  Participantes   Participante[]
+  Portrait        Portrait[]
+
+  @@map("fichas")
+}
+
+model Principal {
+
+  id              String @id @default(uuid())
+
+  nome            String
+  jogador         String
+  classe          String
+  origem          String
+  nacionalidade   String
+  peprod          Int
+  idade           Int
+  idadeAdicional  Int?
+  deslocamento    Int
+  nex             Int
+  trilha          String?
+  patente         String
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasPrincipal")
+}
+
+model Atributo {
+
+  id              String @id @default(uuid())
+
+  agi             Int
+  int             Int
+  vig             Int
+  pre             Int
+  for             Int
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasAtributo")
+}
+
+model Status {
+
+  id              String @id @default(uuid())
+
+  combate         Boolean
+  insano          Boolean
+  danoMassivo     Boolean
+  inconsciente    Boolean
+
+  pv              Int
+  pvMax           Int
+  ps              Int
+  psMax           Int
+  pe              Int
+  peMax           Int
+  municao         Int?
+  municaoMax      Int?
+
+  peso            Int
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasStatus")
+}
+
+model Pericias {
+
+  id              String @id @default(uuid())
+
+  acrobacia       Int?
+  adestramento    Int?
+  arte            Int?
+  atletismo       Int?
+  atualidade      Int?
+  ciencia         Int?
+  crime           Int?
+  diplomacia      Int?
+  enganacao       Int?
+  fortitude       Int?
+  furtividade     Int?
+  iniciativa      Int?
+  intimidacao     Int?
+  intuicao        Int?
+  investigacao    Int?
+  luta            Int?
+  medicina        Int?
+  ocultismo       Int?
+  percepcao       Int?
+  pilotagem       Int?
+  pontaria        Int?
+  profissao       Int?
+  reflexo         Int?
+  religiao        Int?
+  sobrevivencia   Int?
+  tatica          Int?
+  tecnologia      Int?
+  vontade         Int?
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasPericias")
+
+}
+
+model Defesas {
+
+  id              String @id @default(uuid())
+
+  passiva         Int?
+  esquiva         Int?
+  bloqueio        Int?
+  mental          Int?
+  morte           Int?
+  conhecimento    Int?
+  sangue          Int?
+  energia         Int?
+  fisica          Int?
+  balistica       Int?
+  corte           Int?
+  impacto         Int?
+  perfuracao      Int?
+  eletricidade    Int?
+  fogo            Int?
+  frio            Int?
+  quimica         Int?
+  
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasDefesas")
+
+}
+
+model Personagem {
+
+  id              String @id @default(uuid())
+
+  historia            String?
+  aparencia           String?
+  pep                 String?
+  dfm                 String?
+  favoritos           String?
+  personalidade       String?
+  piorpesadelo        String?
+  anotacoesPlayer     String?
+  anotacoesPersonagem String?
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasPersonagem")
+
+}
+
+model Portrait {
+
+  id              String @id @default(uuid())
+
+  normal          String?
+  ferido          String?
+  insano          String?
+  insanoeferido   String?
+  morrendo        String?
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasPortrait")
+}
+
+//npx prisma migrate dev

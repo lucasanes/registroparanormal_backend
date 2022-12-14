@@ -14,17 +14,17 @@ class CreateSessaoUseCase {
     }
 
     if (userId == undefined || userId == '') {
-        throw new AppError("Dados necessários não preenchidos.")
+      throw new AppError("Dados necessários não preenchidos.")
     }
 
     const userIdAlreadyExists = await prisma.user.findFirst({
-        where: {
-          id: userId,
-        },
+      where: {
+        id: userId,
+      },
     });
 
     if (!userIdAlreadyExists) {
-        throw new AppError("Este ID de usuário não existe.");
+      throw new AppError("Este ID de usuário não existe.");
     }
 
     if (descricao == undefined || descricao == '') {
@@ -71,8 +71,12 @@ class CreateSessaoUseCase {
       },
       include: {
         Participantes: {
-          select:{
-            username: true
+          include: {
+            user: {
+              select: {
+                nome: true
+              }
+            }
           }
         }
       }

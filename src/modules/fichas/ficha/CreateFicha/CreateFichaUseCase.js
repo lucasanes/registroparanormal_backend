@@ -3,24 +3,50 @@ const prisma = require("../../../database/prisma");
 const { hash } = require("bcrypt");
 
 class CreateFichaUseCase {
-  async execute({ userId, sessaoId }) {
+  async execute({
+    userId, sessaoId,
+    nome, jogador, classe, origem, nacionalidade, idade, nex, trilha, patente,
+    agi, int, vig, pre, forca,
+    pvMax, sanMax, peMax
+  }) {
 
     if (userId == undefined || userId == '' || userId == null) {
-        throw new AppError("Dados necessários não preenchidos.")
+      throw new AppError("Dados necessários não preenchidos.")
     }
 
     const userIdAlreadyExists = await prisma.user.findFirst({
-        where: {
-          id: userId,
-        },
+      where: {
+        id: userId,
+      },
     });
 
     if (!userIdAlreadyExists) {
-        throw new AppError("Este ID de usuário não existe.");
+      throw new AppError("Este ID de usuário não existe.");
+    }
+
+    if (nome == '' || nome == null || nome == undefined
+      || origem == '' || origem == null || origem == undefined
+      || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
+      || idade == '' || idade == null || idade == undefined
+      || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
+      || idade == '' || idade == null || idade == undefined
+      || agi == '' || agi == null || agi == undefined
+      || int == '' || int == null || int == undefined
+      || vig == '' || vig == null || vig == undefined
+      || pre == '' || pre == null || pre == undefined
+      || forca == '' || forca == null || forca == undefined
+      || pvMax == '' || pvMax == null || pvMax == undefined
+      || sanMax == '' || sanMax == null || sanMax == undefined
+      || peMax == '' || peMax == null || peMax == undefined) {
+      throw new AppError("Dados necessários não preenchidos.")
+    }
+
+    if (trilha == null) {
+      trilha = 'Nenhuma'
     }
 
     let ficha
-    
+
     if (sessaoId != undefined && sessaoId != '' && sessaoId != null) {
       const sessaoIdAlreadyExists = await prisma.sessao.findFirst({
         where: {
@@ -36,13 +62,6 @@ class CreateFichaUseCase {
         throw new AppError("O dono da sessão não pode ter uma ficha nela.")
       }
 
-      ficha = await prisma.ficha.create({
-        data: {
-          userId,
-          sessaoId
-        },
-      });
-
       const participanteAlreadyExistsByUserId = await prisma.participante.findFirst({
         where: {
           userId
@@ -53,12 +72,18 @@ class CreateFichaUseCase {
         throw new AppError("Este usuário já tem uma ficha em sua sessão.")
       }
 
+      ficha = await prisma.ficha.create({
+        data: {
+          userId,
+          sessaoId
+        },
+      });
+
       await prisma.participante.create({
         data: {
           sessaoId,
           userId,
-          fichaId: ficha.id,
-          username: userIdAlreadyExists.username
+          fichaId: ficha.id
         }
       })
 
@@ -79,9 +104,93 @@ class CreateFichaUseCase {
           userId
         },
       });
+
     }
-    
-    return ficha;
+
+    const deslocamento = 7 + agi
+    const peprod = Math.floor(nex / 5) + 1
+
+    let peso;
+
+    if (forca == 0) {
+      peso = 2
+    } else {
+      peso = forca * 5
+    }
+
+    const principal = await prisma.principal.create({
+      data: {
+        fichaId: ficha.id,
+        nome,
+        jogador,
+        classe,
+        origem,
+        nacionalidade,
+        idade,
+        nex,
+        trilha,
+        patente,
+        peprod,
+        deslocamento
+      }
+    })
+
+    const atributos = await prisma.atributo.create({
+      data: {
+        fichaId: ficha.id,
+        agi: agi,
+        int: int,
+        vig: vig,
+        pre: pre,
+        for: forca
+      }
+    })
+
+    const status = await prisma.status.create({
+      data: {
+        fichaId: ficha.id,
+        combate: false,
+        insano: false,
+        danoMassivo: false,
+        inconsciente: false,
+        pv: pvMax,
+        pvMax: pvMax,
+        ps: sanMax,
+        psMax: sanMax,
+        pe: peMax,
+        peMax: peMax,
+        peso: peso
+      }
+    })
+
+    await prisma.pericias.create({
+      data: {
+        fichaId: ficha.id
+      }
+    })
+
+    const passiva = 10 + Number(agi)
+
+    await prisma.defesas.create({
+      data: {
+        fichaId: ficha.id,
+        passiva: passiva
+      }
+    })
+
+    await prisma.personagem.create({
+      data: {
+        fichaId: ficha.id
+      }
+    })
+
+    await prisma.portrait.create({
+      data: {
+        fichaId: ficha.id
+      }
+    })
+
+    return ficha, principal, atributos, status;
   }
 }
 

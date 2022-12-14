@@ -30,12 +30,24 @@ class CreateArmaUseCase {
 
       const alreadyExistsByName = await prisma.arma.findFirst({
         where: {
-          nome: nomeLower
+          nome: nomeLower,
+          sessaoId
+        }
+      })
+
+      const alreadyExistsByItemName = await prisma.item.findFirst({
+        where: {
+          nome: nomeLower,
+          sessaoId
         }
       })
 
       if (alreadyExistsByName) {
         throw new AppError("Você já tem uma arma com este nome.")
+      }
+
+      if (alreadyExistsByItemName) {
+        throw new AppError("Você já tem um item com este nome.")
       }
 
     } else {
@@ -87,6 +99,10 @@ class CreateArmaUseCase {
       }
 
       if (!valorDadoRegex.test(ataque)) {
+        const valorSplit = ataque.split('d')
+        if (valorSplit[0] > 5) {
+          throw new AppError("Você só pode rolar no máximo 5d20.")
+        }
         throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo e se o valor do dado é igual a 20.")
       }
 
@@ -196,6 +212,10 @@ class CreateArmaUseCase {
 
     if (tipo == undefined || tipo == '') {
       throw new AppError("Dados necessários não preenchidos.")
+    } else {
+      if (tipo.includes(" ")) {
+        throw new AppError("O tipo da sua arma não pode conter espaços.")
+      }
     }
 
     if (espaco != undefined && espaco != '') {

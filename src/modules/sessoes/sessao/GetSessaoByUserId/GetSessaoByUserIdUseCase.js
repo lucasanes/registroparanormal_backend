@@ -2,7 +2,7 @@ const prisma = require("../../../database/prisma");
 const AppError = require("../../../../utils/AppError");
 
 class GetSessaoByUserIdUseCase {
-  async execute({id}) {
+  async execute({ id }) {
 
     if (!id) {
       throw new AppError("ID não existente.")
@@ -14,16 +14,16 @@ class GetSessaoByUserIdUseCase {
       },
       include: {
         Participantes: {
-          select: {
-            username: true
+          include: {
+            user: {
+              select: {
+                nome: true
+              }
+            }
           }
         }
       }
     });
-
-    if (sessao.length == 0) {
-      throw new AppError("Este usuário não tem sessões existentes.")
-    }
 
     return sessao;
   }

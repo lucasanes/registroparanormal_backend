@@ -22,6 +22,8 @@ class CreateUserUseCase {
       throw new AppError("Seu nome não pode conter espaços.")
     }
 
+    nome = nome[0].toUpperCase() + nome.substring(1)
+
     if (username == undefined || username == '') {
       throw new AppError("Dados necessários não preenchidos.")
     }

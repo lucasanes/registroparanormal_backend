@@ -28,14 +28,26 @@ class CreateItemUseCase {
         throw new AppError("O nome do seu item não pode passar de 20 caracteres.")
       }
 
-      const alreadyExistsByName = await prisma.item.findFirst({
+      const alreadyExistsByItemName = await prisma.item.findFirst({
         where: {
-          nome: nomeLower
+          nome: nomeLower,
+          sessaoId
         }
       })
 
-      if (alreadyExistsByName) {
+      const alreadyExistsByArmaName = await prisma.arma.findFirst({
+        where: {
+          nome: nomeLower,
+          sessaoId
+        }
+      })
+
+      if (alreadyExistsByItemName) {
         throw new AppError("Você já tem um item com este nome.")
+      }
+
+      if (alreadyExistsByArmaName) {
+        throw new AppError("Você já tem uma arma com este nome.")
       }
 
     } else {
@@ -55,7 +67,7 @@ class CreateItemUseCase {
     if (categoria != undefined && categoria != '') {
 
       if (categoria < 0 || categoria > 4) {
-        throw new AppError("A categoria de um item tem que ser entre 0 e 5.")
+        throw new AppError("A categoria de um item tem que ser entre 0 e 4.")
       }
 
     } else {

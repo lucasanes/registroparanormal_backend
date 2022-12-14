@@ -1,8 +1,11 @@
 require("express-async-errors");
 const express = require("express");
 const routers = require("./routes");
+const { createServer } = require('http')
 const AppError = require("./utils/AppError");
 const cors = require("cors");
+const { Server } = require('socket.io')
+const socket = require('socket.io')
 
 const app = express();
 
@@ -23,4 +26,56 @@ app.use((error, request, response, next) => {
   });
 });
 
-app.listen("8080", () => console.log("Server is running"));
+const options = {
+  cors: true,
+  origin: ['http://localhost:5173']
+}
+
+const httpServer = createServer(app)
+
+const io = new Server(httpServer, options)
+
+io.on('connection', socket => {
+  // console.log('Connection => Alguém Conectou.')
+  socket.on('status.combate', data => {
+    io.emit('status.combate', data)
+  })
+  socket.on('status.insano', data => {
+    console.log('Insano =>', data)
+    io.emit('status.insano', data)
+  })
+  socket.on('status.massivo', data => {
+    io.emit('status.massivo', data)
+  })
+  socket.on('status.inconsciente', data => {
+    io.emit('status.inconsciente', data)
+  })
+
+  socket.on('status.pvA', data => {
+    io.emit('status.pvA', data)
+  })
+  socket.on('status.sanA', data => {
+    io.emit('status.sanA', data)
+  })
+  socket.on('status.peA', data => {
+    io.emit('status.peA', data)
+  })
+  socket.on('status.pvMax', data => {
+    io.emit('status.pvMax', data)
+  })
+  socket.on('status.sanMax', data => {
+    io.emit('status.sanMax', data)
+  })
+  socket.on('status.peMax', data => {
+    io.emit('status.peMax', data)
+  })
+
+  socket.on('status.portrait', data => {
+    io.emit('status.portrait', data)
+  })
+  // socket.on('disconnect', () => {
+  //   console.log('Disconnect => Alguém desconectou.')
+  // })
+})
+
+httpServer.listen("8080", () => console.log("Server is running"));

@@ -2,7 +2,7 @@ const prisma = require("../../../database/prisma");
 const AppError = require("../../../../utils/AppError");
 
 class GetFichaByIdUseCase {
-  async execute({id}) {
+  async execute({ id }) {
 
     if (!id) {
       throw new AppError("ID não existente.")
@@ -12,6 +12,15 @@ class GetFichaByIdUseCase {
       where: {
         id,
       },
+      include: {
+        Principal: true,
+        Atributos: true,
+        Status: true,
+        Pericias: true,
+        Personagem: true,
+        Defesas: true,
+        Portrait: true
+      }
     });
 
     if (!ficha) {
