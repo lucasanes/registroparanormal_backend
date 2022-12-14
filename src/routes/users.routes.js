@@ -17,4 +17,6 @@ usersRouters.get("/:id", getUserByIdController.handle)
 usersRouters.put("/:id", editUserController.handle);
 usersRouters.delete("/:id", deleteUserController.handle)
 
+//Vinha é gay
+
 module.exports = usersRouters;
