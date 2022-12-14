@@ -6,6 +6,7 @@ const AppError = require("./utils/AppError");
 const cors = require("cors");
 const { Server } = require('socket.io')
 const socket = require('socket.io')
+require('dotenv').config()
 
 const app = express();
 
@@ -77,4 +78,4 @@ io.on('connection', socket => {
   // })
 })
 
-httpServer.listen("8080", () => console.log("Server is running"));
+httpServer.listen(process.env.PORT || '8080', () => console.log("Server is running"));
