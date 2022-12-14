@@ -11,7 +11,7 @@ const getUserByIdController = new GetUserByIdController();
 const editUserController = new EditUserController();
 const deleteUserController = new DeleteUserController();
 
-usersRouters.post("/criar/", createUserController.handle);
+usersRouters.post("/", createUserController.handle);
 usersRouters.get("/", getUserController.handle);
 usersRouters.get("/:id", getUserByIdController.handle)
 usersRouters.put("/:id", editUserController.handle);

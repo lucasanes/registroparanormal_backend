@@ -12,12 +12,4 @@ routers.use("/usuarios", usersRouters);
 routers.use("/token", tokenRouters);
 routers.use("/sessoes", sessoesRouters);
 routers.use("/fichas", fichasRouters);
-routers.get("/", (request, response) => {
-  const { user, password } = request.body;
-
-  response.json({
-    user,
-    password
-  });
-});
 module.exports = routers;
