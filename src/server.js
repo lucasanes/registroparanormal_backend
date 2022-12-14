@@ -28,7 +28,7 @@ app.use((error, request, response, next) => {
 
 const options = {
   cors: true,
-  origin: ['http://localhost:5173']
+  origin: ['*']
 }
 
 const httpServer = createServer(app)
@@ -41,7 +41,6 @@ io.on('connection', socket => {
     io.emit('status.combate', data)
   })
   socket.on('status.insano', data => {
-    console.log('Insano =>', data)
     io.emit('status.insano', data)
   })
   socket.on('status.massivo', data => {
