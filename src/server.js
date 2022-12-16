@@ -38,6 +38,9 @@ const io = new Server(httpServer, options);
 
 io.on("connection", (socket) => {
   // console.log('Connection => Alguém Conectou.')
+  socket.on("status.userportrait", (data) => {
+    io.emit("status.userportrait", data);
+  });
   socket.on("status.combate", (data) => {
     io.emit("status.combate", data);
   });
