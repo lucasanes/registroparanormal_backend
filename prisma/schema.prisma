@@ -165,7 +165,7 @@ model Arma {
   dano            String
   margemCritico   Int
   danoCritico     String
-  recarga         String?
+  recarga         Int?
   alcance         String
   especial        String?
 
