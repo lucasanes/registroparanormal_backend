@@ -173,6 +173,8 @@ model Arma {
   espaco          Int
   categoria       Int
 
+  municao         Int?
+
   imagem          String?
 
   created_at      DateTime @default(now())
@@ -266,8 +268,6 @@ model Status {
   psMax           Int
   pe              Int
   peMax           Int
-  municao         Int?
-  municaoMax      Int?
 
   peso            Int
 

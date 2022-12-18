@@ -3,7 +3,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class EditArmaUseCase {
-  async execute({ id, nome, tipo, ataque, dano, margemCritico, danoCritico, recarga, alcance, especial, espaco, categoria, descricao, imagem, sessaoId }) {
+  async execute({ id, nome, tipo, ataque, dano, margemCritico, danoCritico, recarga, municao, alcance, especial, espaco, categoria, descricao, imagem, sessaoId }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
@@ -292,6 +292,11 @@ class EditArmaUseCase {
       data.imagem = null
     }
 
+    if (municao != null && municao != '') {
+      data.municao = number(municao)
+    } else {
+      data.municao = null
+    }
 
     const armaAtualizada = await prisma.arma.update({
       where: {
