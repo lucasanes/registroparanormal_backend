@@ -38,9 +38,6 @@ const io = new Server(httpServer, options);
 
 io.on("connection", (socket) => {
   // console.log('Connection => Alguém Conectou.')
-  socket.on("status.userportrait", (data) => {
-    io.emit("status.userportrait", data);
-  });
   socket.on("status.combate", (data) => {
     io.emit("status.combate", data);
   });
@@ -72,9 +69,15 @@ io.on("connection", (socket) => {
   socket.on("status.peMax", (data) => {
     io.emit("status.peMax", data);
   });
-
   socket.on("status.portrait", (data) => {
     io.emit("status.portrait", data);
+  });
+
+  socket.on("enviado.convite", (data) => {
+    io.emit("enviado.convite", data);
+  });
+  socket.on("enviado.inv", (data) => {
+    io.emit("enviado.inv", data);
   });
   // socket.on('disconnect', () => {
   //   console.log('Disconnect => Alguém desconectou.')

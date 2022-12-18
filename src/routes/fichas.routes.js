@@ -52,6 +52,9 @@ fichasRouters.put("/dado/:id", editDadoController.handle);
 const CreateItemController = require("../modules/fichas/item/CreateItem/CreateItemController");
 const createItemController = new CreateItemController();
 
+const EnviarItemController = require("../modules/fichas/item/EnviarItem/EnviarItemController");
+const enviarItemController = new EnviarItemController();
+
 const GetItensController = require("../modules/fichas/item/GetItens/GetItensController");
 const getItensController = new GetItensController();
 
@@ -62,6 +65,7 @@ const EditItemController = require("../modules/fichas/item/EditItem/EditItemCont
 const editItemController = new EditItemController();
 
 fichasRouters.post("/item", createItemController.handle);
+fichasRouters.post("/item/enviar", enviarItemController.handle);
 fichasRouters.get("/item/:id", getItensController.handle);
 fichasRouters.delete("/item/:id", deleteItemController.handle);
 fichasRouters.put("/item/:id", editItemController.handle);
@@ -73,6 +77,9 @@ fichasRouters.put("/item/:id", editItemController.handle);
 const CreateArmaController = require("../modules/fichas/arma/CreateArma/CreateArmaController");
 const createArmaController = new CreateArmaController();
 
+const EnviarArmaController = require("../modules/fichas/arma/EnviarArma/EnviarArmaController");
+const enviarArmaController = new EnviarArmaController();
+
 const GetArmasController = require("../modules/fichas/arma/GetArmas/GetArmasController");
 const getArmasController = new GetArmasController();
 
@@ -83,6 +90,7 @@ const EditArmaController = require("../modules/fichas/arma/EditArma/EditArmaCont
 const editArmaController = new EditArmaController();
 
 fichasRouters.post("/arma", createArmaController.handle);
+fichasRouters.post("/arma/enviar", enviarArmaController.handle);
 fichasRouters.get("/arma/:id", getArmasController.handle);
 fichasRouters.delete("/arma/:id", deleteArmaController.handle);
 fichasRouters.put("/arma/:id", editArmaController.handle);

@@ -1,7 +1,7 @@
 const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
-class CreateItemUseCase {
+class EnviarItemUseCase {
   async execute({ nome, espaco, categoria, descricao, imagem, fichaId }) {
 
     const nomeLower = nome.toLowerCase()
@@ -43,11 +43,11 @@ class CreateItemUseCase {
       })
 
       if (alreadyExistsByItemName) {
-        throw new AppError("Você já tem um item com este nome.")
+        throw new AppError("Esta ficha já tem um item com este nome.")
       }
 
       if (alreadyExistsByArmaName) {
-        throw new AppError("Você já tem uma arma com este nome.")
+        throw new AppError("Esta ficha já tem uma arma com este nome.")
       }
 
     } else {
@@ -93,4 +93,4 @@ class CreateItemUseCase {
   }
 }
 
-module.exports = CreateItemUseCase;
+module.exports = EnviarItemUseCase;
