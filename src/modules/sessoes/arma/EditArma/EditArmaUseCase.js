@@ -267,8 +267,7 @@ class EditArmaUseCase {
     }
 
     if (recarga != null && recarga != '') {
-      const recargaLower = recarga.toLowerCase()
-      data.recarga = recargaLower
+      data.recarga = Number(recarga)
     } else {
       data.recarga = null
     }
@@ -293,7 +292,7 @@ class EditArmaUseCase {
     }
 
     if (municao != null && municao != '') {
-      data.municao = number(municao)
+      data.municao = Number(municao)
     } else {
       data.municao = null
     }

@@ -238,12 +238,6 @@ class CreateArmaUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    let recargaLower = recarga;
-
-    if (recarga != null) {
-      recargaLower = recarga.toLowerCase()
-    }
-
     let especialLower = especial;
 
     if (especial != null) {
@@ -258,7 +252,7 @@ class CreateArmaUseCase {
         dano,
         margemCritico: Number(margemCritico),
         danoCritico,
-        recarga: recargaLower,
+        recarga: Number(recarga),
         alcance: alcance.toLowerCase(),
         especial: especialLower,
         espaco: Number(espaco),

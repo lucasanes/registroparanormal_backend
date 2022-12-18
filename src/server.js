@@ -72,6 +72,9 @@ io.on("connection", (socket) => {
   socket.on("status.portrait", (data) => {
     io.emit("status.portrait", data);
   });
+  socket.on("status.municao", (data) => {
+    io.emit("status.municao", data);
+  });
 
   socket.on("enviado.convite", (data) => {
     io.emit("enviado.convite", data);

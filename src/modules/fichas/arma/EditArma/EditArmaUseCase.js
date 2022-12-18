@@ -16,7 +16,7 @@ class EditArmaUseCase {
     });
 
     if (!data) {
-      throw new AppError("Iniciativa não existente.");
+      throw new AppError("Arma não existente.");
     }
 
     const nomeLower = nome.toLowerCase()
