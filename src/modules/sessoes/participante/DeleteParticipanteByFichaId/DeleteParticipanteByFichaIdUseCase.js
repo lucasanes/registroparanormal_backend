@@ -9,17 +9,17 @@ class DeleteParticipanteByFichaIdUseCase {
 
     const participanteAntigo = await prisma.participante.findFirst({
       where: {
-        id,
+        fichaId: id,
       },
     });
 
     if (!participanteAntigo) {
-      throw new AppError("Anotação não existente.");
+      throw new AppError("Participante não existente.");
     }
 
     await prisma.participante.delete({
       where: {
-        id,
+        fichaId: id,
       },
     });
 
