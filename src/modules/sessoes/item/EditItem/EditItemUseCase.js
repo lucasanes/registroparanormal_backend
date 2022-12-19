@@ -3,7 +3,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class EditItemUseCase {
-  async execute({ id, nome, espaco, categoria, descricao, imagem, sessaoId }) {
+  async execute({ id, nome, espaco, categoria, descricao, imagem, isMunicao, sessaoId }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
@@ -95,6 +95,12 @@ class EditItemUseCase {
       itemData.descricao = descricao
     } else {
       itemData.descricao = null
+    }
+
+    if (isMunicao != undefined && isMunicao != '') {
+      itemData.isMunicao = isMunicao
+    } else {
+      itemData.isMunicao = null
     }
 
     const itemAtualizado = await prisma.item.update({
