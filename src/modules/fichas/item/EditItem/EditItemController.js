@@ -2,7 +2,7 @@ const EditItemUseCase = require("./EditItemUseCase");
 
 class EditItemController {
   async handle(request, response) {
-    const { nome, espaco, categoria, descricao, imagem } = request.body;
+    const { nome, espaco, categoria, descricao, isMunicao, imagem } = request.body;
 
     const { id } = request.params;
     const editItemUseCase = new EditItemUseCase();
@@ -13,6 +13,7 @@ class EditItemController {
       espaco,
       categoria,
       descricao,
+      isMunicao,
       imagem,
     });
     response.status(201).json(data);

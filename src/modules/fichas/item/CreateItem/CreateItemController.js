@@ -12,6 +12,7 @@ class CreateItemController {
       categoria,
       descricao,
       imagem,
+      isMunicao,
       fichaId
     });
     response.status(201).json(data);

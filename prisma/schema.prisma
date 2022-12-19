@@ -144,6 +144,11 @@ model Item {
 
   imagem          String?
 
+  isMunicao       Boolean?
+
+  municao         Int?
+  municaoMax      Int?
+
   created_at      DateTime @default(now())
 
   sessaoId        String?
