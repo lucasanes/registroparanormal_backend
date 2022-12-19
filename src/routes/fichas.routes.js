@@ -6,6 +6,9 @@ const fichasRouters = Router();
 const CreateFichaController = require("../modules/fichas/ficha/CreateFicha/CreateFichaController");
 const createFichaController = new CreateFichaController();
 
+const EditFichaController = require("../modules/fichas/ficha/EditFicha/EditFichaController");
+const editFichaController = new EditFichaController();
+
 const GetFichaBySessaoIdController = require("../modules/fichas/ficha/GetFichaBySessaoId/GetFichaBySessaoIdController");
 const getFichaControllerBySessaoId = new GetFichaBySessaoIdController();
 
@@ -19,6 +22,7 @@ const DeleteFichaController = require("../modules/fichas/ficha/DeleteFicha/Delet
 const deleteFichaController = new DeleteFichaController();
 
 fichasRouters.post("/", createFichaController.handle);
+fichasRouters.put("/:id", editFichaController.handle);
 fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);
 fichasRouters.get("/user/:id", getFichaControllerByUserId.handle);
 fichasRouters.get("/:id", getFichaByIdController.handle);
