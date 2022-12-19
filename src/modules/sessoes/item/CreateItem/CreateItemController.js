@@ -2,7 +2,7 @@ const CreateItemUseCase = require("./CreateItemUseCase");
 
 class CreateItemController {
   async handle(request, response) {
-    const { nome, espaco, categoria, descricao, imagem, sessaoId } = request.body;
+    const { nome, espaco, categoria, descricao, imagem, isMunicao, sessaoId } = request.body;
 
     const createItemUseCase = new CreateItemUseCase();
 
@@ -12,6 +12,7 @@ class CreateItemController {
       categoria,
       descricao,
       imagem,
+      isMunicao,
       sessaoId
     });
     response.status(201).json(data);

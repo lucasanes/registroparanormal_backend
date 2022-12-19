@@ -2,7 +2,7 @@ const CreateItemUseCase = require("./CreateItemUseCase");
 
 class CreateItemController {
   async handle(request, response) {
-    const { nome, espaco, categoria, descricao, imagem, fichaId } = request.body;
+    const { nome, espaco, categoria, descricao, imagem, isMunicao, fichaId } = request.body;
 
     const createItemUseCase = new CreateItemUseCase();
 
