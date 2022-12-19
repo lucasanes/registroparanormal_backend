@@ -68,7 +68,9 @@ class EditItemUseCase {
       itemData.espaco = Number(espaco)
 
     } else {
-      throw new AppError('Dados necessários não preenchidos.')
+      if (espaco != 0) {
+        throw new AppError('Dados necessários não preenchidos.')
+      }
     }
 
     if (categoria != undefined && categoria != '') {
