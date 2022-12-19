@@ -21,10 +21,6 @@ class GetFichaBySessaoIdUseCase {
       }
     });
 
-    if (ficha.length == 0) {
-      throw new AppError("Este sessão não tem fichas.")
-    }
-
     return ficha;
   }
 }
