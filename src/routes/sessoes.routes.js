@@ -54,13 +54,13 @@ sessoesRouters.put("/dado/:id", editDadoController.handle)
 //PARTICIPANTE
 
 const GetParticipanteBySessaoIdController = require("../modules/sessoes/participante/GetParticipanteBySessaoId/GetParticipanteBySessaoIdController");
-const getParticipanteBySessaoIdController =
-  new GetParticipanteBySessaoIdController();
+const getParticipanteBySessaoIdController = new GetParticipanteBySessaoIdController();
 
-sessoesRouters.get(
-  "/participante/:id",
-  getParticipanteBySessaoIdController.handle
-);
+const DeleteParticipanteByFichaIdController = require("../modules/sessoes/participante/DeleteParticipanteByFichaId/DeleteParticipanteByFichaIdController");
+const deleteParticipanteByFichaIdController = new DeleteParticipanteByFichaIdController();
+
+sessoesRouters.get("/participante/:id", getParticipanteBySessaoIdController.handle);
+sessoesRouters.delete("/participante/:id", deleteParticipanteByFichaIdController.handle);
 
 //FIM PARTICIPANTE
 
