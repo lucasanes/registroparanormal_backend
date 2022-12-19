@@ -161,7 +161,6 @@ model Arma {
   id              String @id @default(uuid())
   nome            String
   tipo            String
-  ataque          String
   dano            String
   margemCritico   Int
   danoCritico     String

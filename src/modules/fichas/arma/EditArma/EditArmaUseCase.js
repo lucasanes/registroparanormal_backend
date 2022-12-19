@@ -59,64 +59,6 @@ class EditArmaUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    if (ataque != undefined && ataque != '') {
-
-      let valorDadoRegex;
-
-      if (ataque.includes("+")) {
-
-        if (ataque.includes('-')) {
-          valorDadoRegex = /^\-[0-5]d20\+[0-9]{1,2}$/
-
-          const valorNegativo = ataque.split('d')
-
-          if (valorNegativo[0] != '-1') {
-            throw new AppError("O único dado negativo que você pode criar é -1.")
-          }
-        } else {
-          valorDadoRegex = /^[0-5]d20\+[0-9]{1,2}$/
-        }
-
-        const valorSomado = ataque.split("+")
-
-        if (valorSomado[1] == null || valorSomado[1] == '') {
-          throw new AppError("Você precisa colocar algum número depois do '+'.")
-        }
-
-        if (valorSomado[1] > 20 || valorSomado[1] < 1) {
-          throw new AppError("O valor de soma deve ser entre 1 e 20.")
-        }
-
-      } else {
-
-        if (ataque.includes('-')) {
-          valorDadoRegex = /^\-[0-5]d20$/
-
-          const valorNegativo = ataque.split('d')
-
-          if (valorNegativo[0] != '-1') {
-            throw new AppError("O único dado negativo que você pode criar é -1.")
-          }
-        } else {
-          valorDadoRegex = /^[0-5]d20$/
-        }
-
-      }
-
-      if (!valorDadoRegex.test(ataque)) {
-        const valorSplit = ataque.split('d')
-        if (valorSplit[0] > 5) {
-          throw new AppError("Você só pode rolar no máximo 5d20.")
-        }
-        throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo e se o valor do dado é igual a 20.")
-      }
-
-      data.ataque = ataque
-
-    } else {
-      throw new AppError("Dados necessários não preenchidos.")
-    }
-
     if (dano != undefined && dano != '') {
 
       const valorDadoDanoRegex = /^\d{1,2}d\d{1,2}$/
