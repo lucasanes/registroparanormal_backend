@@ -19,7 +19,7 @@ class DeleteParticipanteByFichaIdUseCase {
 
     await prisma.participante.delete({
       where: {
-        fichaId: id,
+        id: participanteAntigo.id,
       },
     });
 
