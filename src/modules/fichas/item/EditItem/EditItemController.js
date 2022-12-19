@@ -15,7 +15,7 @@ class EditItemController {
       descricao,
       isMunicao,
       municao,
-      unicaoMax,
+      municaoMax,
       imagem,
     });
     response.status(201).json(data);
