@@ -53,18 +53,22 @@ sessoesRouters.put("/dado/:id", editDadoController.handle)
 
 //PARTICIPANTE
 
+const CreateParticipanteController = require("../modules/sessoes/participante/CreateParticipante/CreateParticipanteController");
+const createParticipanteController = new CreateParticipanteController();
+
 const GetParticipanteBySessaoIdController = require("../modules/sessoes/participante/GetParticipanteBySessaoId/GetParticipanteBySessaoIdController");
 const getParticipanteBySessaoIdController = new GetParticipanteBySessaoIdController();
 
 const DeleteParticipanteByFichaIdController = require("../modules/sessoes/participante/DeleteParticipanteByFichaId/DeleteParticipanteByFichaIdController");
 const deleteParticipanteByFichaIdController = new DeleteParticipanteByFichaIdController();
 
+sessoesRouters.post("/participante", createParticipanteController.handle);
 sessoesRouters.get("/participante/:id", getParticipanteBySessaoIdController.handle);
 sessoesRouters.delete("/participante/:id", deleteParticipanteByFichaIdController.handle);
 
 //FIM PARTICIPANTE
 
-//INICIATIVA
+//Iniciativa
 
 const CreateIniciativaController = require("../modules/sessoes/iniciativa/CreateIniciativa/CreateIniciativaController");
 const createIniciativaController = new CreateIniciativaController();
