@@ -2,7 +2,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class EditFichaUseCase {
-  async execute({ id, userId, sessaoId }) {
+  async execute({ id, isPublic, userId, sessaoId }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
@@ -16,6 +16,12 @@ class EditFichaUseCase {
 
     if (!data) {
       throw new AppError("Ficha não existente.");
+    }
+
+    if (isPublic != undefined && isPublic != '') {
+      data.isPublic = isPublic
+    } else {
+      data.isPublic = data.isPublic
     }
 
     if (userId != undefined && userId != '') {
