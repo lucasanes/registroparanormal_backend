@@ -18,7 +18,7 @@ class EditFichaUseCase {
       throw new AppError("Ficha não existente.");
     }
 
-    if (isPublic != undefined && isPublic != '') {
+    if (isPublic != null) {
       data.isPublic = isPublic
     } else {
       data.isPublic = data.isPublic
