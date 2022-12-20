@@ -14,6 +14,7 @@ class GetFichaByUserIdUseCase {
       },
       include: {
         Principal: true,
+        Portrait: true
       }
     });
 
