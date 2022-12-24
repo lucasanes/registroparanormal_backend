@@ -2,7 +2,7 @@ const EditPortraitUseCase = require("./EditPortraitUseCase");
 
 class EditPortraitController {
   async handle(request, response) {
-    const { normal, ferido, insano, insanoeferido, morrendo } = request.body;
+    const { normal, ferido, insano, insanoeferido, morrendo, insanoemorrendo } = request.body;
 
     const { id } = request.params;
     const editPortraitUseCase = new EditPortraitUseCase();
@@ -13,7 +13,8 @@ class EditPortraitController {
       ferido,
       insano,
       insanoeferido,
-      morrendo
+      morrendo,
+      insanoemorrendo
     });
     response.status(201).json(data);
   }
