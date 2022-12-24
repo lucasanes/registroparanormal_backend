@@ -379,9 +379,10 @@ model Portrait {
 
   normal          String?
   ferido          String?
+  morrendo        String?
   insano          String?
   insanoeferido   String?
-  morrendo        String?
+  insanoemorrendo String?
 
   fichaId         String
   ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
