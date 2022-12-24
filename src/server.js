@@ -82,6 +82,9 @@ io.on("connection", (socket) => {
   socket.on("enviado.inv", (data) => {
     io.emit("enviado.inv", data);
   });
+  socket.on("dado.rolado", (data) => {
+    io.emit("dado.rolado", data);
+  });
   // socket.on('disconnect', () => {
   //   console.log('Disconnect => Alguém desconectou.')
   // })
