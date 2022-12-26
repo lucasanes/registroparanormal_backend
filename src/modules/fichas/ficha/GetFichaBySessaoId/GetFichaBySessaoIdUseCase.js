@@ -17,6 +17,7 @@ class GetFichaBySessaoIdUseCase {
         Status: true,
         Pericias: true,
         Personagem: true,
+        Portrait: true,
         Defesas: true
       }
     });
