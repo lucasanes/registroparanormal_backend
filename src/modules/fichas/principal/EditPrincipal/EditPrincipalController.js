@@ -1,13 +1,13 @@
-const EditPortraitUseCase = require("./EditPortraitUseCase");
+const EditPrincipalUseCase = require("./EditPrincipalUseCase");
 
-class EditPortraitController {
+class EditPrincipalController {
   async handle(request, response) {
     const { nome, classe, origem, nacionalidade, idade, idadeAdicional, nex, trilha, patente, peprod } = request.body;
 
     const { id } = request.params;
-    const editPortraitUseCase = new EditPortraitUseCase();
+    const editPrincipalUseCase = new EditPrincipalUseCase();
 
-    const data = await editPortraitUseCase.execute({
+    const data = await editPrincipalUseCase.execute({
       id,
       nome,
       classe,
@@ -24,4 +24,4 @@ class EditPortraitController {
   }
 }
 
-module.exports = EditPortraitController;
+module.exports = EditPrincipalController;

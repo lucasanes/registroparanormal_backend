@@ -2,7 +2,7 @@ const { hash, compare } = require("bcrypt");
 const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
-class EditDadoUseCase {
+class EditPrincipalUseCase {
   async execute({ id, nome, classe, origem, nacionalidade, idade, idadeAdicional, nex, trilha, patente, peprod }) {
 
     if (!id) {
@@ -70,4 +70,4 @@ class EditDadoUseCase {
   }
 }
 
-module.exports = EditDadoUseCase;
+module.exports = EditPrincipalUseCase;
