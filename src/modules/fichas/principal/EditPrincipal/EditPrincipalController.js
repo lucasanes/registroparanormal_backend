@@ -2,7 +2,7 @@ const EditPrincipalUseCase = require("./EditPrincipalUseCase");
 
 class EditPrincipalController {
   async handle(request, response) {
-    const { nome, classe, origem, nacionalidade, idade, idadeAdicional, nex, trilha, patente, peprod } = request.body;
+    const { nome, classe, origem, nacionalidade, idade, idadeAdicional, nex, trilha, patente, peprod, deslocamento } = request.body;
 
     const { id } = request.params;
     const editPrincipalUseCase = new EditPrincipalUseCase();
@@ -18,7 +18,8 @@ class EditPrincipalController {
       nex,
       trilha,
       patente,
-      peprod
+      peprod,
+      deslocamento
     });
     response.status(201).json(data);
   }
