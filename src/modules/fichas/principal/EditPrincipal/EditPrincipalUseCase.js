@@ -42,17 +42,21 @@ class EditPrincipalUseCase {
     if (idadeAdicional != null && idadeAdicional != '') {
       data.idadeAdicional = idadeAdicional
     } else {
-      data.idade = null
+      data.idadeAdicional = null
     }
 
     if (nex != null && nex != '') {
       data.nex = nex
+    } else {
+      if (nex == 0) {
+        data.nex = nex
+      }
     }
 
     if (trilha != null && trilha != '') {
       data.trilha = trilha
     } else {
-      data.trilha = null
+      data.trilha = 'Nenhuma'
     }
 
     if (patente != null && patente != '') {
