@@ -41,6 +41,8 @@ class EditPrincipalUseCase {
 
     if (idadeAdicional != null && idadeAdicional != '') {
       data.idadeAdicional = idadeAdicional
+    } else {
+      data.idade = null
     }
 
     if (nex != null && nex != '') {
@@ -49,6 +51,8 @@ class EditPrincipalUseCase {
 
     if (trilha != null && trilha != '') {
       data.trilha = trilha
+    } else {
+      data.trilha = null
     }
 
     if (patente != null && patente != '') {
