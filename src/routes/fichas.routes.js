@@ -101,6 +101,15 @@ fichasRouters.put("/arma/:id", editArmaController.handle);
 
 //FIM ARMA
 
+//PRINCIPAL
+
+const EditPrincipalController = require("../modules/fichas/principal/EditPrincipal/EditPrincipalController");
+const editPrincipalController = new EditPrincipalController();
+
+fichasRouters.put("/principal/:id", editPrincipalController.handle);
+
+//FIM PRINCIPAL
+
 //PORTRAIT
 
 const EditPortraitController = require("../modules/fichas/portrait/EditPortrait/EditPortraitController");
