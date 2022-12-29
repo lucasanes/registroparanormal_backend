@@ -18,7 +18,7 @@ class EditPericiasUseCase {
       data.acrobacia = acrobacia
     } else {
       if (acrobacia == 0) {
-        data.acrobacia = 0
+        data.acrobacia = null
       }
     }
 
@@ -26,7 +26,7 @@ class EditPericiasUseCase {
       data.adestramento = adestramento
     } else {
       if (adestramento == 0) {
-        data.adestramento = 0
+        data.adestramento = null
       }
     }
 
@@ -34,7 +34,7 @@ class EditPericiasUseCase {
       data.arte = arte
     } else {
       if (arte == 0) {
-        data.arte = 0
+        data.arte = null
       }
     }
 
@@ -42,7 +42,7 @@ class EditPericiasUseCase {
       data.atletismo = atletismo
     } else {
       if (atletismo == 0) {
-        data.atletismo = 0
+        data.atletismo = null
       }
     }
 
@@ -50,7 +50,7 @@ class EditPericiasUseCase {
       data.atualidade = atualidade
     } else {
       if (atualidade == 0) {
-        data.atualidade = 0
+        data.atualidade = null
       }
     }
 
@@ -58,7 +58,7 @@ class EditPericiasUseCase {
       data.ciencia = ciencia
     } else {
       if (ciencia == 0) {
-        data.ciencia = 0
+        data.ciencia = null
       }
     }
 
@@ -66,7 +66,7 @@ class EditPericiasUseCase {
       data.crime = crime
     } else {
       if (crime == 0) {
-        data.crime = 0
+        data.crime = null
       }
     }
 
@@ -74,7 +74,7 @@ class EditPericiasUseCase {
       data.diplomacia = diplomacia
     } else {
       if (diplomacia == 0) {
-        data.diplomacia = 0
+        data.diplomacia = null
       }
     }
 
@@ -82,7 +82,7 @@ class EditPericiasUseCase {
       data.enganacao = enganacao
     } else {
       if (enganacao == 0) {
-        data.enganacao = 0
+        data.enganacao = null
       }
     }
 
@@ -90,7 +90,7 @@ class EditPericiasUseCase {
       data.fortitude = fortitude
     } else {
       if (fortitude == 0) {
-        data.fortitude = 0
+        data.fortitude = null
       }
     }
 
@@ -98,7 +98,7 @@ class EditPericiasUseCase {
       data.furtividade = furtividade
     } else {
       if (furtividade == 0) {
-        data.furtividade = 0
+        data.furtividade = null
       }
     }
 
@@ -106,7 +106,7 @@ class EditPericiasUseCase {
       data.iniciativa = iniciativa
     } else {
       if (iniciativa == 0) {
-        data.iniciativa = 0
+        data.iniciativa = null
       }
     }
 
@@ -114,7 +114,7 @@ class EditPericiasUseCase {
       data.intimidacao = intimidacao
     } else {
       if (intimidacao == 0) {
-        data.intimidacao = 0
+        data.intimidacao = null
       }
     }
 
@@ -122,7 +122,7 @@ class EditPericiasUseCase {
       data.intuicao = intuicao
     } else {
       if (intuicao == 0) {
-        data.intuicao = 0
+        data.intuicao = null
       }
     }
 
@@ -130,7 +130,7 @@ class EditPericiasUseCase {
       data.investigacao = investigacao
     } else {
       if (investigacao == 0) {
-        data.investigacao = 0
+        data.investigacao = null
       }
     }
 
@@ -138,7 +138,7 @@ class EditPericiasUseCase {
       data.luta = luta
     } else {
       if (luta == 0) {
-        data.luta = 0
+        data.luta = null
       }
     }
 
@@ -146,7 +146,7 @@ class EditPericiasUseCase {
       data.medicina = medicina
     } else {
       if (medicina == 0) {
-        data.medicina = 0
+        data.medicina = null
       }
     }
 
@@ -154,7 +154,7 @@ class EditPericiasUseCase {
       data.ocultismo = ocultismo
     } else {
       if (ocultismo == 0) {
-        data.ocultismo = 0
+        data.ocultismo = null
       }
     }
 
@@ -162,7 +162,7 @@ class EditPericiasUseCase {
       data.percepcao = percepcao
     } else {
       if (percepcao == 0) {
-        data.percepcao = 0
+        data.percepcao = null
       }
     }
 
@@ -170,7 +170,7 @@ class EditPericiasUseCase {
       data.pilotagem = pilotagem
     } else {
       if (pilotagem == 0) {
-        data.pilotagem = 0
+        data.pilotagem = null
       }
     }
 
@@ -178,7 +178,7 @@ class EditPericiasUseCase {
       data.pontaria = pontaria
     } else {
       if (pontaria == 0) {
-        data.pontaria = 0
+        data.pontaria = null
       }
     }
 
@@ -186,7 +186,7 @@ class EditPericiasUseCase {
       data.profissao = profissao
     } else {
       if (profissao == 0) {
-        data.profissao = 0
+        data.profissao = null
       }
     }
 
@@ -194,7 +194,7 @@ class EditPericiasUseCase {
       data.reflexo = reflexo
     } else {
       if (reflexo == 0) {
-        data.reflexo = 0
+        data.reflexo = null
       }
     }
 
@@ -202,7 +202,7 @@ class EditPericiasUseCase {
       data.religiao = religiao
     } else {
       if (religiao == 0) {
-        data.religiao = 0
+        data.religiao = null
       }
     }
 
@@ -210,7 +210,7 @@ class EditPericiasUseCase {
       data.sobrevivencia = sobrevivencia
     } else {
       if (sobrevivencia == 0) {
-        data.sobrevivencia = 0
+        data.sobrevivencia = null
       }
     }
 
@@ -218,7 +218,7 @@ class EditPericiasUseCase {
       data.tatica = tatica
     } else {
       if (tatica == 0) {
-        data.tatica = 0
+        data.tatica = null
       }
     }
 
@@ -226,7 +226,7 @@ class EditPericiasUseCase {
       data.tecnologia = tecnologia
     } else {
       if (tecnologia == 0) {
-        data.tecnologia = 0
+        data.tecnologia = null
       }
     }
 
@@ -234,7 +234,7 @@ class EditPericiasUseCase {
       data.vontade = vontade
     } else {
       if (vontade == 0) {
-        data.vontade = 0
+        data.vontade = null
       }
     }
 
