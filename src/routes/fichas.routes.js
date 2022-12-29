@@ -110,6 +110,15 @@ fichasRouters.put("/principal/:id", editPrincipalController.handle);
 
 //FIM PRINCIPAL
 
+//DEFESAS
+
+const EditDefesasController = require("../modules/fichas/defesas/EditDefesas/EditDefesasController");
+const editDefesasController = new EditDefesasController();
+
+fichasRouters.put("/defesas/:id", editDefesasController.handle);
+
+//FIM DEFESAS
+
 //PORTRAIT
 
 const EditPortraitController = require("../modules/fichas/portrait/EditPortrait/EditPortraitController");
