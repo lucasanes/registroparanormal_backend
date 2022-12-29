@@ -10,7 +10,7 @@ class EditDefesasUseCase {
 
     const data = await prisma.defesas.findFirst({
       where: {
-        fichaId: id
+        id
       }
     })
 
@@ -84,7 +84,7 @@ class EditDefesasUseCase {
 
     const DefesasAtt = await prisma.defesas.update({
       where: {
-        id: data.id
+        id
       },
       data: data
     });
