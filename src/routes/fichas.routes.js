@@ -128,6 +128,15 @@ fichasRouters.put("/atributos/:id", editAtributosController.handle);
 
 //FIM ATRIBUTOS 
 
+//PERICIAS
+
+const EditPericiasController = require("../modules/fichas/pericias/EditPericias/EditPericiasController");
+const editPericiasController = new EditPericiasController();
+
+fichasRouters.put("/pericias/:id", editPericiasController.handle);
+
+//FIM PERICIAS
+
 //PORTRAIT
 
 const EditPortraitController = require("../modules/fichas/portrait/EditPortrait/EditPortraitController");
