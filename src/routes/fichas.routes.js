@@ -119,6 +119,15 @@ fichasRouters.put("/defesas/:id", editDefesasController.handle);
 
 //FIM DEFESAS
 
+//ATRIBUTOS
+
+const EditAtributosController = require("../modules/fichas/atributos/EditAtributos/EditAtributosController");
+const editAtributosController = new EditAtributosController();
+
+fichasRouters.put("/atributos/:id", editAtributosController.handle);
+
+//FIM ATRIBUTOS 
+
 //PORTRAIT
 
 const EditPortraitController = require("../modules/fichas/portrait/EditPortrait/EditPortraitController");
