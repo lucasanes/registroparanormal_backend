@@ -16,22 +16,42 @@ class EditAtributosUseCase {
 
     if (agi != null) {
       data.agi = agi
+    } else {
+      if (agi == 0) {
+        data.agi = 0
+      }
     }
 
     if (int != null) {
       data.int = int
+    } else {
+      if (int == 0) {
+        data.int = 0
+      }
     }
 
     if (pre != null) {
       data.pre = pre
+    } else {
+      if (pre == 0) {
+        data.pre = 0
+      }
     }
 
     if (vig != null) {
       data.vig = vig
+    } else {
+      if (vig == 0) {
+        data.vig = 0
+      }
     }
 
     if (forca != null) {
       data.for = forca
+    } else {
+      if (forca == 0) {
+        data.forca = 0
+      }
     }
 
     const AtributosAtt = await prisma.atributo.update({
