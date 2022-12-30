@@ -20,6 +20,22 @@ class CreateHabilidadeUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
+    if (nome != undefined && nome != '') {
+      if (nome.length < 3) {
+        throw new AppError('O nome de sua habilidade deve ter no mínimo 3 caracteres.')
+      }
+    } else {
+      throw new AppError("Dados necessários não preenchidos.")
+    }
+
+    if (descricao != undefined && descricao != '') {
+      if (descricao.length < 10) {
+        throw new AppError('A descrição de sua habilidade deve ter no mínimo 10 caracteres.')
+      }
+    } else {
+      throw new AppError("Dados necessários não preenchidos.")
+    }
+
     const data = await prisma.habilidade.create({
       data: {
         nome,

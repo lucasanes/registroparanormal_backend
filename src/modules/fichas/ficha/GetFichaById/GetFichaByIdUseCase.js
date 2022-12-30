@@ -19,7 +19,10 @@ class GetFichaByIdUseCase {
         Pericias: true,
         Personagem: true,
         Defesas: true,
-        Portrait: true
+        Portrait: true,
+        Habilidade: true,
+        Armas: true,
+        Itens: true
       }
     });
 
