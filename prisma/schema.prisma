@@ -424,7 +424,6 @@ model Proficiencia {
   id              String @id @default(uuid())
 
   nome            String
-  descricao       String
 
   fichaId         String
   ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
