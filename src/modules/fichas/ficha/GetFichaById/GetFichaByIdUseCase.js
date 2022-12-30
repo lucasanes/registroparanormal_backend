@@ -20,7 +20,9 @@ class GetFichaByIdUseCase {
         Personagem: true,
         Defesas: true,
         Portrait: true,
-        Habilidade: true,
+        Habilidades: true,
+        Poderes: true,
+        Proficiencias: true,
         Armas: true,
         Itens: true
       }
