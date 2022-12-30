@@ -10,7 +10,7 @@ class EditPericiasUseCase {
 
     const data = await prisma.pericias.findFirst({
       where: {
-        id
+        fichaId: id
       }
     })
 
@@ -240,7 +240,7 @@ class EditPericiasUseCase {
 
     const PericiasAtt = await prisma.pericias.update({
       where: {
-        id
+        id: data.id
       },
       data: data
     });
