@@ -1,13 +1,13 @@
-const EditPoderUseCase = require("./EditPoderUseCase");
+const EditProficienciaUseCase = require("./EditProficienciaUseCase");
 
-class EditPoderController {
+class EditProficienciaController {
   async handle(request, response) {
     const { nome } = request.body;
 
     const { id } = request.params;
-    const editPoderUseCase = new EditPoderUseCase();
+    const editProficienciaUseCase = new EditProficienciaUseCase();
 
-    const data = await editPoderUseCase.execute({
+    const data = await editProficienciaUseCase.execute({
       id,
       nome,
     });
@@ -15,4 +15,4 @@ class EditPoderController {
   }
 }
 
-module.exports = EditPoderController;
+module.exports = EditProficienciaController;
