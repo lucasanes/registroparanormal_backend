@@ -137,6 +137,24 @@ fichasRouters.post("/habilidade", createHabilidadeController.handle);
 
 //FIM HABILIDADE
 
+//PODER
+
+const CreatePoderController = require("../modules/fichas/poder/CreatePoder/CreatePoderController");
+const createPoderController = new CreatePoderController();
+
+fichasRouters.post("/poder", createPoderController.handle);
+
+//FIM PODER
+
+//PROFICIENCIA
+
+const CreateProficienciaController = require("../modules/fichas/proficiencia/CreateProficiencia/CreateProficienciaController");
+const createProficienciaController = new CreateProficienciaController();
+
+fichasRouters.post("/proficiencia", createProficienciaController.handle);
+
+//FIM PROFICIENCIA
+
 //PERICIAS
 
 const EditPericiasController = require("../modules/fichas/pericias/EditPericias/EditPericiasController");
