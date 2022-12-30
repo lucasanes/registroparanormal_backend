@@ -216,6 +216,9 @@ model Ficha {
   Armas           Arma[]
   Participantes   Participante[]
   Portrait        Portrait[]
+  Habilidades     Habilidade[]
+  Poderes         Poder[]
+  Proficiencias   Proficiencia[]
 
   @@map("fichas")
 }
@@ -389,5 +392,46 @@ model Portrait {
 
   @@map("fichasPortrait")
 }
+
+model Habilidade {
+
+  id              String @id @default(uuid())
+
+  nome            String
+  descricao       String
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasHabilidades")
+}
+
+model Poder {
+
+  id              String @id @default(uuid())
+
+  nome            String
+  descricao       String
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasPoderes")
+}
+
+model Proficiencia {
+
+  id              String @id @default(uuid())
+
+  nome            String
+  descricao       String
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasProficiencias")
+}
+
+
 
 //npx prisma migrate dev

@@ -128,6 +128,15 @@ fichasRouters.put("/atributos/:id", editAtributosController.handle);
 
 //FIM ATRIBUTOS 
 
+//HABILIDADE
+
+const CreateHabilidadeController = require("../modules/fichas/habilidade/CreateHabilidade/CreateHabilidadeController");
+const createHabilidadeController = new CreateHabilidadeController();
+
+fichasRouters.post("/habilidade", createHabilidadeController.handle);
+
+//FIM HABILIDADE
+
 //PERICIAS
 
 const EditPericiasController = require("../modules/fichas/pericias/EditPericias/EditPericiasController");
