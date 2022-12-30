@@ -133,7 +133,11 @@ fichasRouters.put("/atributos/:id", editAtributosController.handle);
 const CreateHabilidadeController = require("../modules/fichas/habilidade/CreateHabilidade/CreateHabilidadeController");
 const createHabilidadeController = new CreateHabilidadeController();
 
+const DeleteHabilidadeController = require("../modules/fichas/habilidade/DeleteHabilidade/DeleteHabilidadeController");
+const deleteHabilidadeController = new DeleteHabilidadeController();
+
 fichasRouters.post("/habilidade", createHabilidadeController.handle);
+fichasRouters.delete("/habilidade/:id", deleteHabilidadeController.handle);
 
 //FIM HABILIDADE
 
@@ -142,7 +146,11 @@ fichasRouters.post("/habilidade", createHabilidadeController.handle);
 const CreatePoderController = require("../modules/fichas/poder/CreatePoder/CreatePoderController");
 const createPoderController = new CreatePoderController();
 
+const DeletePoderController = require("../modules/fichas/poder/DeletePoder/DeletePoderController");
+const deletePoderController = new DeletePoderController();
+
 fichasRouters.post("/poder", createPoderController.handle);
+fichasRouters.delete("/poder/:id", deletePoderController.handle);
 
 //FIM PODER
 
@@ -151,7 +159,11 @@ fichasRouters.post("/poder", createPoderController.handle);
 const CreateProficienciaController = require("../modules/fichas/proficiencia/CreateProficiencia/CreateProficienciaController");
 const createProficienciaController = new CreateProficienciaController();
 
+const DeleteProficienciaController = require("../modules/fichas/proficiencia/DeleteProficiencia/DeleteProficienciaController");
+const deleteProficienciaController = new DeleteProficienciaController();
+
 fichasRouters.post("/proficiencia", createProficienciaController.handle);
+fichasRouters.delete("/proficiencia/:id", deleteProficienciaController.handle);
 
 //FIM PROFICIENCIA
 
