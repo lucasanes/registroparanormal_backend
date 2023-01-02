@@ -145,6 +145,23 @@ fichasRouters.delete("/habilidade/:id", deleteHabilidadeController.handle);
 
 //FIM HABILIDADE
 
+//RITUAL
+
+const CreateRitualController = require("../modules/fichas/ritual/CreateRitual/CreateRitualController");
+const createRitualController = new CreateRitualController();
+
+const DeleteRitualController = require("../modules/fichas/ritual/DeleteRitual/DeleteRitualController");
+const deleteRitualController = new DeleteRitualController();
+
+const EditRitualController = require("../modules/fichas/ritual/EditRitual/EditRitualController");
+const editRitualController = new EditRitualController();
+
+fichasRouters.put("/ritual/:id", editRitualController.handle);
+fichasRouters.post("/ritual", createRitualController.handle);
+fichasRouters.delete("/ritual/:id", deleteRitualController.handle);
+
+//FIM RITUAL
+
 //PODER
 
 const CreatePoderController = require("../modules/fichas/poder/CreatePoder/CreatePoderController");
