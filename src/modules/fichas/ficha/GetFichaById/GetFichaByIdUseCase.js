@@ -23,6 +23,8 @@ class GetFichaByIdUseCase {
         Habilidades: true,
         Poderes: true,
         Proficiencias: true,
+        Dados: true,
+        Rituais: true,
         Armas: true,
         Itens: true
       }
