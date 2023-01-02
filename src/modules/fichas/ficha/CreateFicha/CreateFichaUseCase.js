@@ -163,7 +163,7 @@ class CreateFichaUseCase {
       }
     })
 
-    await prisma.pericias.create({
+    const pericias = await prisma.pericias.create({
       data: {
         fichaId: ficha.id
       }
@@ -190,7 +190,7 @@ class CreateFichaUseCase {
       }
     })
 
-    return ficha, principal, atributos, status;
+    return { ficha, principal, atributos, status, pericias };
   }
 }
 
