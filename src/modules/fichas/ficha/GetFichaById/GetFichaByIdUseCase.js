@@ -24,9 +24,21 @@ class GetFichaByIdUseCase {
         Poderes: true,
         Proficiencias: true,
         Dados: true,
-        Rituais: true,
-        Armas: true,
-        Itens: true
+        Rituais: {
+          orderBy: {
+            circulo: 'desc'
+          }
+        },
+        Armas: {
+          orderBy: {
+            categoria: 'desc'
+          }
+        },
+        Itens: {
+          orderBy: {
+            categoria: 'desc'
+          }
+        }
       }
     });
 
