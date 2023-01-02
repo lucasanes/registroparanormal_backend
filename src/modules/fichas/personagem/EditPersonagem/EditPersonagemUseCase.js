@@ -56,9 +56,9 @@ class EditPersonagemUseCase {
     }
 
     if (piorPesadelo != undefined && piorPesadelo != '') {
-      data.piorPesadelo = piorPesadelo
+      data.piorpesadelo = piorPesadelo
     } else {
-      data.piorPesadelo = null
+      data.piorpesadelo = null
     }
 
     if (anotacoesPersonagem != undefined && anotacoesPersonagem != '') {

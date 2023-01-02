@@ -8,6 +8,8 @@ const { Server } = require("socket.io");
 const socket = require("socket.io");
 require("dotenv").config();
 
+console.log(process.env.DATABASE_URL)
+
 const app = express();
 
 app.use(express.json());
