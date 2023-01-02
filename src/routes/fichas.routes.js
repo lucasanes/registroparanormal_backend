@@ -128,6 +128,15 @@ fichasRouters.put("/atributos/:id", editAtributosController.handle);
 
 //FIM ATRIBUTOS 
 
+//PERSONAGEM
+
+const EditPersonagemController = require("../modules/fichas/personagem/EditPersonagem/EditPersonagemController");
+const editPersonagemController = new EditPersonagemController();
+
+fichasRouters.put("/personagem/:id", editPersonagemController.handle);
+
+//FIM PERSONAGEM
+
 //HABILIDADE
 
 const CreateHabilidadeController = require("../modules/fichas/habilidade/CreateHabilidade/CreateHabilidadeController");
