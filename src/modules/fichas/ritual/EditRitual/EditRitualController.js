@@ -1,14 +1,14 @@
-const CreateRitualUseCase = require("./CreateRitualUseCase");
+const EditRitualUseCase = require("./EditRitualUseCase");
 
-class CreateRitualController {
+class EditRitualController {
   async handle(request, response) {
     const { nome, circulo, alcance, elemento, execucao, duracao, alvo, resistencia, normal, discente, verdadeiro, descricao, imagem } = request.body;
 
     const { id } = request.params
 
-    const createRitualUseCase = new CreateRitualUseCase();
+    const editRitualUseCase = new EditRitualUseCase();
 
-    const data = await createRitualUseCase.execute({
+    const data = await editRitualUseCase.execute({
       id,
       nome,
       circulo,
@@ -28,4 +28,4 @@ class CreateRitualController {
   }
 }
 
-module.exports = CreateRitualController;
+module.exports = EditRitualController;

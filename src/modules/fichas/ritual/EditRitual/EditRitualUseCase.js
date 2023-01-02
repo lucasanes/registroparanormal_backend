@@ -1,7 +1,7 @@
 const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
-class CreateRitualUseCase {
+class EditRitualUseCase {
   async execute({ id, nome, circulo, alcance, elemento, execucao, duracao, alvo, resistencia, normal, discente, verdadeiro, descricao, imagem }) {
 
     if (!id) {
@@ -226,4 +226,4 @@ class CreateRitualUseCase {
   }
 }
 
-module.exports = CreateRitualUseCase;
+module.exports = EditRitualUseCase;
