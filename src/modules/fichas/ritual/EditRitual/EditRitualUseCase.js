@@ -72,6 +72,8 @@ class EditRitualUseCase {
 
       data.normal = normal
 
+    } else {
+      data.normal = null
     }
 
     if (discente != undefined && discente != '') {
@@ -118,6 +120,8 @@ class EditRitualUseCase {
 
       data.discente = discente
 
+    } else {
+      data.discente = null
     }
 
     if (verdadeiro != undefined && verdadeiro != '') {
@@ -164,6 +168,8 @@ class EditRitualUseCase {
 
       data.verdadeiro = verdadeiro
 
+    } else {
+      data.verdadeiro = null
     }
 
     if (alcance != undefined && alcance != '') {

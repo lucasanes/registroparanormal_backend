@@ -73,7 +73,7 @@ class CreateRitualUseCase {
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      normal = null
     }
 
     if (discente != undefined && discente != '') {
@@ -119,7 +119,7 @@ class CreateRitualUseCase {
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      discente = null
     }
 
     if (verdadeiro != undefined && verdadeiro != '') {
@@ -165,7 +165,7 @@ class CreateRitualUseCase {
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      verdadeiro = null
     }
 
     if (alcance == undefined || alcance == '') {
