@@ -188,6 +188,10 @@ class CreateArmaUseCase {
       especialLower = especial.toLowerCase()
     }
 
+    if (alcance == undefined || alcance == '') {
+      throw new AppError("Dados necessários não preenchidos.")
+    }
+
     const data = await prisma.arma.create({
       data: {
         nome: nomeLower,

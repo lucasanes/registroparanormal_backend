@@ -182,6 +182,10 @@ class CreateArmaUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
+    if (alcance == undefined || alcance == '') {
+      throw new AppError("Dados necessários não preenchidos.")
+    }
+
     let especialLower = especial;
 
     if (especial != null) {
