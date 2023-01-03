@@ -84,6 +84,9 @@ io.on("connection", (socket) => {
   socket.on("enviado.inv", (data) => {
     io.emit("enviado.inv", data);
   });
+  socket.on("enviado.itemImg", (data) => {
+    io.emit("enviado.itemImg", data);
+  });
   socket.on("dado.rolado", (data) => {
     io.emit("dado.rolado", data);
   });
