@@ -24,10 +24,6 @@ class CreateArmaUseCase {
 
     if (nome != undefined && nome != '') {
 
-      if (nome.length > 20) {
-        throw new AppError("O nome da sua arma não pode passar de 20 caracteres.")
-      }
-
       const alreadyExistsByName = await prisma.arma.findFirst({
         where: {
           nome: nomeLower,

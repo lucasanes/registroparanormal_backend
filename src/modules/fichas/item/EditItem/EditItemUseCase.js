@@ -23,10 +23,6 @@ class EditItemUseCase {
 
     if (nome != undefined && nome != '') {
 
-      if (nome.length > 20) {
-        throw new AppError("O nome do seu item não pode passar de 20 caracteres.")
-      }
-
       const alreadyExistsByItemName = await prisma.item.findFirst({
         where: {
           nome: nomeLower,
