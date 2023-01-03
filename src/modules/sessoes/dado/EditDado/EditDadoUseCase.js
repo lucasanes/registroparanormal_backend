@@ -23,10 +23,6 @@ class EditDadoUseCase {
       throw new AppError("Seu dado deve ter um nome.")
     } else {
 
-      if (nome.length > 10) {
-        throw new AppError("O nome do seu dado deve ter no máximo 10 caracteres.")
-      }
-
       const dadoAlreadyExistsByName = await prisma.dado.findMany({
         where: {
           nome,

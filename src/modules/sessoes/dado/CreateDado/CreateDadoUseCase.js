@@ -23,10 +23,6 @@ class CreateDadoUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     } else {
 
-      if (nome.length > 10) {
-        throw new AppError("O nome do seu dado deve ter no máximo 10 caracteres.")
-      }
-
       const dadoAlreadyExistsByName = await prisma.dado.findFirst({
         where: {
           nome: nomeLower,
