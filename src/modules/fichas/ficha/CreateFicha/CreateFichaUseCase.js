@@ -108,7 +108,13 @@ class CreateFichaUseCase {
     }
 
     const deslocamento = 7 + agi
-    const peprod = Math.floor(nex / 5) + 1
+    let peprod
+
+    if (Math.floor(nex / 5) < 1) {
+      peprod = 1
+    } else {
+      peprod = Math.floor(nex / 5)
+    }
 
     let peso;
 
