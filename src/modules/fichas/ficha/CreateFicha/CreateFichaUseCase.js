@@ -41,7 +41,7 @@ class CreateFichaUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    if (trilha == null) {
+    if (trilha == null || trilha == '' || trilha == undefined) {
       trilha = 'Nenhuma'
     }
 
