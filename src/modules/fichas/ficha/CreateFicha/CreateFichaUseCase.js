@@ -196,6 +196,13 @@ class CreateFichaUseCase {
       }
     })
 
+    await prisma.proficiencia.create({
+      data: {
+        fichaId: ficha.id,
+        nome: 'Armas Simples'
+      }
+    })
+
     return { ficha, principal, atributos, status, pericias };
   }
 }
