@@ -189,7 +189,9 @@ class EditArmaUseCase {
       data.espaco = Number(espaco)
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      if (espaco != 0) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     if (categoria != undefined && categoria != '') {
@@ -201,7 +203,9 @@ class EditArmaUseCase {
       data.categoria = Number(categoria)
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      if (categoria != 0) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     if (recarga != null && recarga != '') {
