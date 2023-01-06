@@ -12,14 +12,18 @@ class GetFichaBySessaoIdUseCase {
         sessaoId: id,
       },
       include: {
-        Principal: true,
+        Principal: {
+          orderBy: {
+            nome: 'asc'
+          },
+        },
         Atributos: true,
         Status: true,
         Pericias: true,
         Personagem: true,
         Portrait: true,
         Defesas: true
-      }
+      },
     });
 
     return ficha;
