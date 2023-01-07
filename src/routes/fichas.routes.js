@@ -18,6 +18,9 @@ const getFichaControllerByUserId = new GetFichaByUserIdController();
 const GetFichaByIdController = require("../modules/fichas/ficha/GetFichaById/GetFichaByIdController");
 const getFichaByIdController = new GetFichaByIdController();
 
+const GetFichaNPCController = require("../modules/fichas/ficha/GetFichaNPC/GetFichaNPCController");
+const getFichaNPCController = new GetFichaNPCController();
+
 const DeleteFichaController = require("../modules/fichas/ficha/DeleteFicha/DeleteFichaController");
 const deleteFichaController = new DeleteFichaController();
 
@@ -25,6 +28,7 @@ fichasRouters.post("/", createFichaController.handle);
 fichasRouters.put("/:id", editFichaController.handle);
 fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);
 fichasRouters.get("/user/:id", getFichaControllerByUserId.handle);
+fichasRouters.get("/userandsessao/:userId/:sessaoId", getFichaNPCController.handle);
 fichasRouters.get("/:id", getFichaByIdController.handle);
 fichasRouters.delete("/:id", deleteFichaController.handle);
 
@@ -153,6 +157,15 @@ fichasRouters.post("/habilidade", createHabilidadeController.handle);
 fichasRouters.delete("/habilidade/:id", deleteHabilidadeController.handle);
 
 //FIM HABILIDADE
+
+//OUTROS
+
+const CreateOutrosController = require("../modules/fichas/outros/CreateOutros/CreateOutrosController");
+const createOutrosController = new CreateOutrosController();
+
+fichasRouters.post("/outros", createOutrosController.handle);
+
+//FIM OUTROS
 
 //RITUAL
 
