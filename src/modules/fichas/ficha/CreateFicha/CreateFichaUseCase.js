@@ -4,7 +4,7 @@ const { hash } = require("bcrypt");
 
 class CreateFichaUseCase {
   async execute({
-    userId, sessaoId,
+    npc, userId, sessaoId,
     nome, jogador, classe, origem, nacionalidade, idade, nex, trilha, patente,
     agi, int, vig, pre, forca,
     pvMax, sanMax, peMax
@@ -58,18 +58,22 @@ class CreateFichaUseCase {
         throw new AppError("Este ID de sessão não existe.");
       }
 
-      if (sessaoIdAlreadyExists.userId == userId) {
-        throw new AppError("O dono da sessão não pode ter uma ficha nela.")
-      }
+      if (npc != true) {
 
-      const participanteAlreadyExistsByUserId = await prisma.participante.findFirst({
-        where: {
-          userId
+        if (sessaoIdAlreadyExists.userId == userId) {
+          throw new AppError("O dono da sessão não pode ter uma ficha nela.")
         }
-      })
 
-      if (participanteAlreadyExistsByUserId) {
-        throw new AppError("Este usuário já tem uma ficha em sua sessão.")
+        const participanteAlreadyExistsByUserId = await prisma.participante.findFirst({
+          where: {
+            userId
+          }
+        })
+
+        if (participanteAlreadyExistsByUserId) {
+          throw new AppError("Este usuário já tem uma ficha em sua sessão.")
+        }
+
       }
 
       ficha = await prisma.ficha.create({
