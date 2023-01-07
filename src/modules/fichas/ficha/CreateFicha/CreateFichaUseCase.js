@@ -197,34 +197,32 @@ class CreateFichaUseCase {
         }
       })
 
-      await prisma.personagem.create({
-        data: {
-          fichaId: ficha.id
-        }
-      })
-
-      await prisma.portrait.create({
-        data: {
-          fichaId: ficha.id
-        }
-      })
-
-      await prisma.proficiencia.create({
-        data: {
-          fichaId: ficha.id,
-          nome: 'Armas Simples'
-        }
-      })
-
     } else {
-
       await prisma.defesas.create({
         data: {
-          fichaId: ficha.id
+          fichaId: ficha.id,
         }
       })
-
     }
+
+    await prisma.personagem.create({
+      data: {
+        fichaId: ficha.id
+      }
+    })
+
+    await prisma.portrait.create({
+      data: {
+        fichaId: ficha.id
+      }
+    })
+
+    await prisma.proficiencia.create({
+      data: {
+        fichaId: ficha.id,
+        nome: 'Armas Simples'
+      }
+    })
 
     return { ficha, principal, atributos, status, pericias };
   }

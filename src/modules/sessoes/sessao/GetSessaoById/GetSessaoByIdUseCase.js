@@ -22,7 +22,15 @@ class GetSessaoByIdUseCase {
             }
           }
         },
-        Fichas: true
+        Fichas: {
+          include: {
+            Principal: true,
+            Atributos: true,
+            Status: true,
+            Pericias: true,
+            Defesas: true
+          }
+        }
       }
     });
 
