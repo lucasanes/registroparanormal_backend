@@ -220,6 +220,7 @@ model Ficha {
   Poderes         Poder[]
   Proficiencias   Proficiencia[]
   Rituais         Ritual[]
+  Outros          Outros[]
 
   @@map("fichas")
 }
@@ -457,6 +458,21 @@ model Ritual {
 
   @@map("fichasRituais")
 
+}
+
+model Outros {
+
+  id              String @id @default(uuid())
+
+  inventario            String?
+  habilidade         String?
+  detalhes         String?
+
+  fichaId         String
+  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+
+  @@map("fichasOutros")
+  
 }
 
 //npx prisma migrate dev

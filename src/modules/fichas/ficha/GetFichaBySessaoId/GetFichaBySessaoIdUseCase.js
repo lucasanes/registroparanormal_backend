@@ -12,11 +12,7 @@ class GetFichaBySessaoIdUseCase {
         sessaoId: id,
       },
       include: {
-        Principal: {
-          orderBy: {
-            nome: 'asc',
-          }
-        },
+        Principal: true,
         Atributos: true,
         Status: true,
         Pericias: true,
@@ -24,11 +20,6 @@ class GetFichaBySessaoIdUseCase {
         Portrait: true,
         Defesas: true
       },
-      orderBy: {
-        Principal: {
-          _count: 'asc'
-        }
-      }
     });
 
     return ficha;
