@@ -21,7 +21,8 @@ class GetSessaoByIdUseCase {
               }
             }
           }
-        }
+        },
+        Fichas: true
       }
     });
 
