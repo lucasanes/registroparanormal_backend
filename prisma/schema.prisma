@@ -200,6 +200,10 @@ model Ficha {
 
   isPublic        Boolean @default(false)
 
+  npc             Boolean?
+  npcmonstro      Boolean?
+  npcprincipal    Boolean?
+
   userId          String
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
   sessaoId        String?

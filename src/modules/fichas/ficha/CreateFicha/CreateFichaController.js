@@ -3,7 +3,7 @@ const CreateFichaUseCase = require("./CreateFichaUseCase");
 class CreateFichaController {
   async handle(request, response) {
     const {
-      npc, userId, sessaoId,
+      npc, npcmonstro, npcprincipal, userId, sessaoId,
       nome, jogador, classe, origem, nacionalidade, idade, nex, trilha, patente,
       agi, int, vig, pre, forca,
       pvMax, sanMax, peMax
@@ -13,6 +13,8 @@ class CreateFichaController {
 
     const ficha = await createFichaUseCase.execute({
       npc,
+      npcmonstro,
+      npcprincipal,
       userId,
       sessaoId,
 

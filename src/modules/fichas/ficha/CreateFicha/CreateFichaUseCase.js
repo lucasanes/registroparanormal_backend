@@ -5,6 +5,7 @@ const { hash } = require("bcrypt");
 class CreateFichaUseCase {
   async execute({
     npc, userId, sessaoId,
+    npcmonstro, npcprincipal,
     nome, jogador, classe, origem, nacionalidade, idade, nex, trilha, patente,
     agi, int, vig, pre, forca,
     pvMax, sanMax, peMax
@@ -93,6 +94,8 @@ class CreateFichaUseCase {
         ficha = await prisma.ficha.create({
           data: {
             userId,
+            npcmonstro,
+            npcprincipal,
             sessaoId
           },
         });
