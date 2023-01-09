@@ -25,21 +25,38 @@ class CreateFichaUseCase {
       throw new AppError("Este ID de usuário não existe.");
     }
 
-    if (nome == '' || nome == null || nome == undefined
-      || origem == '' || origem == null || origem == undefined
-      || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
-      || idade == '' || idade == null || idade == undefined
-      || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
-      || idade == '' || idade == null || idade == undefined
-      || agi == '' || agi == null || agi == undefined
-      || int == '' || int == null || int == undefined
-      || vig == '' || vig == null || vig == undefined
-      || pre == '' || pre == null || pre == undefined
-      || forca == '' || forca == null || forca == undefined
-      || pvMax == '' || pvMax == null || pvMax == undefined
-      || sanMax == '' || sanMax == null || sanMax == undefined
-      || peMax == '' || peMax == null || peMax == undefined) {
-      throw new AppError("Dados necessários não preenchidos.")
+    if (npcmonstro != true) {
+
+      if (nome == '' || nome == null || nome == undefined
+        || origem == '' || origem == null || origem == undefined
+        || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
+        || idade == '' || idade == null || idade == undefined
+        || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
+        || idade == '' || idade == null || idade == undefined
+        || agi == '' || agi == null || agi == undefined
+        || int == '' || int == null || int == undefined
+        || vig == '' || vig == null || vig == undefined
+        || pre == '' || pre == null || pre == undefined
+        || forca == '' || forca == null || forca == undefined
+        || pvMax == '' || pvMax == null || pvMax == undefined
+        || sanMax == '' || sanMax == null || sanMax == undefined
+        || peMax == '' || peMax == null || peMax == undefined) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
+
+    } else {
+      if (nome == '' || nome == null || nome == undefined
+        || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
+        || agi == '' || agi == null || agi == undefined
+        || int == '' || int == null || int == undefined
+        || vig == '' || vig == null || vig == undefined
+        || pre == '' || pre == null || pre == undefined
+        || forca == '' || forca == null || forca == undefined
+        || pvMax == '' || pvMax == null || pvMax == undefined
+        || sanMax == '' || sanMax == null || sanMax == undefined
+        || peMax == '' || peMax == null || peMax == undefined) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     if (trilha == null || trilha == '' || trilha == undefined) {

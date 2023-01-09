@@ -14,8 +14,6 @@ class EditPericiasUseCase {
       }
     })
 
-    console.log(data)
-
     if (acrobacia != null) {
       data.acrobacia = acrobacia
     } else {
