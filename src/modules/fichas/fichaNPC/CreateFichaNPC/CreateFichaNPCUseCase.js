@@ -4,26 +4,74 @@ const { hash } = require("bcrypt");
 
 class CreateFichaUseCase {
   async execute({
-    userId, sessaoId,
-    nome, jogador, classe, origem, nacionalidade, idade, nex, trilha, patente,
-    agi, int, vig, pre, forca,
-    pvMax, sanMax, peMax
+    nome,
+    classe,
+    origem,
+    nacionalidade,
+    idade,
+    deslocamento,
+    nex,
+    trilha,
+    patente,
+    peso,
+    agi,
+    int,
+    vig,
+    pre,
+    forca,
+    pvMax,
+    psMax,
+    peMax,
+    acrobacia,
+    adestramento,
+    arte,
+    atletismo,
+    atualidade,
+    ciencia,
+    crime,
+    diplomacia,
+    enganacao,
+    fortitude,
+    furtividade,
+    iniciativa,
+    intimidacao,
+    intuicao,
+    investigacao,
+    luta,
+    medicina,
+    ocultismo,
+    percepcao,
+    pilotagem,
+    pontaria,
+    profissao,
+    reflexo,
+    religiao,
+    sobrevivencia,
+    tatica,
+    tecnologia,
+    vontade,
+    passiva,
+    esquiva,
+    bloqueio,
+    mental,
+    morte,
+    conhecimento,
+    sangue,
+    energia,
+    fisica,
+    balistica,
+    corte,
+    impacto,
+    perfuracao,
+    eletricidade,
+    fogo,
+    frio,
+    quimica,
+    inventario,
+    habilidades,
+    detalhes,
+    sessaoId
   }) {
-
-    if (userId == undefined || userId == '' || userId == null) {
-      throw new AppError("Dados necessários não preenchidos.")
-    }
-
-    const userIdAlreadyExists = await prisma.user.findFirst({
-      where: {
-        id: userId
-      },
-    });
-
-    if (!userIdAlreadyExists) {
-      throw new AppError("Este ID de usuário não existe.");
-    }
-
 
     if (nome == '' || nome == null || nome == undefined
       || origem == '' || origem == null || origem == undefined
@@ -59,21 +107,7 @@ class CreateFichaUseCase {
         throw new AppError("Este ID de sessão não existe.");
       }
 
-      if (sessaoIdAlreadyExists.userId == userId) {
-        throw new AppError("O dono da sessão não pode ter uma ficha nela.")
-      }
-
-      const participanteAlreadyExistsByUserId = await prisma.participante.findFirst({
-        where: {
-          userId
-        }
-      })
-
-      if (participanteAlreadyExistsByUserId) {
-        throw new AppError("Este usuário já tem uma ficha em sua sessão.")
-      }
-
-      ficha = await prisma.ficha.create({
+      ficha = await prisma.fichaNPC.create({
         data: {
           userId,
           sessaoId
@@ -89,23 +123,7 @@ class CreateFichaUseCase {
       })
 
     } else {
-
-      const fichasSeparadas = await prisma.ficha.findMany({
-        where: {
-          userId
-        }
-      })
-
-      if (fichasSeparadas.length == 3) {
-        throw new AppError("Você só pode ter no máximo 3 fichas.")
-      }
-
-      ficha = await prisma.ficha.create({
-        data: {
-          userId
-        },
-      });
-
+      throw new AppError("Esta sessão não existe.")
     }
 
     const deslocamento = 7 + agi

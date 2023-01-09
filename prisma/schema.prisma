@@ -41,6 +41,8 @@ model Sessao {
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   Fichas          Ficha[]
+  FichasNPC       FichaNPC[]
+  Monstros        FichaNPCMonstro[]
   Participantes   Participante[]
   Convites        Convite[]
   Anotacoes       Anotacao[]
@@ -200,10 +202,6 @@ model Ficha {
 
   isPublic        Boolean @default(false)
 
-  npc             Boolean?
-  npcmonstro      Boolean?
-  npcprincipal    Boolean?
-
   userId          String
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
   sessaoId        String?
@@ -224,9 +222,175 @@ model Ficha {
   Poderes         Poder[]
   Proficiencias   Proficiencia[]
   Rituais         Ritual[]
-  Outros          Outros[]
 
   @@map("fichas")
+}
+
+model FichaNPC {
+
+  id              String @id @default(uuid())
+  created_at      DateTime @default(now())
+
+  nome            String
+  classe          String
+  origem          String
+  nacionalidade   String
+  idade           Int
+  deslocamento    Int
+  nex             Int
+  trilha          String?
+  patente         String?
+  peso            Int
+
+  agi             Int
+  int             Int
+  vig             Int
+  pre             Int
+  for             Int
+
+  pv              Int
+  pvMax           Int
+  ps              Int
+  psMax           Int
+  pe              Int
+  peMax           Int
+
+  acrobacia       Int?
+  adestramento    Int?
+  arte            Int?
+  atletismo       Int?
+  atualidade      Int?
+  ciencia         Int?
+  crime           Int?
+  diplomacia      Int?
+  enganacao       Int?
+  fortitude       Int?
+  furtividade     Int?
+  iniciativa      Int?
+  intimidacao     Int?
+  intuicao        Int?
+  investigacao    Int?
+  luta            Int?
+  medicina        Int?
+  ocultismo       Int?
+  percepcao       Int?
+  pilotagem       Int?
+  pontaria        Int?
+  profissao       Int?
+  reflexo         Int?
+  religiao        Int?
+  sobrevivencia   Int?
+  tatica          Int?
+  tecnologia      Int?
+  vontade         Int?
+
+  passiva         Int?
+  esquiva         Int?
+  bloqueio        Int?
+  mental          Int?
+  morte           Int?
+  conhecimento    Int?
+  sangue          Int?
+  energia         Int?
+  fisica          Int?
+  balistica       Int?
+  corte           Int?
+  impacto         Int?
+  perfuracao      Int?
+  eletricidade    Int?
+  fogo            Int?
+  frio            Int?
+  quimica         Int?
+
+  inventario      String?
+  habilidades     String?
+  detalhes        String?
+
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("fichasNPCs")
+
+}
+
+model FichaNPCMonstro {
+
+  id              String @id @default(uuid())
+  created_at      DateTime @default(now())
+
+  nome            String
+  deslocamento    Int
+  nex             Int
+
+  agi             Int
+  int             Int
+  vig             Int
+  pre             Int
+  for             Int
+
+  pv              Int
+  pvMax           Int
+  ps              Int
+  psMax           Int
+  pe              Int
+  peMax           Int
+
+  acrobacia       Int?
+  adestramento    Int?
+  arte            Int?
+  atletismo       Int?
+  atualidade      Int?
+  ciencia         Int?
+  crime           Int?
+  diplomacia      Int?
+  enganacao       Int?
+  fortitude       Int?
+  furtividade     Int?
+  iniciativa      Int?
+  intimidacao     Int?
+  intuicao        Int?
+  investigacao    Int?
+  luta            Int?
+  medicina        Int?
+  ocultismo       Int?
+  percepcao       Int?
+  pilotagem       Int?
+  pontaria        Int?
+  profissao       Int?
+  reflexo         Int?
+  religiao        Int?
+  sobrevivencia   Int?
+  tatica          Int?
+  tecnologia      Int?
+  vontade         Int?
+
+  passiva         Int?
+  esquiva         Int?
+  bloqueio        Int?
+  mental          Int?
+  morte           Int?
+  conhecimento    Int?
+  sangue          Int?
+  energia         Int?
+  fisica          Int?
+  balistica       Int?
+  corte           Int?
+  impacto         Int?
+  perfuracao      Int?
+  eletricidade    Int?
+  fogo            Int?
+  frio            Int?
+  quimica         Int?
+
+  inventario      String?
+  habilidades     String?
+  detalhes        String?
+
+  sessaoId        String?
+  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@map("fichasNPCsMonstros")
+
 }
 
 model Principal {
@@ -246,8 +410,8 @@ model Principal {
   trilha          String?
   patente         String
 
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId         String?
+  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPrincipal")
 }
@@ -462,21 +626,6 @@ model Ritual {
 
   @@map("fichasRituais")
 
-}
-
-model Outros {
-
-  id              String @id @default(uuid())
-
-  inventario      String?
-  habilidades     String?
-  detalhes        String?
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
-
-  @@map("fichasOutros")
-  
 }
 
 //npx prisma migrate dev

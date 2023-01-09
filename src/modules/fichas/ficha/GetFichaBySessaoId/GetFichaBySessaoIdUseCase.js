@@ -19,7 +19,7 @@ class GetFichaBySessaoIdUseCase {
         Personagem: true,
         Portrait: true,
         Defesas: true
-      },
+      }
     });
 
     return ficha;
