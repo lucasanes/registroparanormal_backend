@@ -93,6 +93,7 @@ class CreateFichaUseCase {
       } else {
         ficha = await prisma.ficha.create({
           data: {
+            npc,
             userId,
             npcmonstro,
             npcprincipal,
