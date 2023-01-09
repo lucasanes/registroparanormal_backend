@@ -20,6 +20,8 @@ class CreateHabilidadeUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
+    console.log(fichaId)
+
     const data = await prisma.outros.create({
       data: {
         inventario,

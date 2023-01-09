@@ -468,9 +468,9 @@ model Outros {
 
   id              String @id @default(uuid())
 
-  inventario            String?
-  habilidade         String?
-  detalhes         String?
+  inventario      String?
+  habilidades     String?
+  detalhes        String?
 
   fichaId         String
   ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)

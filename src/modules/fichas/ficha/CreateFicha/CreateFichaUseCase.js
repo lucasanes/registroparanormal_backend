@@ -207,11 +207,13 @@ class CreateFichaUseCase {
       }
     })
 
+    let defesas
+
     if (npc != true) {
 
       const passiva = 10 + Number(agi)
 
-      await prisma.defesas.create({
+      defesas = await prisma.defesas.create({
         data: {
           fichaId: ficha.id,
           passiva: passiva
@@ -219,7 +221,7 @@ class CreateFichaUseCase {
       })
 
     } else {
-      await prisma.defesas.create({
+      defesas = await prisma.defesas.create({
         data: {
           fichaId: ficha.id,
         }
@@ -245,7 +247,7 @@ class CreateFichaUseCase {
       }
     })
 
-    return { ficha, principal, atributos, status, pericias };
+    return { ficha, principal, atributos, status, pericias, defesas };
   }
 }
 

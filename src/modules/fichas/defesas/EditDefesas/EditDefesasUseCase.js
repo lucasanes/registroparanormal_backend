@@ -14,8 +14,6 @@ class EditDefesasUseCase {
       }
     })
 
-    console.log(data)
-
     if (passiva != null) {
       data.passiva = passiva
     }
