@@ -9,11 +9,9 @@ class CreateFichaUseCase {
     origem,
     nacionalidade,
     idade,
-    deslocamento,
     nex,
     trilha,
     patente,
-    peso,
     agi,
     int,
     vig,
@@ -107,6 +105,16 @@ class CreateFichaUseCase {
         throw new AppError("Este ID de sessão não existe.");
       }
 
+      const deslocamento = 7 + agi
+
+      let peso;
+
+      if (forca == 0) {
+        peso = 2
+      } else {
+        peso = forca * 5
+      }
+
       ficha = await prisma.fichaNPC.create({
         data: {
           nome,
@@ -181,16 +189,6 @@ class CreateFichaUseCase {
 
     } else {
       throw new AppError("Esta sessão não existe.")
-    }
-
-    const deslocamento = 7 + agi
-
-    let peso;
-
-    if (forca == 0) {
-      peso = 2
-    } else {
-      peso = forca * 5
     }
 
     return ficha;
