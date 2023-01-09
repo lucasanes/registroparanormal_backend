@@ -109,32 +109,81 @@ class CreateFichaUseCase {
 
       ficha = await prisma.fichaNPC.create({
         data: {
-          userId,
+          nome,
+          classe,
+          origem,
+          nacionalidade,
+          idade,
+          deslocamento,
+          nex,
+          trilha,
+          patente,
+          peso,
+          agi,
+          int,
+          vig,
+          pre,
+          forca,
+          pvMax,
+          psMax,
+          peMax,
+          acrobacia,
+          adestramento,
+          arte,
+          atletismo,
+          atualidade,
+          ciencia,
+          crime,
+          diplomacia,
+          enganacao,
+          fortitude,
+          furtividade,
+          iniciativa,
+          intimidacao,
+          intuicao,
+          investigacao,
+          luta,
+          medicina,
+          ocultismo,
+          percepcao,
+          pilotagem,
+          pontaria,
+          profissao,
+          reflexo,
+          religiao,
+          sobrevivencia,
+          tatica,
+          tecnologia,
+          vontade,
+          passiva,
+          esquiva,
+          bloqueio,
+          mental,
+          morte,
+          conhecimento,
+          sangue,
+          energia,
+          fisica,
+          balistica,
+          corte,
+          impacto,
+          perfuracao,
+          eletricidade,
+          fogo,
+          frio,
+          quimica,
+          inventario,
+          habilidades,
+          detalhes,
           sessaoId
         },
       });
-
-      await prisma.participante.create({
-        data: {
-          sessaoId,
-          userId,
-          fichaId: ficha.id
-        }
-      })
 
     } else {
       throw new AppError("Esta sessão não existe.")
     }
 
     const deslocamento = 7 + agi
-
-    let peprod
-
-    if (Math.floor(nex / 5) < 1) {
-      peprod = 1
-    } else {
-      peprod = Math.floor(nex / 5)
-    }
 
     let peso;
 
@@ -144,92 +193,7 @@ class CreateFichaUseCase {
       peso = forca * 5
     }
 
-
-
-    const principal = await prisma.principal.create({
-      data: {
-        fichaId: ficha.id,
-        nome,
-        jogador,
-        classe,
-        origem,
-        nacionalidade,
-        idade,
-        nex,
-        trilha,
-        patente,
-        peprod,
-        deslocamento
-      }
-    })
-
-    const atributos = await prisma.atributo.create({
-      data: {
-        fichaId: ficha.id,
-        agi: agi,
-        int: int,
-        vig: vig,
-        pre: pre,
-        for: forca
-      }
-    })
-
-    const status = await prisma.status.create({
-      data: {
-        fichaId: ficha.id,
-        combate: false,
-        insano: false,
-        danoMassivo: false,
-        inconsciente: false,
-        pv: pvMax,
-        pvMax: pvMax,
-        ps: sanMax,
-        psMax: sanMax,
-        pe: peMax,
-        peMax: peMax,
-        peso: peso
-      }
-    })
-
-    const pericias = await prisma.pericias.create({
-      data: {
-        fichaId: ficha.id
-      }
-    })
-
-    let defesas
-
-    const passiva = 10 + Number(agi)
-
-    defesas = await prisma.defesas.create({
-      data: {
-        fichaId: ficha.id,
-        passiva: passiva
-      }
-    })
-
-    await prisma.personagem.create({
-      data: {
-        fichaId: ficha.id
-      }
-    })
-
-    await prisma.portrait.create({
-      data: {
-        fichaId: ficha.id
-      }
-    })
-
-    await prisma.proficiencia.create({
-      data: {
-        fichaId: ficha.id,
-        nome: 'Armas Simples'
-      }
-    })
-
-
-
-    return { ficha, principal, atributos, status, pericias, defesas };
+    return ficha;
   }
 }
 

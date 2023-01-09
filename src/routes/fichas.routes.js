@@ -6,6 +6,9 @@ const fichasRouters = Router();
 const CreateFichaController = require("../modules/fichas/ficha/CreateFicha/CreateFichaController");
 const createFichaController = new CreateFichaController();
 
+const CreateFichaNPCController = require("../modules/fichas/fichaNPC/CreateFichaNPC/CreateFichaNPCController");
+const createFichaNPCController = new CreateFichaNPCController();
+
 const EditFichaController = require("../modules/fichas/ficha/EditFicha/EditFichaController");
 const editFichaController = new EditFichaController();
 
@@ -18,17 +21,14 @@ const getFichaControllerByUserId = new GetFichaByUserIdController();
 const GetFichaByIdController = require("../modules/fichas/ficha/GetFichaById/GetFichaByIdController");
 const getFichaByIdController = new GetFichaByIdController();
 
-const GetFichaNPCController = require("../modules/fichas/ficha/GetFichaNPC/GetFichaNPCController");
-const getFichaNPCController = new GetFichaNPCController();
-
 const DeleteFichaController = require("../modules/fichas/ficha/DeleteFicha/DeleteFichaController");
 const deleteFichaController = new DeleteFichaController();
 
 fichasRouters.post("/", createFichaController.handle);
+fichasRouters.post("/npc/", createFichaNPCController.handle);
 fichasRouters.put("/:id", editFichaController.handle);
 fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);
 fichasRouters.get("/user/:id", getFichaControllerByUserId.handle);
-fichasRouters.get("/userandsessao/:userId/:sessaoId", getFichaNPCController.handle);
 fichasRouters.get("/:id", getFichaByIdController.handle);
 fichasRouters.delete("/:id", deleteFichaController.handle);
 
