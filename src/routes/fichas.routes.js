@@ -9,11 +9,17 @@ const createFichaController = new CreateFichaController();
 const CreateFichaNPCController = require("../modules/fichas/fichaNPC/CreateFichaNPC/CreateFichaNPCController");
 const createFichaNPCController = new CreateFichaNPCController();
 
+const CreateFichaNPCMonstroController = require("../modules/fichas/fichaNPCMonstro/CreateFichaNPCMonstro/CreateFichaNPCMonstroController");
+const createFichaNPCMonstroController = new CreateFichaNPCMonstroController();
+
 const EditFichaController = require("../modules/fichas/ficha/EditFicha/EditFichaController");
 const editFichaController = new EditFichaController();
 
 const GetFichaBySessaoIdController = require("../modules/fichas/ficha/GetFichaBySessaoId/GetFichaBySessaoIdController");
 const getFichaControllerBySessaoId = new GetFichaBySessaoIdController();
+
+const GetFichasNPCSBySessaoIdController = require("../modules/fichas/ficha/GetFichasNPCSBySessaoId/GetFichasNPCSBySessaoIdController");
+const getFichasNPCSControllerBySessaoId = new GetFichasNPCSBySessaoIdController();
 
 const GetFichaByUserIdController = require("../modules/fichas/ficha/GetFichaByUserId/GetFichaByUserIdController");
 const getFichaControllerByUserId = new GetFichaByUserIdController();
@@ -26,7 +32,9 @@ const deleteFichaController = new DeleteFichaController();
 
 fichasRouters.post("/", createFichaController.handle);
 fichasRouters.post("/npc/", createFichaNPCController.handle);
+fichasRouters.post("/npcmonstro/", createFichaNPCMonstroController.handle);
 fichasRouters.put("/:id", editFichaController.handle);
+fichasRouters.get("/npcs/:id", getFichasNPCSControllerBySessaoId.handle)
 fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);
 fichasRouters.get("/user/:id", getFichaControllerByUserId.handle);
 fichasRouters.get("/:id", getFichaByIdController.handle);
@@ -239,6 +247,7 @@ fichasRouters.put("/portrait/:id", editPortraitController.handle);
 //STATUS
 
 const EditStatusController = require("../modules/fichas/status/EditStatus/EditStatusController");
+const { ficha } = require("../modules/database/prisma");
 const editStatusController = new EditStatusController();
 
 fichasRouters.put("/status/:id", editStatusController.handle);

@@ -1,16 +1,10 @@
-const CreateFichaNPCUseCase = require("./CreateFichaNPCUseCase");
+const CreateFichaNPCMonstroUseCase = require("./CreateFichaNPCMonstroUseCase");
 
-class CreateFichaNPCController {
+class CreateFichaNPCMonstroController {
   async handle(request, response) {
     const {
       nome,
-      classe,
-      origem,
-      nacionalidade,
-      idade,
       nex,
-      trilha,
-      patente,
       agi,
       int,
       vig,
@@ -70,18 +64,12 @@ class CreateFichaNPCController {
       sessaoId
     } = request.body;
 
-    const createFichaNPCUseCase = new CreateFichaNPCUseCase();
+    const createFichaNPCMonstroUseCase = new CreateFichaNPCMonstroUseCase();
 
-    const fichaNPC = await createFichaNPCUseCase.execute({
+    const fichaNPCMonstro = await createFichaNPCMonstroUseCase.execute({
 
       nome,
-      classe,
-      origem,
-      nacionalidade,
-      idade,
       nex,
-      trilha,
-      patente,
 
       agi,
       int,
@@ -145,8 +133,8 @@ class CreateFichaNPCController {
       sessaoId
 
     });
-    response.status(201).json(fichaNPC);
+    response.status(201).json(fichaNPCMonstro);
   }
 }
 
-module.exports = CreateFichaNPCController;
+module.exports = CreateFichaNPCMonstroController;

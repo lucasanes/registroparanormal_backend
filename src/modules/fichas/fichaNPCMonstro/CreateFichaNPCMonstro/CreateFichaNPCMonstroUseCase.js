@@ -2,16 +2,10 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 const { hash } = require("bcrypt");
 
-class CreateFichaNPCUseCase {
+class CreateFichaNPCMonstroUseCase {
   async execute({
     nome,
-    classe,
-    origem,
-    nacionalidade,
-    idade,
     nex,
-    trilha,
-    patente,
 
     agi,
     int,
@@ -75,10 +69,7 @@ class CreateFichaNPCUseCase {
   }) {
 
     if (nome == '' || nome == null || nome == undefined
-      || origem == '' || origem == null || origem == undefined
-      || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
       || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
-      || idade == '' || idade == null || idade == undefined
 
       || agi == '' || agi == null || agi == undefined
       || int == '' || int == null || int == undefined
@@ -90,10 +81,6 @@ class CreateFichaNPCUseCase {
       || psMax == '' || psMax == null || psMax == undefined
       || peMax == '' || peMax == null || peMax == undefined) {
       throw new AppError("Dados necessários não preenchidos.")
-    }
-
-    if (trilha == null || trilha == '' || trilha == undefined) {
-      trilha = 'Nenhuma'
     }
 
     if (sessaoId != undefined && sessaoId != '' && sessaoId != null) {
@@ -111,31 +98,14 @@ class CreateFichaNPCUseCase {
       throw new AppError("Esta sessão não existe.")
     }
 
-    const deslocamento = 7 + agi
+    const deslocamento = 5 + agi
 
-    let peso;
-
-    if (forca == 0) {
-      peso = 2
-    } else {
-      peso = forca * 5
-    }
-
-    console.log('a')
-
-    const ficha = await prisma.fichaNPC.create({
+    const ficha = await prisma.fichaNPCMonstro.create({
       data: {
 
         nome,
-        classe,
-        origem,
-        nacionalidade,
-        idade,
         deslocamento,
         nex,
-        trilha,
-        patente,
-        peso,
 
         agi,
         int,
@@ -209,4 +179,4 @@ class CreateFichaNPCUseCase {
   }
 }
 
-module.exports = CreateFichaNPCUseCase;
+module.exports = CreateFichaNPCMonstroUseCase;
