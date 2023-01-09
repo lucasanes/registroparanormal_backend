@@ -14,8 +14,6 @@ class CreateFichaNPCMonstroUseCase {
     forca,
 
     pvMax,
-    psMax,
-    peMax,
 
     acrobacia,
     adestramento,
@@ -77,9 +75,7 @@ class CreateFichaNPCMonstroUseCase {
       || pre == '' || pre == null || pre == undefined
       || forca == '' || forca == null || forca == undefined
 
-      || pvMax == '' || pvMax == null || pvMax == undefined
-      || psMax == '' || psMax == null || psMax == undefined
-      || peMax == '' || peMax == null || peMax == undefined) {
+      || pvMax == '' || pvMax == null || pvMax == undefined) {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
@@ -114,11 +110,7 @@ class CreateFichaNPCMonstroUseCase {
         for: forca,
 
         pv: pvMax,
-        ps: psMax,
-        pe: peMax,
         pvMax,
-        psMax,
-        peMax,
 
         acrobacia,
         adestramento,

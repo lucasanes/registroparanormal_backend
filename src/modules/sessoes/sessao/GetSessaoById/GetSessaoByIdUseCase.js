@@ -30,7 +30,9 @@ class GetSessaoByIdUseCase {
             Pericias: true,
             Defesas: true
           }
-        }
+        },
+        FichasNPC: true,
+        Monstros: true
       }
     });
 

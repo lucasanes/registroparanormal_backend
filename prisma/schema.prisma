@@ -330,10 +330,6 @@ model FichaNPCMonstro {
 
   pv              Int
   pvMax           Int
-  ps              Int
-  psMax           Int
-  pe              Int
-  peMax           Int
 
   acrobacia       Int?
   adestramento    Int?

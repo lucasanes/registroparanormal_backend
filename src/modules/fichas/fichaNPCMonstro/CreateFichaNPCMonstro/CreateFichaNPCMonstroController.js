@@ -11,8 +11,6 @@ class CreateFichaNPCMonstroController {
       pre,
       forca,
       pvMax,
-      psMax,
-      peMax,
       acrobacia,
       adestramento,
       arte,
