@@ -139,7 +139,14 @@ class CreateFichaUseCase {
 
     }
 
-    const deslocamento = 7 + agi
+    let deslocamento
+
+    if (npcmonstro != true) {
+      deslocamento = 7 + agi
+    } else {
+      deslocamento = 5 + agi
+    }
+
     let peprod
 
     if (Math.floor(nex / 5) < 1) {
@@ -156,22 +163,47 @@ class CreateFichaUseCase {
       peso = forca * 5
     }
 
-    const principal = await prisma.principal.create({
-      data: {
-        fichaId: ficha.id,
-        nome,
-        jogador,
-        classe,
-        origem,
-        nacionalidade,
-        idade,
-        nex,
-        trilha,
-        patente,
-        peprod,
-        deslocamento
-      }
-    })
+    let principal
+
+    if (npcmonstro != true) {
+
+      principal = await prisma.principal.create({
+        data: {
+          fichaId: ficha.id,
+          nome,
+          jogador,
+          classe,
+          origem,
+          nacionalidade,
+          idade,
+          nex,
+          trilha,
+          patente,
+          peprod,
+          deslocamento
+        }
+      })
+
+    } else {
+
+      principal = await prisma.principal.create({
+        data: {
+          fichaId: ficha.id,
+          nome,
+          jogador,
+          classe: 'Nenhuma',
+          origem: 'Nenhuma',
+          nacionalidade: 'Nenhuma',
+          idade: 0,
+          nex,
+          trilha,
+          patente: 'Nenhuma',
+          peprod,
+          deslocamento
+        }
+      })
+
+    }
 
     const atributos = await prisma.atributo.create({
       data: {
@@ -228,24 +260,28 @@ class CreateFichaUseCase {
       })
     }
 
-    await prisma.personagem.create({
-      data: {
-        fichaId: ficha.id
-      }
-    })
+    if (npcprincipal && npc || !npc) {
 
-    await prisma.portrait.create({
-      data: {
-        fichaId: ficha.id
-      }
-    })
+      await prisma.personagem.create({
+        data: {
+          fichaId: ficha.id
+        }
+      })
 
-    await prisma.proficiencia.create({
-      data: {
-        fichaId: ficha.id,
-        nome: 'Armas Simples'
-      }
-    })
+      await prisma.portrait.create({
+        data: {
+          fichaId: ficha.id
+        }
+      })
+
+      await prisma.proficiencia.create({
+        data: {
+          fichaId: ficha.id,
+          nome: 'Armas Simples'
+        }
+      })
+
+    }
 
     return { ficha, principal, atributos, status, pericias, defesas };
   }
