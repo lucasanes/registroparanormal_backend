@@ -10,12 +10,18 @@ class GetFichasNPCSBySessaoIdUseCase {
     const npcs = await prisma.fichaNPC.findMany({
       where: {
         sessaoId: id,
+      },
+      orderBy: {
+        nome: 'asc'
       }
     });
 
     const npcsMonstros = await prisma.fichaNPCMonstro.findMany({
       where: {
         sessaoId: id,
+      },
+      orderBy: {
+        nome: 'asc'
       }
     });
 
