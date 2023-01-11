@@ -2,16 +2,12 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 const { hash } = require("bcrypt");
 
-class CreateFichaNPCUseCase {
+class EditFichaNPCMonstroUseCase {
   async execute({
+    id,
     nome,
-    classe,
-    origem,
-    nacionalidade,
-    idade,
+    deslocamento,
     nex,
-    trilha,
-    patente,
 
     agi,
     int,
@@ -19,9 +15,8 @@ class CreateFichaNPCUseCase {
     pre,
     forca,
 
+    pv,
     pvMax,
-    psMax,
-    peMax,
 
     acrobacia,
     adestramento,
@@ -70,30 +65,21 @@ class CreateFichaNPCUseCase {
     quimica,
     inventario,
     habilidades,
-    detalhes,
-    sessaoId
+    detalhes
   }) {
 
-    if (nome == '' || nome == null || nome == undefined
-      || origem == '' || origem == null || origem == undefined
-      || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
-      || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
-      || idade == '' || idade == null || idade == undefined
-
-      || agi == '' || agi == null || agi == undefined
-      || int == '' || int == null || int == undefined
-      || vig == '' || vig == null || vig == undefined
-      || pre == '' || pre == null || pre == undefined
-      || forca == '' || forca == null || forca == undefined
-
-      || pvMax == '' || pvMax == null || pvMax == undefined
-      || psMax == '' || psMax == null || psMax == undefined
-      || peMax == '' || peMax == null || peMax == undefined) {
-      throw new AppError("Dados necessários não preenchidos.")
+    if (!id) {
+      throw new AppError("ID não passado.")
     }
 
-    if (trilha == null || trilha == '' || trilha == undefined) {
-      trilha = 'Nenhuma'
+    const data = await prisma.fichaNPCMonstro.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!data) {
+      throw new AppError("Não existe nenhum Monstro com o ID passado.")
     }
 
     if (sessaoId != undefined && sessaoId != '' && sessaoId != null) {
@@ -111,29 +97,16 @@ class CreateFichaNPCUseCase {
       throw new AppError("Esta sessão não existe.")
     }
 
-    const deslocamento = 7 + agi
+    const ficha = await prisma.fichaNPCMonstro.update({
+      where: {
+        id: data.id
+      },
 
-    let peso;
-
-    if (forca == 0) {
-      peso = 2
-    } else {
-      peso = forca * 5
-    }
-
-    const ficha = await prisma.fichaNPC.create({
       data: {
 
         nome,
-        classe,
-        origem,
-        nacionalidade,
-        idade,
         deslocamento,
         nex,
-        trilha,
-        patente,
-        peso,
 
         agi,
         int,
@@ -141,12 +114,8 @@ class CreateFichaNPCUseCase {
         pre,
         for: forca,
 
-        pv: pvMax,
-        ps: psMax,
-        pe: peMax,
+        pv,
         pvMax,
-        psMax,
-        peMax,
 
         acrobacia,
         adestramento,
@@ -197,9 +166,7 @@ class CreateFichaNPCUseCase {
 
         inventario,
         habilidades,
-        detalhes,
-
-        sessaoId
+        detalhes
       },
     });
 
@@ -207,4 +174,4 @@ class CreateFichaNPCUseCase {
   }
 }
 
-module.exports = CreateFichaNPCUseCase;
+module.exports = EditFichaNPCMonstroUseCase;

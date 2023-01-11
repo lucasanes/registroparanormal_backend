@@ -15,6 +15,18 @@ const createFichaNPCMonstroController = new CreateFichaNPCMonstroController();
 const EditFichaController = require("../modules/fichas/ficha/EditFicha/EditFichaController");
 const editFichaController = new EditFichaController();
 
+const EditFichaNPCController = require("../modules/fichas/fichaNPC/EditFichaNPC/EditFichaNPCController");
+const editFichaNPCController = new EditFichaNPCController();
+
+const EditFichaNPCStatusController = require("../modules/fichas/fichaNPC/EditFichaNPCStatus/EditFichaNPCStatusController");
+const editFichaNPCStatusController = new EditFichaNPCStatusController();
+
+const EditFichaNPCMonstroController = require("../modules/fichas/fichaNPCMonstro/EditFichaNPCMonstro/EditFichaNPCMonstroController");
+const editFichaNPCMonstroController = new EditFichaNPCMonstroController();
+
+const EditFichaNPCMonstroStatusController = require("../modules/fichas/fichaNPCMonstro/EditFichaNPCMonstroStatus/EditFichaNPCMonstroStatusController");
+const editFichaNPCMonstroStatusController = new EditFichaNPCMonstroStatusController();
+
 const GetFichaBySessaoIdController = require("../modules/fichas/ficha/GetFichaBySessaoId/GetFichaBySessaoIdController");
 const getFichaControllerBySessaoId = new GetFichaBySessaoIdController();
 
@@ -32,7 +44,11 @@ const deleteFichaController = new DeleteFichaController();
 
 fichasRouters.post("/", createFichaController.handle);
 fichasRouters.post("/npc/", createFichaNPCController.handle);
+fichasRouters.put("/npc/:id", editFichaNPCController.handle);
+fichasRouters.put("/npc/status/:id", editFichaNPCStatusController.handle);
 fichasRouters.post("/npcmonstro/", createFichaNPCMonstroController.handle);
+fichasRouters.put("/npcmonstro/:id", editFichaNPCMonstroController.handle);
+fichasRouters.put("/npcmonstro/status/:id", editFichaNPCMonstroStatusController.handle);
 fichasRouters.put("/:id", editFichaController.handle);
 fichasRouters.get("/npcs/:id", getFichasNPCSControllerBySessaoId.handle)
 fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);

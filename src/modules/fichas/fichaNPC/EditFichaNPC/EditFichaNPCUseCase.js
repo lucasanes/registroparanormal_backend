@@ -2,8 +2,9 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 const { hash } = require("bcrypt");
 
-class CreateFichaNPCUseCase {
+class EditFichaNPCUseCase {
   async execute({
+    id,
     nome,
     classe,
     origem,
@@ -12,6 +13,8 @@ class CreateFichaNPCUseCase {
     nex,
     trilha,
     patente,
+    deslocamento,
+    peso,
 
     agi,
     int,
@@ -19,6 +22,9 @@ class CreateFichaNPCUseCase {
     pre,
     forca,
 
+    pv,
+    ps,
+    pe,
     pvMax,
     psMax,
     peMax,
@@ -70,9 +76,23 @@ class CreateFichaNPCUseCase {
     quimica,
     inventario,
     habilidades,
-    detalhes,
-    sessaoId
+    detalhes
+
   }) {
+
+    if (!id) {
+      throw new AppError('ID não passado.')
+    }
+
+    const data = await prisma.fichaNPC.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!data) {
+      throw new AppError("Não existe nenhum NPC com o ID passado.")
+    }
 
     if (nome == '' || nome == null || nome == undefined
       || origem == '' || origem == null || origem == undefined
@@ -96,44 +116,22 @@ class CreateFichaNPCUseCase {
       trilha = 'Nenhuma'
     }
 
-    if (sessaoId != undefined && sessaoId != '' && sessaoId != null) {
-      const sessaoIdAlreadyExists = await prisma.sessao.findFirst({
-        where: {
-          id: sessaoId,
-        },
-      });
 
-      if (!sessaoIdAlreadyExists) {
-        throw new AppError("Este ID de sessão não existe.");
-      }
-
-    } else {
-      throw new AppError("Esta sessão não existe.")
-    }
-
-    const deslocamento = 7 + agi
-
-    let peso;
-
-    if (forca == 0) {
-      peso = 2
-    } else {
-      peso = forca * 5
-    }
-
-    const ficha = await prisma.fichaNPC.create({
+    const ficha = await prisma.fichaNPC.update({
+      where: {
+        id: data.id
+      },
       data: {
-
         nome,
         classe,
         origem,
         nacionalidade,
-        idade,
         deslocamento,
+        peso,
+        idade,
         nex,
         trilha,
         patente,
-        peso,
 
         agi,
         int,
@@ -141,9 +139,9 @@ class CreateFichaNPCUseCase {
         pre,
         for: forca,
 
-        pv: pvMax,
-        ps: psMax,
-        pe: peMax,
+        pv,
+        pe,
+        ps,
         pvMax,
         psMax,
         peMax,
@@ -176,7 +174,6 @@ class CreateFichaNPCUseCase {
         tatica,
         tecnologia,
         vontade,
-
         passiva,
         esquiva,
         bloqueio,
@@ -194,12 +191,9 @@ class CreateFichaNPCUseCase {
         fogo,
         frio,
         quimica,
-
         inventario,
         habilidades,
-        detalhes,
-
-        sessaoId
+        detalhes
       },
     });
 
@@ -207,4 +201,4 @@ class CreateFichaNPCUseCase {
   }
 }
 
-module.exports = CreateFichaNPCUseCase;
+module.exports = EditFichaNPCUseCase;
