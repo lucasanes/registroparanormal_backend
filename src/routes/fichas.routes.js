@@ -42,6 +42,12 @@ const getFichaByIdController = new GetFichaByIdController();
 const DeleteFichaController = require("../modules/fichas/ficha/DeleteFicha/DeleteFichaController");
 const deleteFichaController = new DeleteFichaController();
 
+const DeleteFichaNPCController = require("../modules/fichas/fichaNPC/DeleteFichaNPC/DeleteFichaNPCController");
+const deleteFichaNPCController = new DeleteFichaNPCController();
+
+const DeleteFichaNPCMonstroController = require("../modules/fichas/fichaNPCMonstro/DeleteFichaNPCMonstro/DeleteFichaNPCMonstroController");
+const deleteFichaNPCMonstroController = new DeleteFichaNPCMonstroController();
+
 fichasRouters.post("/", createFichaController.handle);
 fichasRouters.post("/npc/", createFichaNPCController.handle);
 fichasRouters.put("/npc/:id", editFichaNPCController.handle);
@@ -55,6 +61,8 @@ fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);
 fichasRouters.get("/user/:id", getFichaControllerByUserId.handle);
 fichasRouters.get("/:id", getFichaByIdController.handle);
 fichasRouters.delete("/:id", deleteFichaController.handle);
+fichasRouters.delete("/npc/:id", deleteFichaNPCController.handle);
+fichasRouters.delete("/npcmonstro/:id", deleteFichaNPCMonstroController.handle);
 
 //Fim Ficha
 
