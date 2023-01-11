@@ -63,7 +63,7 @@ class EditFichaNPCMonstroUseCase {
     fogo,
     frio,
     quimica,
-    inventario,
+    ataques,
     habilidades,
     detalhes
   }) {
@@ -164,7 +164,7 @@ class EditFichaNPCMonstroUseCase {
         frio,
         quimica,
 
-        inventario,
+        ataques,
         habilidades,
         detalhes
       },

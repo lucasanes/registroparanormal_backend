@@ -60,7 +60,6 @@ class CreateFichaNPCMonstroUseCase {
     fogo,
     frio,
     quimica,
-    inventario,
     ataques,
     habilidades,
     detalhes,
@@ -160,7 +159,6 @@ class CreateFichaNPCMonstroUseCase {
         frio,
         quimica,
 
-        inventario,
         ataques,
         habilidades,
         detalhes,

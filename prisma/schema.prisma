@@ -379,7 +379,6 @@ model FichaNPCMonstro {
   frio            Int?
   quimica         Int?
 
-  inventario      String?
   ataques         String?
   habilidades     String?
   detalhes        String?

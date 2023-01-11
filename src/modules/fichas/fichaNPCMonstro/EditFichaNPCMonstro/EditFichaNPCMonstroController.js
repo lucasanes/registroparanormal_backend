@@ -58,7 +58,7 @@ class EditFichaNPCMonstroController {
       fogo,
       frio,
       quimica,
-      inventario,
+      ataques,
       habilidades,
       detalhes
     } = request.body;
@@ -128,7 +128,7 @@ class EditFichaNPCMonstroController {
       fogo,
       frio,
       quimica,
-      inventario,
+      ataques,
       habilidades,
       detalhes,
 
