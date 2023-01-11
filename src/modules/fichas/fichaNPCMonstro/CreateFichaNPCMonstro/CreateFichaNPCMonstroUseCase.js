@@ -66,6 +66,8 @@ class CreateFichaNPCMonstroUseCase {
     sessaoId
   }) {
 
+    console.log('a')
+
     if (nome == '' || nome == null || nome == undefined
       || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
 
