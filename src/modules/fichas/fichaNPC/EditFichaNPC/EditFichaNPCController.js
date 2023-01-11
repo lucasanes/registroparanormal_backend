@@ -70,6 +70,7 @@ class EditFichaNPCController {
       frio,
       quimica,
       inventario,
+      ataques,
       habilidades,
       detalhes
     } = request.body;
@@ -150,6 +151,7 @@ class EditFichaNPCController {
       frio,
       quimica,
       inventario,
+      ataques,
       habilidades,
       detalhes,
 

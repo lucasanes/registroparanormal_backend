@@ -70,6 +70,7 @@ class CreateFichaNPCUseCase {
     quimica,
     inventario,
     habilidades,
+    ataques,
     detalhes,
     sessaoId
   }) {
@@ -196,6 +197,7 @@ class CreateFichaNPCUseCase {
         quimica,
 
         inventario,
+        ataques,
         habilidades,
         detalhes,
 

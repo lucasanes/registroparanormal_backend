@@ -303,6 +303,7 @@ model FichaNPC {
   quimica         Int?
 
   inventario      String?
+  ataques         String?
   habilidades     String?
   detalhes        String?
 
@@ -379,6 +380,7 @@ model FichaNPCMonstro {
   quimica         Int?
 
   inventario      String?
+  ataques         String?
   habilidades     String?
   detalhes        String?
 

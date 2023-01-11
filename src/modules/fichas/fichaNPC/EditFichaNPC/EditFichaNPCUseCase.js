@@ -75,6 +75,7 @@ class EditFichaNPCUseCase {
     frio,
     quimica,
     inventario,
+    ataques,
     habilidades,
     detalhes
 
@@ -192,6 +193,7 @@ class EditFichaNPCUseCase {
         frio,
         quimica,
         inventario,
+        ataques,
         habilidades,
         detalhes
       },

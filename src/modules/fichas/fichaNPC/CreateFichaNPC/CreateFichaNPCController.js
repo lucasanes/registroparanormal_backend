@@ -66,6 +66,7 @@ class CreateFichaNPCController {
       quimica,
       inventario,
       habilidades,
+      ataques,
       detalhes,
       sessaoId
     } = request.body;
@@ -139,6 +140,7 @@ class CreateFichaNPCController {
       frio,
       quimica,
       inventario,
+      ataques,
       habilidades,
       detalhes,
 

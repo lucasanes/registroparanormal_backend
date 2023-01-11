@@ -61,6 +61,7 @@ class CreateFichaNPCMonstroUseCase {
     frio,
     quimica,
     inventario,
+    ataques,
     habilidades,
     detalhes,
     sessaoId
@@ -160,6 +161,7 @@ class CreateFichaNPCMonstroUseCase {
         quimica,
 
         inventario,
+        ataques,
         habilidades,
         detalhes,
 

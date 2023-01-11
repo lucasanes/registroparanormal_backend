@@ -57,6 +57,7 @@ class CreateFichaNPCMonstroController {
       frio,
       quimica,
       inventario,
+      ataques,
       habilidades,
       detalhes,
       sessaoId
@@ -123,6 +124,7 @@ class CreateFichaNPCMonstroController {
       frio,
       quimica,
       inventario,
+      ataques,
       habilidades,
       detalhes,
 
