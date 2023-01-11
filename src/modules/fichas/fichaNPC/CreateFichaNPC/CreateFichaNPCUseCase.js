@@ -81,11 +81,11 @@ class CreateFichaNPCUseCase {
       || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
       || idade == '' || idade == null || idade == undefined
 
-      || agi == '' || agi == null || agi == undefined
-      || int == '' || int == null || int == undefined
-      || vig == '' || vig == null || vig == undefined
-      || pre == '' || pre == null || pre == undefined
-      || forca == '' || forca == null || forca == undefined
+      || agi == null && agi != 0 || agi == undefined
+      || int == null && int != 0 || int == undefined
+      || vig == null && vig != 0 || vig == undefined
+      || pre == null && pre != 0 || pre == undefined
+      || forca == null && forca != 0 || forca == undefined
 
       || pvMax == '' || pvMax == null || pvMax == undefined
       || psMax == '' || psMax == null || psMax == undefined

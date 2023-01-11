@@ -82,19 +82,22 @@ class EditFichaNPCMonstroUseCase {
       throw new AppError("Não existe nenhum Monstro com o ID passado.")
     }
 
-    if (sessaoId != undefined && sessaoId != '' && sessaoId != null) {
-      const sessaoIdAlreadyExists = await prisma.sessao.findFirst({
-        where: {
-          id: sessaoId,
-        },
-      });
+    if (nome == '' || nome == null || nome == undefined
+      || origem == '' || origem == null || origem == undefined
+      || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
+      || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
+      || idade == '' || idade == null || idade == undefined
 
-      if (!sessaoIdAlreadyExists) {
-        throw new AppError("Este ID de sessão não existe.");
-      }
+      || agi == null && agi != 0 || agi == undefined
+      || int == null && int != 0 || int == undefined
+      || vig == null && vig != 0 || vig == undefined
+      || pre == null && pre != 0 || pre == undefined
+      || forca == null && forca != 0 || forca == undefined
 
-    } else {
-      throw new AppError("Esta sessão não existe.")
+      || pvMax == '' || pvMax == null || pvMax == undefined
+      || psMax == '' || psMax == null || psMax == undefined
+      || peMax == '' || peMax == null || peMax == undefined) {
+      throw new AppError("Dados necessários não preenchidos.")
     }
 
     const ficha = await prisma.fichaNPCMonstro.update({
