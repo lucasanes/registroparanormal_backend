@@ -9,12 +9,6 @@ class EditPrincipalUseCase {
       throw new AppError("ID não existente.");
     }
 
-    const ficha = await prisma.ficha.findFirst({
-      where: {
-        id
-      }
-    })
-
     const data = await prisma.principal.findFirst({
       where: {
         id
@@ -24,14 +18,6 @@ class EditPrincipalUseCase {
     if (nome != null && nome != '') {
 
       data.nome = nome
-      ficha.nome = nome
-
-      await prisma.ficha.update({
-        where: {
-          id: ficha.id
-        },
-        data: ficha
-      });
 
     }
 
