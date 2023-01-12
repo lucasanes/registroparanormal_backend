@@ -83,10 +83,8 @@ class EditFichaNPCMonstroUseCase {
     }
 
     if (nome == '' || nome == null || nome == undefined
-      || origem == '' || origem == null || origem == undefined
-      || nacionalidade == '' || nacionalidade == null || nacionalidade == undefined
+      || deslocamento == '' || deslocamento == null || deslocamento == undefined
       || nex == '' && nex != 0 || nex == null && nex != 0 || nex == undefined && nex != 0
-      || idade == '' || idade == null || idade == undefined
 
       || agi == null && agi != 0 || agi == undefined
       || int == null && int != 0 || int == undefined
@@ -94,11 +92,11 @@ class EditFichaNPCMonstroUseCase {
       || pre == null && pre != 0 || pre == undefined
       || forca == null && forca != 0 || forca == undefined
 
-      || pvMax == '' || pvMax == null || pvMax == undefined
-      || psMax == '' || psMax == null || psMax == undefined
-      || peMax == '' || peMax == null || peMax == undefined) {
+      || pvMax == '' || pvMax == null || pvMax == undefined) {
       throw new AppError("Dados necessários não preenchidos.")
     }
+
+    console.log('q')
 
     const ficha = await prisma.fichaNPCMonstro.update({
       where: {
