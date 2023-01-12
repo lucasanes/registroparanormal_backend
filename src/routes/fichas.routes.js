@@ -110,7 +110,7 @@ fichasRouters.get("/item/:id", getItensController.handle);
 fichasRouters.delete("/item/:id", deleteItemController.handle);
 fichasRouters.put("/item/:id", editItemController.handle);
 
-//FIM ITEM
+//FIM ITEm
 
 //ARMA
 
