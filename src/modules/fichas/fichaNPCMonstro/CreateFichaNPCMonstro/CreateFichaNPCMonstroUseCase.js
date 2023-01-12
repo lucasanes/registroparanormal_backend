@@ -44,8 +44,6 @@ class CreateFichaNPCMonstroUseCase {
     tecnologia,
     vontade,
     passiva,
-    esquiva,
-    bloqueio,
     mental,
     morte,
     conhecimento,
@@ -142,8 +140,6 @@ class CreateFichaNPCMonstroUseCase {
         vontade,
 
         passiva,
-        esquiva,
-        bloqueio,
         mental,
         morte,
         conhecimento,
