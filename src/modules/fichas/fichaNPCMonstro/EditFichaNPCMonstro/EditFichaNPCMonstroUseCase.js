@@ -96,8 +96,6 @@ class EditFichaNPCMonstroUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    console.log('q')
-
     const ficha = await prisma.fichaNPCMonstro.update({
       where: {
         id: data.id
