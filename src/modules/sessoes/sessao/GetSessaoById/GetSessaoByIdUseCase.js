@@ -30,9 +30,6 @@ class GetSessaoByIdUseCase {
             Pericias: true,
             Portrait: true,
             Defesas: true
-          },
-          orderBy: {
-            nome: 'asc'
           }
         },
         FichasNPC: {
