@@ -24,15 +24,28 @@ class GetSessaoByIdUseCase {
         },
         Fichas: {
           include: {
-            Principal: true,
+            Principal: {
+              orderBy: {
+                nome: 'asc'
+              }
+            },
             Atributos: true,
             Status: true,
             Pericias: true,
+            Portrait: true,
             Defesas: true
           }
         },
-        FichasNPC: true,
-        Monstros: true
+        FichasNPC: {
+          orderBy: {
+            nome: 'asc'
+          }
+        },
+        Monstros: {
+          orderBy: {
+            nome: 'asc'
+          }
+        }
       }
     });
 
