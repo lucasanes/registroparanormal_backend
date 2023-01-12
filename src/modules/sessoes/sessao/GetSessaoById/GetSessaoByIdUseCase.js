@@ -43,7 +43,10 @@ class GetSessaoByIdUseCase {
           orderBy: {
             nome: 'asc'
           }
-        }
+        },
+        Anotacoes: true,
+        Dados: true,
+        Iniciativas: true
       }
     });
 
