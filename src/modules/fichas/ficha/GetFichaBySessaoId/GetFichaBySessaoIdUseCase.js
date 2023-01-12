@@ -13,6 +13,8 @@ class GetFichaBySessaoIdUseCase {
       },
       include: {
         Principal: true,
+        Armas: true,
+        Itens: true,
         Atributos: true,
         Status: true,
         Pericias: true,
