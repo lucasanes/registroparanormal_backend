@@ -26,6 +26,8 @@ class GetSessaoByIdUseCase {
           include: {
             Principal: true,
             Atributos: true,
+            Armas: true,
+            Itens: true,
             Status: true,
             Pericias: true,
             Portrait: true,
