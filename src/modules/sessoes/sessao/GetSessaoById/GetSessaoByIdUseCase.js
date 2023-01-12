@@ -51,7 +51,7 @@ class GetSessaoByIdUseCase {
     });
 
     if (!sessao) {
-      throw new AppError("Sessão não existente.")
+      throw new AppError("Essa sessão não é existente.")
     }
 
     return sessao;
