@@ -75,6 +75,7 @@ class CreateFichaUseCase {
 
       ficha = await prisma.ficha.create({
         data: {
+          nome,
           userId,
           sessaoId
         },

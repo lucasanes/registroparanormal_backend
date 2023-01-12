@@ -24,17 +24,13 @@ class GetSessaoByIdUseCase {
         },
         Fichas: {
           include: {
-            Principal: {
-              orderBy: {
-                nome: 'asc'
-              }
-            },
+            Principal: true,
             Atributos: true,
             Status: true,
             Pericias: true,
             Portrait: true,
             Defesas: true
-          }
+          },
         },
         FichasNPC: {
           orderBy: {

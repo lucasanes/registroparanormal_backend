@@ -200,6 +200,8 @@ model Ficha {
   id              String @id @default(uuid())
   created_at      DateTime @default(now())
 
+  nome            String
+
   isPublic        Boolean @default(false)
 
   userId          String
