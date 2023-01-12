@@ -31,6 +31,9 @@ class GetSessaoByIdUseCase {
             Portrait: true,
             Defesas: true
           },
+          orderBy: {
+            nome: 'asc'
+          }
         },
         FichasNPC: {
           orderBy: {
