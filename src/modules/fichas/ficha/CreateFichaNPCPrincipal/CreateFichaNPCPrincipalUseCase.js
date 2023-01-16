@@ -2,7 +2,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 const { hash } = require("bcrypt");
 
-class CreateFichaUseCase {
+class CreateFichaNPCPrincipalUseCase {
   async execute({
     userId, sessaoId,
     nome, jogador, classe, origem, nacionalidade, idade, nex, trilha, patente,
@@ -192,4 +192,4 @@ class CreateFichaUseCase {
   }
 }
 
-module.exports = CreateFichaUseCase;
+module.exports = CreateFichaNPCPrincipalUseCase;

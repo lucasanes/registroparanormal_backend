@@ -1,6 +1,6 @@
-const CreateFichaUseCase = require("./CreateFichaUseCase");
+const CreateFichaNPCPrincipalUseCase = require("./CreateFichaNPCPrincipalUseCase");
 
-class CreateFichaController {
+class CreateFichaNPCPrincipalController {
   async handle(request, response) {
     const {
       userId, sessaoId,
@@ -9,9 +9,9 @@ class CreateFichaController {
       pvMax, sanMax, peMax
     } = request.body;
 
-    const createFichaUseCase = new CreateFichaUseCase();
+    const createFichaNPCPrincipalUseCase = new CreateFichaNPCPrincipalUseCase();
 
-    const ficha = await createFichaUseCase.execute({
+    const ficha = await createFichaNPCPrincipalUseCase.execute({
       userId,
       sessaoId,
 
@@ -40,4 +40,4 @@ class CreateFichaController {
   }
 }
 
-module.exports = CreateFichaController;
+module.exports = CreateFichaNPCPrincipalController;
