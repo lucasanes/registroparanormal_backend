@@ -12,6 +12,9 @@ const createFichaNPCController = new CreateFichaNPCController();
 const CreateFichaNPCMonstroController = require("../modules/fichas/fichaNPCMonstro/CreateFichaNPCMonstro/CreateFichaNPCMonstroController");
 const createFichaNPCMonstroController = new CreateFichaNPCMonstroController();
 
+const CreateFichaNPCPrincipalController = require("../modules/fichas/ficha/CreateFichaNPCPrincipal/CreateFichaNPCPrincipalController");
+const createFichaNPCPrincipalController = new CreateFichaNPCPrincipalController();
+
 const EditFichaController = require("../modules/fichas/ficha/EditFicha/EditFichaController");
 const editFichaController = new EditFichaController();
 
@@ -50,6 +53,7 @@ const deleteFichaNPCMonstroController = new DeleteFichaNPCMonstroController();
 
 fichasRouters.post("/", createFichaController.handle);
 fichasRouters.post("/npc/", createFichaNPCController.handle);
+fichasRouters.post("/npcprincipal/", createFichaNPCPrincipalController.handle);
 fichasRouters.put("/npc/:id", editFichaNPCController.handle);
 fichasRouters.put("/npc/status/:id", editFichaNPCStatusController.handle);
 fichasRouters.post("/npcmonstro/", createFichaNPCMonstroController.handle);
