@@ -46,7 +46,17 @@ class GetSessaoByIdUseCase {
         },
         Anotacoes: true,
         Dados: true,
-        Iniciativas: true
+        Iniciativas: true,
+        Armas: {
+          orderBy: {
+            categoria: 'desc'
+          }
+        },
+        Itens: {
+          orderBy: {
+            categoria: 'desc'
+          }
+        }
       }
     });
 
