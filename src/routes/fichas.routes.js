@@ -42,6 +42,9 @@ const getFichaControllerByUserId = new GetFichaByUserIdController();
 const GetFichaByIdController = require("../modules/fichas/ficha/GetFichaById/GetFichaByIdController");
 const getFichaByIdController = new GetFichaByIdController();
 
+const GetFichaForImagemByIdController = require("../modules/fichas/ficha/GetFichaForImagemById/GetFichaForImagemByIdController");
+const getFichaForImagemByIdController = new GetFichaForImagemByIdController();
+
 const DeleteFichaController = require("../modules/fichas/ficha/DeleteFicha/DeleteFichaController");
 const deleteFichaController = new DeleteFichaController();
 
@@ -64,6 +67,7 @@ fichasRouters.get("/npcs/:id", getFichasNPCSControllerBySessaoId.handle)
 fichasRouters.get("/sessao/:id", getFichaControllerBySessaoId.handle);
 fichasRouters.get("/user/:id", getFichaControllerByUserId.handle);
 fichasRouters.get("/:id", getFichaByIdController.handle);
+fichasRouters.get("/imagem/:id", getFichaForImagemByIdController.handle);
 fichasRouters.delete("/:id", deleteFichaController.handle);
 fichasRouters.delete("/npc/:id", deleteFichaNPCController.handle);
 fichasRouters.delete("/npcmonstro/:id", deleteFichaNPCMonstroController.handle);
