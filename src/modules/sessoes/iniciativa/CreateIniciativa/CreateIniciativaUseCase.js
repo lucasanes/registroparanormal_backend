@@ -4,13 +4,17 @@ const prisma = require("../../../database/prisma");
 class CreateIniciativaUseCase {
   async execute({ nome, iniciativa, dano, sessaoId }) {
 
-    const ultimaPosicao = await prisma.iniciativa.count();
+    const ultimaPosicao = await prisma.iniciativa.findMany({
+      where: {
+        sessaoId
+      }
+    });
 
-    if (ultimaPosicao == 10) {
+    if (ultimaPosicao.length == 10) {
       throw new AppError("Você não pode adicionar mais do que 10 iniciativas.")
     }
 
-    const posicao = ultimaPosicao + 1;
+    const posicao = ultimaPosicao.length + 1;
 
     const data = await prisma.iniciativa.create({
       data: {
