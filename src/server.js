@@ -7,8 +7,16 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const socket = require("socket.io");
 require("dotenv").config();
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
+
+// app.use('/images',
+//   createProxyMiddleware({
+//     target: 'http://https://fichasrpg.vercel.app/',
+//     changeOrigin: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(cors());
