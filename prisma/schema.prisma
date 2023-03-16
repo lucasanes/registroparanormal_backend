@@ -13,15 +13,14 @@ datasource db {
 }
 
 model User {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  nome       String
+  username   String   @unique
+  email      String   @unique
+  senha      String
+  created_at DateTime @default(now())
 
-  nome            String
-  username        String @unique
-  email           String @unique
-  senha           String
-  created_at      DateTime @default(now())
-  
   Fichas          Ficha[]
   Sessoes         Sessao[]
   souParticipante Participante[]
@@ -31,500 +30,472 @@ model User {
 }
 
 model Sessao {
+  id         String   @id @default(uuid())
+  nome       String
+  descricao  String
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  nome            String
-  descricao       String
-  created_at      DateTime @default(now())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  userId          String
-  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  Fichas          Ficha[]
-  FichasNPC       FichaNPC[]
-  Monstros        FichaNPCMonstro[]
-  Participantes   Participante[]
-  Convites        Convite[]
-  Anotacoes       Anotacao[]
-  Iniciativas     Iniciativa[]
-  Dados           Dado[]
-  Itens           Item[]
-  Armas           Arma[]
+  Fichas        Ficha[]
+  FichasNPC     FichaNPC[]
+  Monstros      FichaNPCMonstro[]
+  Participantes Participante[]
+  Convites      Convite[]
+  Anotacoes     Anotacao[]
+  Iniciativas   Iniciativa[]
+  Dados         Dado[]
+  Itens         Item[]
+  Armas         Arma[]
 
   @@map("sessoes")
 }
 
 model Participante {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  created_at      DateTime @default(now())
+  sessaoId String
+  sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  sessaoId        String
-  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  userId          String
-  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("participantes")
-
 }
 
 model Convite {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  created_at      DateTime @default(now())
+  sessaoId String
+  sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  sessaoId        String
-  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
-
-  userEmail       String
-  user            User @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  userEmail String
+  user      User   @relation(fields: [userEmail], references: [email], onDelete: Cascade)
 
   @@map("convites")
-
 }
 
 model Anotacao {
+  id         String   @id @default(uuid())
+  nome       String
+  descricao  String?
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  nome            String
-  descricao       String?
-  created_at      DateTime @default(now())
-
-  sessaoId        String
-  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId String
+  sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("anotacoes")
-
 }
 
 model Iniciativa {
+  id         String   @id @default(uuid())
+  posicao    Int
+  nome       String
+  iniciativa Int
+  dano       Int
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  posicao         Int
-  nome            String
-  iniciativa      Int
-  dano            Int
-  created_at      DateTime @default(now()) 
-
-  sessaoId        String
-  sessao          Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId String
+  sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("iniciativas")
-
 }
 
 model Dado {
+  id     String  @id @default(uuid())
+  nome   String
+  valor  String
+  isDano Boolean
 
-  id              String @id @default(uuid())
-  nome            String
-  valor           String
-  isDano          Boolean
+  created_at DateTime @default(now())
 
-  created_at      DateTime @default(now()) 
+  fichaId String?
+  ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
-  fichaId         String?
-  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
-
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId String?
+  sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("dados")
-
 }
 
 model Item {
+  id        String  @id @default(uuid())
+  nome      String
+  descricao String?
+  espaco    Int
+  categoria Int
 
-  id              String @id @default(uuid())
-  nome            String
-  descricao       String?
-  espaco          Int
-  categoria       Int
+  imagem String?
 
-  imagem          String?
+  isMunicao Boolean?
 
-  isMunicao       Boolean?
+  municao    Int?
+  municaoMax Int?
 
-  municao         Int?
-  municaoMax      Int?
+  created_at DateTime @default(now())
 
-  created_at      DateTime @default(now())
+  sessaoId String?
+  sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
-
-  fichaId         String?
-  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String?
+  ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("itens")
-
 }
 
 model Arma {
+  id            String  @id @default(uuid())
+  nome          String
+  tipo          String
+  dano          String
+  margemCritico Int
+  danoCritico   String
+  recarga       Int?
+  alcance       String
+  especial      String?
 
-  id              String @id @default(uuid())
-  nome            String
-  tipo            String
-  dano            String
-  margemCritico   Int
-  danoCritico     String
-  recarga         Int?
-  alcance         String
-  especial        String?
+  descricao String?
+  espaco    Int
+  categoria Int
 
-  descricao       String?
-  espaco          Int
-  categoria       Int
+  municao Int?
 
-  municao         Int?
+  imagem String?
 
-  imagem          String?
+  created_at DateTime @default(now())
 
-  created_at      DateTime @default(now())
+  sessaoId String?
+  sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
-
-  fichaId         String?
-  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String?
+  ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("armas")
-
 }
 
 model Ficha {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  created_at      DateTime @default(now())
+  isPublic Boolean @default(false)
 
-  isPublic        Boolean @default(false)
+  userId   String
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessaoId String?
+  sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  userId          String
-  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
-
-  Principal       Principal[]
-  Atributos       Atributo[]
-  Status          Status[]
-  Pericias        Pericias[]
-  Defesas         Defesas[]
-  Personagem      Personagem[]
-  Dados           Dado[]
-  Itens           Item[]
-  Armas           Arma[]
-  Participantes   Participante[]
-  Portrait        Portrait[]
-  Habilidades     Habilidade[]
-  Poderes         Poder[]
-  Proficiencias   Proficiencia[]
-  Rituais         Ritual[]
+  Principal     Principal[]
+  Atributos     Atributo[]
+  Status        Status[]
+  Pericias      Pericias[]
+  Defesas       Defesas[]
+  Personagem    Personagem[]
+  Dados         Dado[]
+  Itens         Item[]
+  Armas         Arma[]
+  Participantes Participante[]
+  Portrait      Portrait[]
+  Habilidades   Habilidade[]
+  Poderes       Poder[]
+  Proficiencias Proficiencia[]
+  Rituais       Ritual[]
 
   @@map("fichas")
 }
 
 model FichaNPC {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  created_at      DateTime @default(now())
+  nome          String
+  classe        String
+  origem        String
+  nacionalidade String
+  idade         Int
+  deslocamento  Int
+  nex           Int
+  trilha        String?
+  patente       String?
+  peso          Int
 
-  nome            String
-  classe          String
-  origem          String
-  nacionalidade   String
-  idade           Int
-  deslocamento    Int
-  nex             Int
-  trilha          String?
-  patente         String?
-  peso            Int
+  agi Int
+  int Int
+  vig Int
+  pre Int
+  for Int
 
-  agi             Int
-  int             Int
-  vig             Int
-  pre             Int
-  for             Int
+  pv    Int
+  pvMax Int
+  ps    Int
+  psMax Int
+  pe    Int
+  peMax Int
 
-  pv              Int
-  pvMax           Int
-  ps              Int
-  psMax           Int
-  pe              Int
-  peMax           Int
+  acrobacia     Int?
+  adestramento  Int?
+  arte          Int?
+  atletismo     Int?
+  atualidade    Int?
+  ciencia       Int?
+  crime         Int?
+  diplomacia    Int?
+  enganacao     Int?
+  fortitude     Int?
+  furtividade   Int?
+  iniciativa    Int?
+  intimidacao   Int?
+  intuicao      Int?
+  investigacao  Int?
+  luta          Int?
+  medicina      Int?
+  ocultismo     Int?
+  percepcao     Int?
+  pilotagem     Int?
+  pontaria      Int?
+  profissao     Int?
+  reflexo       Int?
+  religiao      Int?
+  sobrevivencia Int?
+  tatica        Int?
+  tecnologia    Int?
+  vontade       Int?
 
-  acrobacia       Int?
-  adestramento    Int?
-  arte            Int?
-  atletismo       Int?
-  atualidade      Int?
-  ciencia         Int?
-  crime           Int?
-  diplomacia      Int?
-  enganacao       Int?
-  fortitude       Int?
-  furtividade     Int?
-  iniciativa      Int?
-  intimidacao     Int?
-  intuicao        Int?
-  investigacao    Int?
-  luta            Int?
-  medicina        Int?
-  ocultismo       Int?
-  percepcao       Int?
-  pilotagem       Int?
-  pontaria        Int?
-  profissao       Int?
-  reflexo         Int?
-  religiao        Int?
-  sobrevivencia   Int?
-  tatica          Int?
-  tecnologia      Int?
-  vontade         Int?
+  passiva      Int?
+  esquiva      Int?
+  bloqueio     Int?
+  mental       Int?
+  morte        Int?
+  conhecimento Int?
+  sangue       Int?
+  energia      Int?
+  fisica       Int?
+  balistica    Int?
+  corte        Int?
+  impacto      Int?
+  perfuracao   Int?
+  eletricidade Int?
+  fogo         Int?
+  frio         Int?
+  quimica      Int?
 
-  passiva         Int?
-  esquiva         Int?
-  bloqueio        Int?
-  mental          Int?
-  morte           Int?
-  conhecimento    Int?
-  sangue          Int?
-  energia         Int?
-  fisica          Int?
-  balistica       Int?
-  corte           Int?
-  impacto         Int?
-  perfuracao      Int?
-  eletricidade    Int?
-  fogo            Int?
-  frio            Int?
-  quimica         Int?
+  inventario  String?
+  ataques     String?
+  habilidades String?
+  detalhes    String?
 
-  inventario      String?
-  ataques         String?
-  habilidades     String?
-  detalhes        String?
-
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId String?
+  sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("fichasNPCs")
-
 }
 
 model FichaNPCMonstro {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
 
-  id              String @id @default(uuid())
-  created_at      DateTime @default(now())
+  nome         String
+  deslocamento Int
+  nex          Int
 
-  nome            String
-  deslocamento    Int
-  nex             Int
+  agi Int
+  int Int
+  vig Int
+  pre Int
+  for Int
 
-  agi             Int
-  int             Int
-  vig             Int
-  pre             Int
-  for             Int
+  pv    Int
+  pvMax Int
 
-  pv              Int
-  pvMax           Int
+  acrobacia     Int?
+  adestramento  Int?
+  arte          Int?
+  atletismo     Int?
+  atualidade    Int?
+  ciencia       Int?
+  crime         Int?
+  diplomacia    Int?
+  enganacao     Int?
+  fortitude     Int?
+  furtividade   Int?
+  iniciativa    Int?
+  intimidacao   Int?
+  intuicao      Int?
+  investigacao  Int?
+  luta          Int?
+  medicina      Int?
+  ocultismo     Int?
+  percepcao     Int?
+  pilotagem     Int?
+  pontaria      Int?
+  profissao     Int?
+  reflexo       Int?
+  religiao      Int?
+  sobrevivencia Int?
+  tatica        Int?
+  tecnologia    Int?
+  vontade       Int?
 
-  acrobacia       Int?
-  adestramento    Int?
-  arte            Int?
-  atletismo       Int?
-  atualidade      Int?
-  ciencia         Int?
-  crime           Int?
-  diplomacia      Int?
-  enganacao       Int?
-  fortitude       Int?
-  furtividade     Int?
-  iniciativa      Int?
-  intimidacao     Int?
-  intuicao        Int?
-  investigacao    Int?
-  luta            Int?
-  medicina        Int?
-  ocultismo       Int?
-  percepcao       Int?
-  pilotagem       Int?
-  pontaria        Int?
-  profissao       Int?
-  reflexo         Int?
-  religiao        Int?
-  sobrevivencia   Int?
-  tatica          Int?
-  tecnologia      Int?
-  vontade         Int?
+  passiva      Int?
+  esquiva      Int?
+  bloqueio     Int?
+  mental       Int?
+  morte        Int?
+  conhecimento Int?
+  sangue       Int?
+  energia      Int?
+  fisica       Int?
+  balistica    Int?
+  corte        Int?
+  impacto      Int?
+  perfuracao   Int?
+  eletricidade Int?
+  fogo         Int?
+  frio         Int?
+  quimica      Int?
 
-  passiva         Int?
-  esquiva         Int?
-  bloqueio        Int?
-  mental          Int?
-  morte           Int?
-  conhecimento    Int?
-  sangue          Int?
-  energia         Int?
-  fisica          Int?
-  balistica       Int?
-  corte           Int?
-  impacto         Int?
-  perfuracao      Int?
-  eletricidade    Int?
-  fogo            Int?
-  frio            Int?
-  quimica         Int?
+  ataques     String?
+  habilidades String?
+  detalhes    String?
 
-  ataques         String?
-  habilidades     String?
-  detalhes        String?
-
-  sessaoId        String?
-  sessao          Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  sessaoId String?
+  sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("fichasNPCsMonstros")
-
 }
 
 model Principal {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  nome           String
+  jogador        String
+  classe         String
+  origem         String
+  nacionalidade  String
+  peprod         Int
+  idade          Int
+  idadeAdicional Int?
+  deslocamento   Int
+  nex            Int
+  trilha         String?
+  patente        String
 
-  nome            String
-  jogador         String
-  classe          String
-  origem          String
-  nacionalidade   String
-  peprod          Int
-  idade           Int
-  idadeAdicional  Int?
-  deslocamento    Int
-  nex             Int
-  trilha          String?
-  patente         String
-
-  fichaId         String?
-  ficha           Ficha? @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String?
+  ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPrincipal")
 }
 
 model Atributo {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  agi Int
+  int Int
+  vig Int
+  pre Int
+  for Int
 
-  agi             Int
-  int             Int
-  vig             Int
-  pre             Int
-  for             Int
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasAtributo")
 }
 
 model Status {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  combate      Boolean
+  insano       Boolean
+  danoMassivo  Boolean
+  inconsciente Boolean
 
-  combate         Boolean
-  insano          Boolean
-  danoMassivo     Boolean
-  inconsciente    Boolean
+  pv    Int
+  pvMax Int
+  ps    Int
+  psMax Int
+  pe    Int
+  peMax Int
 
-  pv              Int
-  pvMax           Int
-  ps              Int
-  psMax           Int
-  pe              Int
-  peMax           Int
+  peso Int
 
-  peso            Int
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasStatus")
 }
 
 model Pericias {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  acrobacia     Int?
+  adestramento  Int?
+  arte          Int?
+  atletismo     Int?
+  atualidade    Int?
+  ciencia       Int?
+  crime         Int?
+  diplomacia    Int?
+  enganacao     Int?
+  fortitude     Int?
+  furtividade   Int?
+  iniciativa    Int?
+  intimidacao   Int?
+  intuicao      Int?
+  investigacao  Int?
+  luta          Int?
+  medicina      Int?
+  ocultismo     Int?
+  percepcao     Int?
+  pilotagem     Int?
+  pontaria      Int?
+  profissao     Int?
+  reflexo       Int?
+  religiao      Int?
+  sobrevivencia Int?
+  tatica        Int?
+  tecnologia    Int?
+  vontade       Int?
 
-  acrobacia       Int?
-  adestramento    Int?
-  arte            Int?
-  atletismo       Int?
-  atualidade      Int?
-  ciencia         Int?
-  crime           Int?
-  diplomacia      Int?
-  enganacao       Int?
-  fortitude       Int?
-  furtividade     Int?
-  iniciativa      Int?
-  intimidacao     Int?
-  intuicao        Int?
-  investigacao    Int?
-  luta            Int?
-  medicina        Int?
-  ocultismo       Int?
-  percepcao       Int?
-  pilotagem       Int?
-  pontaria        Int?
-  profissao       Int?
-  reflexo         Int?
-  religiao        Int?
-  sobrevivencia   Int?
-  tatica          Int?
-  tecnologia      Int?
-  vontade         Int?
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPericias")
-
 }
 
 model Defesas {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  passiva      Int?
+  esquiva      Int?
+  bloqueio     Int?
+  mental       Int?
+  morte        Int?
+  conhecimento Int?
+  sangue       Int?
+  energia      Int?
+  fisica       Int?
+  balistica    Int?
+  corte        Int?
+  impacto      Int?
+  perfuracao   Int?
+  eletricidade Int?
+  fogo         Int?
+  frio         Int?
+  quimica      Int?
 
-  passiva         Int?
-  esquiva         Int?
-  bloqueio        Int?
-  mental          Int?
-  morte           Int?
-  conhecimento    Int?
-  sangue          Int?
-  energia         Int?
-  fisica          Int?
-  balistica       Int?
-  corte           Int?
-  impacto         Int?
-  perfuracao      Int?
-  eletricidade    Int?
-  fogo            Int?
-  frio            Int?
-  quimica         Int?
-  
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasDefesas")
-
 }
 
 model Personagem {
-
-  id              String @id @default(uuid())
+  id String @id @default(uuid())
 
   historia            String?
   aparencia           String?
@@ -536,16 +507,14 @@ model Personagem {
   anotacoesPlayer     String?
   anotacoesPersonagem String?
 
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPersonagem")
-
 }
 
 model Portrait {
-
-  id              String @id @default(uuid())
+  id String @id @default(uuid())
 
   normal          String?
   ferido          String?
@@ -554,75 +523,70 @@ model Portrait {
   insanoeferido   String?
   insanoemorrendo String?
 
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPortrait")
 }
 
 model Habilidade {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  nome      String
+  descricao String
 
-  nome            String
-  descricao       String
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasHabilidades")
 }
 
 model Poder {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  nome      String
+  descricao String
 
-  nome            String
-  descricao       String
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPoderes")
 }
 
 model Proficiencia {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  nome String
 
-  nome            String
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasProficiencias")
 }
 
 model Ritual {
+  id String @id @default(uuid())
 
-  id              String @id @default(uuid())
+  nome        String
+  circulo     Int
+  alcance     String
+  elemento    String
+  execucao    String
+  duracao     String
+  alvo        String
+  resistencia String?
 
-  nome            String
-  circulo         Int
-  alcance         String
-  elemento        String
-  execucao        String
-  duracao         String
-  alvo            String
-  resistencia     String?
+  normal     String?
+  discente   String?
+  verdadeiro String?
 
-  normal          String?
-  discente        String?
-  verdadeiro      String?
+  descricao String?
+  imagem    String?
 
-  descricao       String?
-  imagem          String?
-
-  fichaId         String
-  ficha           Ficha @relation(fields: [fichaId], references: [id], onDelete: Cascade)
+  fichaId String
+  ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasRituais")
-
 }
 
 //npx prisma migrate dev

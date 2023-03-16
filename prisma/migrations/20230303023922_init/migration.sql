@@ -132,6 +132,152 @@ CREATE TABLE "fichas" (
 );
 
 -- CreateTable
+CREATE TABLE "fichasNPCs" (
+    "id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "nome" TEXT NOT NULL,
+    "classe" TEXT NOT NULL,
+    "origem" TEXT NOT NULL,
+    "nacionalidade" TEXT NOT NULL,
+    "idade" INTEGER NOT NULL,
+    "deslocamento" INTEGER NOT NULL,
+    "nex" INTEGER NOT NULL,
+    "trilha" TEXT,
+    "patente" TEXT,
+    "peso" INTEGER NOT NULL,
+    "agi" INTEGER NOT NULL,
+    "int" INTEGER NOT NULL,
+    "vig" INTEGER NOT NULL,
+    "pre" INTEGER NOT NULL,
+    "for" INTEGER NOT NULL,
+    "pv" INTEGER NOT NULL,
+    "pvMax" INTEGER NOT NULL,
+    "ps" INTEGER NOT NULL,
+    "psMax" INTEGER NOT NULL,
+    "pe" INTEGER NOT NULL,
+    "peMax" INTEGER NOT NULL,
+    "acrobacia" INTEGER,
+    "adestramento" INTEGER,
+    "arte" INTEGER,
+    "atletismo" INTEGER,
+    "atualidade" INTEGER,
+    "ciencia" INTEGER,
+    "crime" INTEGER,
+    "diplomacia" INTEGER,
+    "enganacao" INTEGER,
+    "fortitude" INTEGER,
+    "furtividade" INTEGER,
+    "iniciativa" INTEGER,
+    "intimidacao" INTEGER,
+    "intuicao" INTEGER,
+    "investigacao" INTEGER,
+    "luta" INTEGER,
+    "medicina" INTEGER,
+    "ocultismo" INTEGER,
+    "percepcao" INTEGER,
+    "pilotagem" INTEGER,
+    "pontaria" INTEGER,
+    "profissao" INTEGER,
+    "reflexo" INTEGER,
+    "religiao" INTEGER,
+    "sobrevivencia" INTEGER,
+    "tatica" INTEGER,
+    "tecnologia" INTEGER,
+    "vontade" INTEGER,
+    "passiva" INTEGER,
+    "esquiva" INTEGER,
+    "bloqueio" INTEGER,
+    "mental" INTEGER,
+    "morte" INTEGER,
+    "conhecimento" INTEGER,
+    "sangue" INTEGER,
+    "energia" INTEGER,
+    "fisica" INTEGER,
+    "balistica" INTEGER,
+    "corte" INTEGER,
+    "impacto" INTEGER,
+    "perfuracao" INTEGER,
+    "eletricidade" INTEGER,
+    "fogo" INTEGER,
+    "frio" INTEGER,
+    "quimica" INTEGER,
+    "inventario" TEXT,
+    "ataques" TEXT,
+    "habilidades" TEXT,
+    "detalhes" TEXT,
+    "sessaoId" TEXT,
+
+    CONSTRAINT "fichasNPCs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fichasNPCsMonstros" (
+    "id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "nome" TEXT NOT NULL,
+    "deslocamento" INTEGER NOT NULL,
+    "nex" INTEGER NOT NULL,
+    "agi" INTEGER NOT NULL,
+    "int" INTEGER NOT NULL,
+    "vig" INTEGER NOT NULL,
+    "pre" INTEGER NOT NULL,
+    "for" INTEGER NOT NULL,
+    "pv" INTEGER NOT NULL,
+    "pvMax" INTEGER NOT NULL,
+    "acrobacia" INTEGER,
+    "adestramento" INTEGER,
+    "arte" INTEGER,
+    "atletismo" INTEGER,
+    "atualidade" INTEGER,
+    "ciencia" INTEGER,
+    "crime" INTEGER,
+    "diplomacia" INTEGER,
+    "enganacao" INTEGER,
+    "fortitude" INTEGER,
+    "furtividade" INTEGER,
+    "iniciativa" INTEGER,
+    "intimidacao" INTEGER,
+    "intuicao" INTEGER,
+    "investigacao" INTEGER,
+    "luta" INTEGER,
+    "medicina" INTEGER,
+    "ocultismo" INTEGER,
+    "percepcao" INTEGER,
+    "pilotagem" INTEGER,
+    "pontaria" INTEGER,
+    "profissao" INTEGER,
+    "reflexo" INTEGER,
+    "religiao" INTEGER,
+    "sobrevivencia" INTEGER,
+    "tatica" INTEGER,
+    "tecnologia" INTEGER,
+    "vontade" INTEGER,
+    "passiva" INTEGER,
+    "esquiva" INTEGER,
+    "bloqueio" INTEGER,
+    "mental" INTEGER,
+    "morte" INTEGER,
+    "conhecimento" INTEGER,
+    "sangue" INTEGER,
+    "energia" INTEGER,
+    "fisica" INTEGER,
+    "balistica" INTEGER,
+    "corte" INTEGER,
+    "impacto" INTEGER,
+    "perfuracao" INTEGER,
+    "eletricidade" INTEGER,
+    "fogo" INTEGER,
+    "frio" INTEGER,
+    "quimica" INTEGER,
+    "ataques" TEXT,
+    "habilidades" TEXT,
+    "detalhes" TEXT,
+    "sessaoId" TEXT,
+
+    CONSTRAINT "fichasNPCsMonstros_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "fichasPrincipal" (
     "id" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
@@ -146,7 +292,7 @@ CREATE TABLE "fichasPrincipal" (
     "nex" INTEGER NOT NULL,
     "trilha" TEXT,
     "patente" TEXT NOT NULL,
-    "fichaId" TEXT NOT NULL,
+    "fichaId" TEXT,
 
     CONSTRAINT "fichasPrincipal_pkey" PRIMARY KEY ("id")
 );
@@ -325,17 +471,6 @@ CREATE TABLE "fichasRituais" (
     CONSTRAINT "fichasRituais_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "fichasOutros" (
-    "id" TEXT NOT NULL,
-    "inventario" TEXT,
-    "habilidade" TEXT,
-    "detalhes" TEXT,
-    "fichaId" TEXT NOT NULL,
-
-    CONSTRAINT "fichasOutros_pkey" PRIMARY KEY ("id")
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
 
@@ -391,6 +526,12 @@ ALTER TABLE "fichas" ADD CONSTRAINT "fichas_userId_fkey" FOREIGN KEY ("userId") 
 ALTER TABLE "fichas" ADD CONSTRAINT "fichas_sessaoId_fkey" FOREIGN KEY ("sessaoId") REFERENCES "sessoes"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "fichasNPCs" ADD CONSTRAINT "fichasNPCs_sessaoId_fkey" FOREIGN KEY ("sessaoId") REFERENCES "sessoes"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fichasNPCsMonstros" ADD CONSTRAINT "fichasNPCsMonstros_sessaoId_fkey" FOREIGN KEY ("sessaoId") REFERENCES "sessoes"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "fichasPrincipal" ADD CONSTRAINT "fichasPrincipal_fichaId_fkey" FOREIGN KEY ("fichaId") REFERENCES "fichas"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -422,6 +563,3 @@ ALTER TABLE "fichasProficiencias" ADD CONSTRAINT "fichasProficiencias_fichaId_fk
 
 -- AddForeignKey
 ALTER TABLE "fichasRituais" ADD CONSTRAINT "fichasRituais_fichaId_fkey" FOREIGN KEY ("fichaId") REFERENCES "fichas"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "fichasOutros" ADD CONSTRAINT "fichasOutros_fichaId_fkey" FOREIGN KEY ("fichaId") REFERENCES "fichas"("id") ON DELETE CASCADE ON UPDATE CASCADE;
