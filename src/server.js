@@ -1,22 +1,15 @@
 require("express-async-errors");
 const express = require("express");
 const routers = require("./routes");
-const { createServer } = require("http");
 const AppError = require("./utils/AppError");
 const cors = require("cors");
-const { Server } = require("socket.io");
-const socket = require("socket.io");
 require("dotenv").config();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const app = express();
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
-// app.use('/images',
-//   createProxyMiddleware({
-//     target: 'http://https://fichasrpg.vercel.app/',
-//     changeOrigin: true,
-//   })
-// );
+const app = express();
 
 app.use(express.json());
 app.use(cors());
@@ -104,4 +97,3 @@ io.on("connection", (socket) => {
 httpServer.listen(process.env.PORT || "8080", () =>
   console.log("Server is running")
 );
-// 1234567

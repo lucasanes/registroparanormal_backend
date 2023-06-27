@@ -1,11 +1,10 @@
+const auth = require("../../../config/auth");
 const AppError = require("../../../utils/AppError");
 const prisma = require("../../database/prisma");
 const jwt = require("jsonwebtoken");
 
 class VerifyTokenUseCase {
   async execute({ token }) {
-
-    const SECRET_KEY = '5c72ca07c60df05fdc2734b03a9c2593'
 
     let tokenIsValid
 
@@ -19,7 +18,7 @@ class VerifyTokenUseCase {
 
         try {
 
-            if (jwt.verify(token, SECRET_KEY)) {
+            if (jwt.verify(token, auth.jwt.secretUser)) {
                 tokenIsValid = true
             }
 
