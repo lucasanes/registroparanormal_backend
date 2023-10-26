@@ -23,7 +23,7 @@ class SendRecoveryUseCase {
       }
     });
 
-    const code = () => {
+    function gerarCodigo() {
       const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       const nums = "0123456789"
       let codigo = '';
@@ -40,6 +40,8 @@ class SendRecoveryUseCase {
     
       return codigo;
     }
+
+    const code = gerarCodigo()
 
     const recoveryAlreadyExists = await prisma.recovery.findFirst({
       where: {
