@@ -14,21 +14,28 @@ class VerifyTokenUseCase {
 
     if (!token) {
         throw new AppError("Token inválido.")
-    } else {
+    }
 
-        try {
+    try {
 
-            if (jwt.verify(token, auth.jwt.secretUser)) {
-                tokenIsValid = true
-            }
-
-        } catch (erro) {
-            tokenIsValid = false
+        if (jwt.verify(token, auth.jwt.secretUser)) {
+            tokenIsValid = true
         }
 
+    } catch (erro) {
+        tokenIsValid = false
+        return
     }
+
+    const id = jwt.decode(token, auth.jwt.secretUser)
+
+    const user = await prisma.user.findFirst({
+        where: {
+            id
+        }
+    })
     
-    return {tokenIsValid};
+    return {tokenIsValid, user};
   }
 }
 
