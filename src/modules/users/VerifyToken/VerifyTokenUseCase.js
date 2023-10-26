@@ -27,7 +27,7 @@ class VerifyTokenUseCase {
         return
     }
 
-    const id = jwt.decode(token, auth.jwt.secretUser)
+    const id = jwt.decode(token, auth.jwt.secretUser).id
 
     const user = await prisma.user.findFirst({
         where: {
