@@ -1,6 +1,5 @@
 const prisma = require("../../database/prisma");
 const AppError = require("../../../utils/AppError");
-require('../../../globalFunctions')
 
 class GetRecoveryUseCase {
   async execute({code, email}) {
