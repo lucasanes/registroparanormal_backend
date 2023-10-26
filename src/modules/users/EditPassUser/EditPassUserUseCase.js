@@ -1,4 +1,4 @@
-const { hash, compare } = require("bcrypt");
+const { hash } = require("bcrypt");
 const AppError = require('../../../utils/AppError');
 const prisma = require("../../database/prisma");
 
@@ -6,6 +6,8 @@ const senhaRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9!@#$%*_&^-]{8,2
 
 class EditPassUserUseCase {
   async execute({ id, senha, senhaConfirmada }) {
+
+    console.log('a')
 
     const user = await prisma.user.findFirst({
       where: {

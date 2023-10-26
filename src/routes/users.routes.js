@@ -17,7 +17,7 @@ usersRouters.post("/", createUserController.handle);
 usersRouters.get("/", getUserController.handle);
 usersRouters.get("/:id", getUserByIdController.handle)
 usersRouters.put("/:id", editUserController.handle);
-usersRouters.put("/:id", editPassUserController.handle);
+usersRouters.put("/pass/:id", editPassUserController.handle);
 usersRouters.delete("/:id", deleteUserController.handle)
 
 //Vinha é gay
