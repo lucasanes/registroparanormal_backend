@@ -1,6 +1,5 @@
 const prisma = require("../../database/prisma");
 const AppError = require("../../../utils/AppError");
-const moment = require("moment")
 require('../../../globalFunctions')
 
 class GetRecoveryUseCase {
