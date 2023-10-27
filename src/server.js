@@ -19,12 +19,12 @@ app.use((error, request, response, next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
       status: error.statusCode,
-      mensagem: error.msg
+      msg: error.msg
     });
   }
   return response.status(500).json({
     status: 500,
-    mensagem: "Erro interno no servidor!"
+    msg: "Erro interno no servidor!"
   });
 });
 
