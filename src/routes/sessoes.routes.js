@@ -24,7 +24,7 @@ const getSessaoByUserIdController = new GetSessaoByUserIdController();
 sessoesRouters.post("/", createSessaoController.handle);
 sessoesRouters.get("/", getSessaoController.handle);
 sessoesRouters.get("/:id", getSessaoByIdController.handle);
-sessoesRouters.get("/userid/:id", getSessaoByUserIdController.handle);
+sessoesRouters.get("/user/:id", getSessaoByUserIdController.handle);
 sessoesRouters.delete("/:id", deleteSessaoController.handle);
 sessoesRouters.put("/:id", editSessaoController.handle);
 
