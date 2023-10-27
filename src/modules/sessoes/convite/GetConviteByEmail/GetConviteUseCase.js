@@ -11,6 +11,20 @@ class GetConviteUseCase {
     const convites = await prisma.convite.findMany({
       where: {
         userEmail: email
+      },
+      include: {
+        sessao: {
+          select: {
+            nome: true,
+            descricao: true,
+            Participantes: true
+          }
+        },
+        user: {
+          select: {
+            nome: true
+          }
+        }
       }
     });
 

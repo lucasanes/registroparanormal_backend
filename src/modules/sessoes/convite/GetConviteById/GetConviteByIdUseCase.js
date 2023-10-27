@@ -11,6 +11,20 @@ class GetConviteByIdUseCase {
     const convitee = await prisma.convite.findFirst({
       where: {
         id
+      },
+      include: {
+        sessao: {
+          select: {
+            nome: true,
+            descricao: true,
+            Participantes: true
+          }
+        },
+        user: {
+          select: {
+            nome: true
+          }
+        }
       }
     });
 
