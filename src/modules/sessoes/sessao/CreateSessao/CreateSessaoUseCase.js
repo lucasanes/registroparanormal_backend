@@ -45,17 +45,11 @@ class CreateSessaoUseCase {
       throw new AppError("Você só pode ter no máximo 3 sessões.")
     }
 
-    if (sessaoByUserIdAlreadyExists) {
-      const nomeAlreadyExists = await prisma.sessao.findFirst({
-        where: {
-          nome
-        }
-      })
-
-      if (nomeAlreadyExists) {
+    sessaoByUserIdAlreadyExists.forEach((each) => {
+      if (each.nome == nome) {
         throw new AppError("Você já tem uma sessão com este nome.")
       }
-    }
+    })
 
     const sessao = await prisma.sessao.create({
       data: {
@@ -65,24 +59,7 @@ class CreateSessaoUseCase {
       },
     });
 
-    const sessoes = await prisma.sessao.findFirst({
-      where: {
-        id: sessao.id
-      },
-      include: {
-        Participantes: {
-          include: {
-            user: {
-              select: {
-                nome: true
-              }
-            }
-          }
-        }
-      }
-    })
-
-    return sessoes;
+    return sessao;
   }
 }
 

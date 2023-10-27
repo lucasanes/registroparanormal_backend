@@ -50,22 +50,15 @@ class EditSessaoUseCase {
       sessao.descricao = descricao;
     }
 
-    const sessaoByUserIdAlreadyExists = await prisma.sessao.findFirst({
+    const sessaoByUserIdAndNomeAlreadyExists = await prisma.sessao.findFirst({
       where: {
         userId,
+        nome
       },
     });
 
-    if (sessaoByUserIdAlreadyExists) {
-      const nomeAlreadyExists = await prisma.sessao.findFirst({
-        where: {
-          nome,
-        },
-      });
-
-      if (nomeAlreadyExists) {
-        throw new AppError("Você já tem uma sessão com este nome.");
-      }
+    if (sessaoByUserIdAndNomeAlreadyExists) {
+      throw new AppError("Você já tem uma sessão com este nome.");
     }
 
     const sessaoAtualizado = await prisma.sessao.update({
