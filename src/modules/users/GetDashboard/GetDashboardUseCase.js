@@ -1,8 +1,10 @@
-const prisma = require("../../../database/prisma");
-const AppError = require("../../../../utils/AppError");
+const prisma = require("../../database/prisma");
+const AppError = require("../../../utils/AppError");
 
 class GetDashboardUseCase {
   async execute({ id, email }) {
+
+    console.log('aaa')
 
     if (!id) {
       throw new AppError("ID não existente.")
