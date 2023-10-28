@@ -13,6 +13,11 @@ class GetFichaByIdUseCase {
         id,
       },
       include: {
+        sessao: {
+          select: {
+            userId: true
+          }
+        },
         Principal: true,
         Atributos: true,
         Status: true,

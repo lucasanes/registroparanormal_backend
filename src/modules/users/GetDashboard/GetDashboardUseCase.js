@@ -4,8 +4,6 @@ const AppError = require("../../../utils/AppError");
 class GetDashboardUseCase {
   async execute({ id }) {
 
-    console.log(id)
-
     if (!id) {
       throw new AppError("ID não existente.")
     }
