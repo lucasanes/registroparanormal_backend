@@ -14,7 +14,12 @@ class GetFichaByUserIdUseCase {
       },
       include: {
         Principal: true,
-        Portrait: true
+        Portrait: true,
+        sessao: {
+          select: {
+            nome: true
+          }
+        }
       }
     });
 
