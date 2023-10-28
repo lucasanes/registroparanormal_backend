@@ -4,9 +4,9 @@ class GetDashboardController {
     async handle(request, response) {
         const getDashboardUseCase = new GetDashboardUseCase();
 
-        const {id, email} = request.body
+        const {id} = request.params
 
-        const dashboard = await getDashboardUseCase.execute({id, email});
+        const dashboard = await getDashboardUseCase.execute({id});
         response.json(dashboard);
     }
 }

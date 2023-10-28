@@ -2,16 +2,12 @@ const prisma = require("../../database/prisma");
 const AppError = require("../../../utils/AppError");
 
 class GetDashboardUseCase {
-  async execute({ id, email }) {
+  async execute({ id }) {
 
-    console.log('aaa')
+    console.log(id)
 
     if (!id) {
       throw new AppError("ID não existente.")
-    }
-
-    if (!email) {
-      throw new AppError("E-mail não existente.")
     }
 
     const sessao = await prisma.sessao.findMany({
@@ -48,7 +44,9 @@ class GetDashboardUseCase {
 
     const convites = await prisma.convite.findMany({
       where: {
-        userEmail: email
+        user: {
+          id
+        }
       },
       include: {
         sessao: {

@@ -17,7 +17,7 @@ const getDashboardController = new GetDashboardController()
 
 usersRouters.post("/", createUserController.handle);
 usersRouters.get("/", getUserController.handle);
-usersRouters.get("/dashboard/", getDashboardController.handle);
+usersRouters.get("/dashboard/:id", getDashboardController.handle);
 usersRouters.get("/:id", getUserByIdController.handle)
 usersRouters.put("/:id", editUserController.handle);
 usersRouters.put("/pass/:id", editPassUserController.handle);
