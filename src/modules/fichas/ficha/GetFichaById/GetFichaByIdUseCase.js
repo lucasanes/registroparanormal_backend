@@ -15,7 +15,17 @@ class GetFichaByIdUseCase {
       include: {
         sessao: {
           select: {
-            userId: true
+            userId: true,
+            Fichas: {
+              select: {
+                id: true,
+                Principal: {
+                  select: {
+                    nome: true
+                  }
+                }
+              }
+            }
           }
         },
         Principal: true,
