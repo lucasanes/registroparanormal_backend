@@ -44,8 +44,8 @@ class CreateDadoUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    const patternTeste = /^(((100|\d{1,2}|\/[ADCEFGINOPRTV]{3,4}\/)?((d)(20))))([+]((100|\d{1,2}|\/[ADCEFGINOPRTV]{3,4}\/)?))*$/g;
-    const patternDano = /^(((100|\d{1,2}|\/[ADCEFGINOPRTV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ADCEFGINOPRTV]{3,4}\/))?)|(\d{0,3}|1000))([+]((100|\d{1,2}|\/[ADCEFGINOPRTV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ADCEFGINOPRTV]{3,4}\/))?)|([+]\d{0,3}|1000)?)*$/g;
+    const patternTeste = /^(((100|\d{1,2}|\/[ABCDEFGILMNOPRSTUV]{3,4}\/)?((d)(20))))([+]((100|\d{1,2}|\/[ABCDEFGILMNOPRSTUV]{3,4}\/)?))*$/g;
+    const patternDano = /^(((100|\d{1,2}|\/[ABCDEFGILMNOPRSTUV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ABCDEFGILMNOPRSTUV]{3,4}\/))?)|(\d{0,3}|1000))([+]((100|\d{1,2}|\/[ABCDEFGILMNOPRSTUV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ABCDEFGILMNOPRSTUV]{3,4}\/))?)|([+]\d{0,3}|1000)?)*$/g;
 
     if (!isDano && !valor.match(patternTeste)) {
       toast.error('Dado inválido.')
