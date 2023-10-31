@@ -49,7 +49,7 @@ class EditDadoUseCase {
       data.isDano = isDano
     }
 
-    const pattern = /^([+-]?((100|\d{1,2}|\/[ADCEFGINOPRTV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ADCEFGINOPRTV]{3,4}\/))?)|(\d{0,3}|1000))([+-]((100|\d{1,2}|\/[ADCEFGINOPRTV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ADCEFGINOPRTV]{3,4}\/))?)|([+-]\d{0,3}|1000)?)*$/g;
+    const pattern = /^([+-]?((100|\d{1,2}|\/[ADCEFGILMNOPRSTUV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ADCEFGILMNOPRSTUV]{3,4}\/))?)|(\d{0,3}|1000))([+-]((100|\d{1,2}|\/[ADCEFGILMNOPRSTUV]{3,4}\/)?((d)(100|[1-9]\d?|\/[ADCEFGILMNOPRSTUV]{3,4}\/))?)|([+-]\d{0,3}|1000)?)*$/g;
 
     if (!valor.match(pattern)) {
       throw new AppError("Dado inválido.")
