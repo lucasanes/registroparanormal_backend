@@ -40,52 +40,56 @@ const io = new Server(httpServer, options);
 io.on("connection", (socket) => {
   // console.log('Connection => Alguém Conectou.')
   socket.on(`status.combate`, (data) => {
-    io.emit(`status.combate`, data);
+    io.emit(`status.combate?${data.fichaId}`, data);
   });
   socket.on(`status.insano`, (data) => {
-    io.emit(`status.insano`, data);
+    io.emit(`status.insano?${data.fichaId}`, data);
   });
   socket.on(`status.massivo`, (data) => {
-    io.emit(`status.massivo`, data);
+    io.emit(`status.massivo?${data.fichaId}`, data);
   });
   socket.on(`status.inconsciente`, (data) => {
-    io.emit(`status.inconsciente`, data);
+    io.emit(`status.inconsciente?${data.fichaId}`, data);
   });
   socket.on(`status.pvA`, (data) => {
-    io.emit(`status.pvA`, data);
+    io.emit(`status.pvA?${data.fichaId}`, data);
   });
   socket.on(`status.sanA`, (data) => {
-    io.emit(`status.sanA`, data);
+    io.emit(`status.sanA?${data.fichaId}`, data);
   });
   socket.on(`status.peA`, (data) => {
-    io.emit(`status.peA`, data);
+    io.emit(`status.peA?${data.fichaId}`, data);
   });
   socket.on(`status.pvMax`, (data) => {
-    io.emit(`status.pvMax`, data);
+    io.emit(`status.pvMax?${data.fichaId}`, data);
   });
   socket.on(`status.sanMax`, (data) => {
-    io.emit(`status.sanMax`, data);
+    io.emit(`status.sanMax?${data.fichaId}`, data);
   });
   socket.on(`status.peMax`, (data) => {
-    io.emit(`status.peMax`, data);
+    io.emit(`status.peMax?${data.fichaId}`, data);
   });
   socket.on(`status.portrait`, (data) => {
-    io.emit(`status.portrait`, data);
+    io.emit(`status.portrait?${data.fichaId}`, data);
   });
   socket.on(`status.municao`, (data) => {
-    io.emit(`status.municao`, data);
+    io.emit(`status.municao?${data.fichaId}`, data);
   });
   socket.on(`enviado.convite`, (data) => {
     io.emit(`enviado.convite?${data.email}`, data);
   });
   socket.on(`enviado.inv`, (data) => {
-    io.emit(`enviado.inv`, data);
+    io.emit(`enviado.inv?${data.fichaId}`, data);
   });
   socket.on(`enviado.itemImg`, (data) => {
-    io.emit(`enviado.itemImg`, data);
+    if (data.fichaId != null) {
+      io.emit(`enviado.itemImg?${data.fichaId}`, data);
+    } else {
+      io.emit(`enviado.itemImg?${data.sessaoId}`, data);
+    }
   });
   socket.on(`dado.rolado`, (data) => {
-    io.emit(`dado.rolado`, data);
+    io.emit(`dado.rolado?${data.fichaId}`, data);
   });
   // socket.on('disconnect', () => {
   //   console.log('Disconnect => Alguém desconectou.')
