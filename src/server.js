@@ -84,7 +84,9 @@ io.on("connection", (socket) => {
   socket.on(`enviado.itemImg`, (data) => {
     if (data.fichaId != null) {
       io.emit(`enviado.itemImg?${data.fichaId}`, data);
-    } else {
+    }
+
+    if (data.sessaoId != null) {
       io.emit(`enviado.itemImg?${data.sessaoId}`, data);
     }
   });
