@@ -51,14 +51,14 @@ class GetDashboardUseCase {
           select: {
             nome: true,
             descricao: true,
-            Participantes: true
+            Participantes: true,
+            user: {
+              select: {
+                nome: true
+              }
+            }
           }
         },
-        user: {
-          select: {
-            nome: true
-          }
-        }
       }
     });
 
