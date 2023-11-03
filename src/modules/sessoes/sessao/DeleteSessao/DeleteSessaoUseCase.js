@@ -17,6 +17,22 @@ class DeleteSessaoUseCase {
       throw new AppError("Usuário não existente.");
     }
 
+    const fichas = await prisma.ficha.findMany({
+      where: {
+        sessaoId: id
+      }
+    })
+
+    fichas.forEach(async (each) => {
+      
+      const ficha = await prisma.ficha.update({
+        data: {
+          sessaoId: null
+        }
+      })
+
+    })
+
     await prisma.sessao.delete({
       where: {
         id,
