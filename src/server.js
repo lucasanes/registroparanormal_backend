@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
     io.emit(`status.municao?${data.fichaId}`, data);
   });
   socket.on(`enviado.convite`, (data) => {
-    io.emit(`enviado.convite?${data.email}`, data);
+    io.emit(`enviado.convite?${data}`, data);
   });
   socket.on(`enviado.inv`, (data) => {
     io.emit(`enviado.inv?${data.fichaId}`, data);
