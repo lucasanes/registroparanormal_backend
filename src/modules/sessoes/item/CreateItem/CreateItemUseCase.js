@@ -2,7 +2,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class CreateItemUseCase {
-  async execute({ nome, espaco, categoria, descricao, imagem, isMunicao, sessaoId }) {
+  async execute({ nome, espaco, categoria, descricao, imagem, isMunicao, municao, municaoMax, sessaoId }) {
 
     const nomeLower = nome.toLowerCase()
 
@@ -82,6 +82,8 @@ class CreateItemUseCase {
         descricao,
         imagem,
         isMunicao,
+        municao,
+        municaoMax,
         sessaoId
       },
     });
