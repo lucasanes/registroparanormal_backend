@@ -91,6 +91,7 @@ io.on("connection", (socket) => {
     }
   });
   socket.on(`dado.rolado`, (data) => {
+    io.emit(`dado.rolado`, data);
     io.emit(`dado.rolado?${data.fichaId}`, data);
   });
   // socket.on('disconnect', () => {
