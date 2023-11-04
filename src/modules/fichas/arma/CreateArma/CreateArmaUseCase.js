@@ -2,7 +2,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class CreateArmaUseCase {
-  async execute({ nome, tipo, dano, margemCritico, danoCritico, recarga, alcance, especial, espaco, categoria, descricao, imagem, fichaId }) {
+  async execute({ nome, tipo, dano, ataque, margemCritico, danoCritico, recarga, alcance, especial, espaco, categoria, descricao, imagem, fichaId }) {
 
     const nomeLower = nome.toLowerCase()
 
@@ -50,52 +50,6 @@ class CreateArmaUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    if (dano != undefined && dano != '') {
-
-      const valorDadoDanoRegex = /^\d{1,2}d\d{1,2}$/
-
-      if (dano.includes("+")) {
-        const dadosDano = dano.split("+")
-        dadosDano.forEach(dado => {
-          if (dado.includes("d")) {
-            if (!valorDadoDanoRegex.test(dado)) {
-              throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo.")
-            }
-            const dadoSeparado = dado.split("d")
-            if (dadoSeparado[0] < 0 || dadoSeparado[0] > 10) {
-              throw new AppError("A quantidade de um dado deve ser entre 1 e 10.")
-            }
-            if (dadoSeparado[1] < 2 || dadoSeparado[1] > 20) {
-              throw new AppError("O valor de um dado deve ser entre 2 a 20.")
-            }
-          } else {
-            if (dado == null || dado == undefined || dado == '') {
-              throw new AppError("Você precisa colocar algum número depois do '+'.")
-            }
-            if (dado < 1 || dado > 25) {
-              throw new AppError("O valor de soma deve ser entre 1 e 25.")
-            }
-          }
-        });
-      } else {
-
-        if (!valorDadoDanoRegex.test(dano)) {
-          throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo.")
-        }
-        const dadoSeparado = dano.split("d")
-        if (dadoSeparado[0] < 0 || dadoSeparado[0] > 10) {
-          throw new AppError("A quantidade de um dado deve ser entre 1 e 10.")
-        }
-        if (dadoSeparado[1] < 2 || dadoSeparado[1] > 20) {
-          throw new AppError("O valor de um dado deve ser entre 2 a 20.")
-        }
-
-      }
-
-    } else {
-      throw new AppError("Dados necessários não preenchidos.")
-    }
-
     if (margemCritico != undefined && margemCritico != '') {
       if (Number(margemCritico) < 5 || Number(margemCritico) > 20) {
         throw new AppError("A margem do crítico deve ser de 5 a 20.")
@@ -104,52 +58,7 @@ class CreateArmaUseCase {
       throw new AppError("Dados necessários não preenchidos.")
     }
 
-    if (danoCritico != undefined && danoCritico != '') {
-
-      const valorDadoDanoRegex = /^\d{1,2}d\d{1,2}$/
-
-      if (danoCritico.includes("+")) {
-        const dadosDano = danoCritico.split("+")
-        dadosDano.forEach(dado => {
-          if (dado.includes("d")) {
-            if (!valorDadoDanoRegex.test(dado)) {
-              throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo.")
-            }
-            const dadoSeparado = dado.split("d")
-            if (dadoSeparado[0] < 0 || dadoSeparado[0] > 10) {
-              throw new AppError("A quantidade de um dado deve ser entre 1 e 10.")
-            }
-            if (dadoSeparado[1] < 2 || dadoSeparado[1] > 20) {
-              throw new AppError("O valor de um dado deve ser entre 2 a 20.")
-            }
-          } else {
-            if (dado == null || dado == undefined || dado == '') {
-              throw new AppError("Você precisa colocar algum número depois do '+'.")
-            }
-            if (dado < 1 || dado > 25) {
-              throw new AppError("O valor de soma deve ser entre 1 e 25.")
-            }
-          }
-        });
-      } else {
-
-        if (!valorDadoDanoRegex.test(danoCritico)) {
-          throw new AppError("Valor do dado inválido. Verifique se o 'd' está minúsculo.")
-        }
-        const dadoSeparado = danoCritico.split("d")
-        if (dadoSeparado[0] < 0 || dadoSeparado[0] > 10) {
-          throw new AppError("A quantidade de um dado deve ser entre 1 e 10.")
-        }
-        if (dadoSeparado[1] < 2 || dadoSeparado[1] > 20) {
-          throw new AppError("O valor de um dado deve ser entre 2 a 20.")
-        }
-
-      }
-
-    } else {
-      throw new AppError("Dados necessários não preenchidos.")
-    }
-
+   
     if (tipo == undefined || tipo == '') {
       throw new AppError("Dados necessários não preenchidos.")
     } else {
@@ -193,6 +102,7 @@ class CreateArmaUseCase {
         nome: nomeLower,
         tipo: tipo.toLowerCase(),
         dano,
+        ataque,
         margemCritico: Number(margemCritico),
         danoCritico,
         recarga: Number(recarga),
