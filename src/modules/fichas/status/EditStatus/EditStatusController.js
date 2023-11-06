@@ -2,7 +2,7 @@ const EditStatusUseCase = require("./EditStatusUseCase");
 
 class EditStatusController {
   async handle(request, response) {
-    const { combate, insano, danoMassivo, inconsciente, pv, pvMax, ps, psMax, pe, peMax, municao, municaoMax } = request.body;
+    const { combate, insano, danoMassivo, peso, inconsciente, pv, pvMax, ps, psMax, pe, peMax, municao, municaoMax } = request.body;
 
     const { id } = request.params;
     const editStatusUseCase = new EditStatusUseCase();
@@ -11,7 +11,8 @@ class EditStatusController {
       id,
       combate,
       insano,
-      danoMassivo,
+      danoMassivo, 
+      peso,
       inconsciente,
       pv,
       pvMax,

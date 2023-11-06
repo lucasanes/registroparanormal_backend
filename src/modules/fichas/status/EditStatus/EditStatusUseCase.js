@@ -3,7 +3,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class EditStatusUseCase {
-  async execute({ id, combate, insano, danoMassivo, inconsciente, pv, pvMax, ps, psMax, pe, peMax, municao, municaoMax }) {
+  async execute({ id, combate, insano, danoMassivo, inconsciente, pv, pvMax, ps, psMax, pe, peMax, municao, municaoMax, peso }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
@@ -61,6 +61,10 @@ class EditStatusUseCase {
 
     if (municaoMax != null) {
       data.municaoMax = municaoMax
+    }
+
+    if (peso != null) {
+      data.peso = peso
     }
 
     const StatusAtt = await prisma.status.update({
