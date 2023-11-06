@@ -50,8 +50,16 @@ class EditAtributosUseCase {
       data.for = forca
     } else {
       if (forca == 0) {
-        data.forca = 0
+        data.for = 0
       }
+    }
+
+    let peso;
+
+    if (forca == 0) {
+      peso = 2
+    } else {
+      peso = forca * 5
     }
 
     const AtributosAtt = await prisma.atributo.update({
@@ -60,6 +68,15 @@ class EditAtributosUseCase {
       },
       data: data
     });
+
+    const StatusAtt = await prisma.status.update({
+      where: {
+        fichaId: AtributosAtt.fichaId
+      },
+      data: {
+        peso
+      }
+    })
 
     return AtributosAtt;
   }
