@@ -46,6 +46,10 @@ class CreateFichaNPCPrincipalUseCase {
       trilha = 'Nenhuma'
     }
 
+    if (patente == null || patente == '' || patente == undefined) {
+      patente = 'Nenhuma'
+    }
+
     let ficha
 
     if (sessaoId != undefined && sessaoId != '' && sessaoId != null) {
@@ -65,26 +69,8 @@ class CreateFichaNPCPrincipalUseCase {
           sessaoId
         },
       });
-
     } else {
-
-      const fichasSeparadas = await prisma.ficha.findMany({
-        where: {
-          userId,
-          sessaoId
-        }
-      })
-
-      if (fichasSeparadas.length == 3) {
-        throw new AppError("Você só pode ter no máximo 3 NPC's principais.")
-      }
-
-      ficha = await prisma.ficha.create({
-        data: {
-          userId
-        },
-      });
-
+      throw new AppError("Dados necessários não preenchidos.")
     }
 
     const deslocamento = 7 + agi
@@ -104,8 +90,6 @@ class CreateFichaNPCPrincipalUseCase {
     } else {
       peso = forca * 5
     }
-
-
 
     const principal = await prisma.principal.create({
       data: {
