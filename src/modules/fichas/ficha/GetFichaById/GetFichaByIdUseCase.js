@@ -19,6 +19,7 @@ class GetFichaByIdUseCase {
             Fichas: {
               select: {
                 id: true,
+                userId: true,
                 Principal: {
                   select: {
                     nome: true
