@@ -49,6 +49,7 @@ class EditFichaNPCController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
       tatica,
       tecnologia,
       vontade,
@@ -130,6 +131,8 @@ class EditFichaNPCController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
+      
       tatica,
       tecnologia,
       vontade,

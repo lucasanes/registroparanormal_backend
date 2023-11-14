@@ -38,6 +38,7 @@ class EditFichaNPCMonstroController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
       tatica,
       tecnologia,
       vontade,
@@ -106,6 +107,8 @@ class EditFichaNPCMonstroController {
       reflexo,
       religiao,
       sobrevivencia,
+      
+      
       tatica,
       tecnologia,
       vontade,

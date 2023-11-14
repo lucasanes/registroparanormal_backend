@@ -36,6 +36,7 @@ class CreateFichaNPCMonstroController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
       tatica,
       tecnologia,
       vontade,
@@ -100,6 +101,8 @@ class CreateFichaNPCMonstroController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
+      
       tatica,
       tecnologia,
       vontade,

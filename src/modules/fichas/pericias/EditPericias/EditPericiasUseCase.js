@@ -2,7 +2,7 @@ const AppError = require("../../../../utils/AppError");
 const prisma = require("../../../database/prisma");
 
 class EditPericiasUseCase {
-  async execute({ id, acrobacia, adestramento, arte, atletismo, atualidade, ciencia, crime, diplomacia, enganacao, fortitude, furtividade, iniciativa, intimidacao, intuicao, investigacao, luta, medicina, ocultismo, percepcao, pilotagem, pontaria, profissao, reflexo, religiao, sobrevivencia, tatica, tecnologia, vontade }) {
+  async execute({ id, acrobacia, adestramento, arte, atletismo, atualidade, ciencia, crime, diplomacia, enganacao, fortitude, furtividade, iniciativa, intimidacao, intuicao, investigacao, luta, medicina, ocultismo, percepcao, pilotagem, pontaria, profissao, reflexo, religiao, sobrevivencia, sorte, tatica, tecnologia, vontade }) {
 
     if (!id) {
       throw new AppError("ID não existente.");
@@ -211,6 +211,14 @@ class EditPericiasUseCase {
     } else {
       if (sobrevivencia == 0) {
         data.sobrevivencia = null
+      }
+    }
+
+    if (sorte != null) {
+      data.sorte = sorte
+    } else {
+      if (sorte == 0) {
+        data.sorte = null
       }
     }
 

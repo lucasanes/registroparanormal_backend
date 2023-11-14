@@ -43,6 +43,7 @@ class EditFichaNPCMonstroUseCase {
     reflexo,
     religiao,
     sobrevivencia,
+    sorte,
     tatica,
     tecnologia,
     vontade,
@@ -139,6 +140,8 @@ class EditFichaNPCMonstroUseCase {
         reflexo,
         religiao,
         sobrevivencia,
+        sorte,
+        
         tatica,
         tecnologia,
         vontade,

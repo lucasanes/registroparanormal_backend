@@ -48,6 +48,7 @@ class CreateFichaNPCUseCase {
     reflexo,
     religiao,
     sobrevivencia,
+    sorte,
     tatica,
     tecnologia,
     vontade,
@@ -119,6 +120,7 @@ class CreateFichaNPCUseCase {
     if (forca == 0) {
       peso = 2
     } else {
+      
       peso = forca * 5
     }
 
@@ -174,6 +176,7 @@ class CreateFichaNPCUseCase {
         reflexo,
         religiao,
         sobrevivencia,
+        sorte,
         tatica,
         tecnologia,
         vontade,

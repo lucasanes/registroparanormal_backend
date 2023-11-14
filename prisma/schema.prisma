@@ -277,6 +277,7 @@ model FichaNPC {
   reflexo       Int?
   religiao      Int?
   sobrevivencia Int?
+  sorte         Int?
   tatica        Int?
   tecnologia    Int?
   vontade       Int?
@@ -352,6 +353,7 @@ model FichaNPCMonstro {
   reflexo       Int?
   religiao      Int?
   sobrevivencia Int?
+  sorte         Int?
   tatica        Int?
   tecnologia    Int?
   vontade       Int?
@@ -472,6 +474,7 @@ model Pericias {
   reflexo       Int?
   religiao      Int?
   sobrevivencia Int?
+  sorte         Int?
   tatica        Int?
   tecnologia    Int?
   vontade       Int?

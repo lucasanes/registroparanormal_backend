@@ -44,6 +44,7 @@ class CreateFichaNPCController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
       tatica,
       tecnologia,
       vontade,
@@ -119,6 +120,8 @@ class CreateFichaNPCController {
       reflexo,
       religiao,
       sobrevivencia,
+      sorte,
+      
       tatica,
       tecnologia,
       vontade,
