@@ -57,7 +57,7 @@ class CreateItemUseCase {
       }
 
     } else {
-      if (espaco != 0) {
+      if (Number(espaco) != 0) {
         throw new AppError("Dados necessários não preenchidos.")
       }
     }
@@ -69,7 +69,7 @@ class CreateItemUseCase {
       }
 
     } else {
-      if (categoria != 0) {
+      if (Number(categoria) != 0) {
         throw new AppError("Dados necessários não preenchidos.")
       }
     }

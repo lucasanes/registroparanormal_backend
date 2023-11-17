@@ -56,12 +56,14 @@ class CreateItemUseCase {
 
     if (espaco != undefined && espaco != '') {
 
-      if (espaco > 9) {
+      if (Number(espaco) > 9) {
         throw new AppError("O máximo de espaços que um item pode ter é 9.")
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      if (Number(espaco) != 0) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     if (categoria != undefined && categoria != '') {
@@ -71,7 +73,9 @@ class CreateItemUseCase {
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      if (Number(categoria) != 0) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     const data = await prisma.item.create({

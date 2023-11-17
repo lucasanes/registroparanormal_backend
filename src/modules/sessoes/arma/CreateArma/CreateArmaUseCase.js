@@ -77,7 +77,9 @@ class CreateArmaUseCase {
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      if (Number(espaco) != 0) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     if (categoria != undefined && categoria != '') {
@@ -87,7 +89,9 @@ class CreateArmaUseCase {
       }
 
     } else {
-      throw new AppError("Dados necessários não preenchidos.")
+      if (Number(categoria) != 0) {
+        throw new AppError("Dados necessários não preenchidos.")
+      }
     }
 
     let especialLower = especial;
