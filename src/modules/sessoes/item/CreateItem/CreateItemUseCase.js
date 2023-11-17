@@ -66,7 +66,7 @@ class CreateItemUseCase {
 
     if (categoria != undefined && categoria != '') {
 
-      if (categoria < 0 || categoria > 4) {
+      if (Number(categoria) < 0 || Number(categoria) > 4) {
         throw new AppError("A categoria de um item tem que ser entre 0 e 4.")
       }
 
