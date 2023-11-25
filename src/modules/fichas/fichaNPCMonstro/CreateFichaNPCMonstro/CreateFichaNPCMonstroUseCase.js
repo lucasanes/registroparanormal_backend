@@ -93,7 +93,7 @@ class CreateFichaNPCMonstroUseCase {
       throw new AppError("Esta sessão não existe.")
     }
 
-    const deslocamento = 5 + agi
+    const deslocamento = 8 + agi
 
     const ficha = await prisma.fichaNPCMonstro.create({
       data: {
