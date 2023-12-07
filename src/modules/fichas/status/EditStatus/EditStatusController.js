@@ -20,6 +20,12 @@ class EditStatusController {
       psMax,
       pe,
       peMax,
+      pv2,
+      pvMax2,
+      ps2,
+      psMax2,
+      pe2,
+      peMax2,
       municao,
       municaoMax
     });
