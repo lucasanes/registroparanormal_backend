@@ -431,12 +431,18 @@ model Status {
   danoMassivo  Boolean
   inconsciente Boolean
 
-  pv    Int
-  pvMax Int
-  ps    Int
-  psMax Int
-  pe    Int
-  peMax Int
+  pv     Int
+  pvMax  Int
+  pv2    Int?
+  pvMax2 Int?
+  ps     Int
+  psMax  Int
+  ps2    Int?
+  psMax2 Int?
+  pe     Int
+  peMax  Int
+  pe2    Int?
+  peMax2 Int?
 
   peso Int
 

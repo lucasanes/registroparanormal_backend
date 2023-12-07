@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "fichasStatus" ADD COLUMN     "pe2" INTEGER,
+ADD COLUMN     "peMax2" INTEGER,
+ADD COLUMN     "ps2" INTEGER,
+ADD COLUMN     "psMax2" INTEGER,
+ADD COLUMN     "pv2" INTEGER,
+ADD COLUMN     "pvMax2" INTEGER;
