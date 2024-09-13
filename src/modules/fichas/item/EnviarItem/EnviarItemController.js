@@ -2,17 +2,14 @@ const EnviarItemUseCase = require("./EnviarItemUseCase");
 
 class EnviarItemController {
   async handle(request, response) {
-    const { nome, espaco, categoria, descricao, imagem, fichaId } = request.body;
+    const { id, fichaId, sessaoId } = request.body;
 
     const enviarItemUseCase = new EnviarItemUseCase();
 
     const data = await enviarItemUseCase.execute({
-      nome,
-      espaco,
-      categoria,
-      descricao,
-      imagem,
-      fichaId
+      id,
+      fichaId,
+      sessaoId
     });
     response.status(201).json(data);
   }
