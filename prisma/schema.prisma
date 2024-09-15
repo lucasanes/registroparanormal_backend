@@ -12,6 +12,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum EnumRole {
+  USER
+  ADMIN
+}
+
 model Recovery {
   id String @id @default(uuid())
 
@@ -33,6 +38,7 @@ model User {
   email      String   @unique
   senha      String
   created_at DateTime @default(now())
+  role       EnumRole @default(USER)
 
   Fichas          Ficha[]
   Sessoes         Sessao[]

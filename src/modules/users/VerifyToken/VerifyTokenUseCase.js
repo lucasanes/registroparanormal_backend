@@ -5,37 +5,34 @@ const jwt = require("jsonwebtoken");
 
 class VerifyTokenUseCase {
   async execute({ token }) {
+    let tokenIsValid;
 
-    let tokenIsValid
-
-    if (token == undefined || token == null || token == '') {
-        throw new AppError("Você precisa passar o token.")
+    if (token == undefined || token == null || token == "") {
+      throw new AppError("Você precisa passar o token.");
     }
 
     if (!token) {
-        throw new AppError("Token inválido.")
+      throw new AppError("Token inválido.");
     }
 
     try {
-
-        if (jwt.verify(token, auth.jwt.secretUser)) {
-            tokenIsValid = true
-        }
-
+      if (jwt.verify(token, auth.jwt.secretUser)) {
+        tokenIsValid = true;
+      }
     } catch (erro) {
-        tokenIsValid = false
-        return
+      tokenIsValid = false;
+      return;
     }
 
-    const id = jwt.decode(token, auth.jwt.secretUser).id
+    const id = jwt.decode(token, auth.jwt.secretUser).id;
 
     const user = await prisma.user.findFirst({
-        where: {
-            id
-        }
-    })
-    
-    return {tokenIsValid, user};
+      where: {
+        id,
+      },
+    });
+
+    return { tokenIsValid, user };
   }
 }
 
