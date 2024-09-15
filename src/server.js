@@ -37,6 +37,9 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, options);
 
+let screenSharer = null;
+let webcamSharer = null;
+
 io.on("connection", (socket) => {
   socket.on(`status.combate`, (data) => {
     io.emit(`status.combate?${data.fichaId}`, data);
@@ -93,17 +96,103 @@ io.on("connection", (socket) => {
     io.emit(`dado.rolado`, data);
     io.emit(`dado.rolado?${data.fichaId}`, data);
   });
-  socket.on("offer", (data) => {
-    console.log("offer", data);
-    socket.broadcast.emit("offer", data); // Envia o SDP offer para outros usuários
+
+  // Screen Share
+
+  socket.on("offer", (offer, targetId) => {
+    if (targetId) {
+      io.to(targetId).emit("offer", offer);
+    } else {
+      socket.broadcast.emit("offer", offer);
+    }
   });
-  socket.on("answer", (data) => {
-    console.log("answer", data);
-    socket.broadcast.emit("answer", data); // Envia o SDP answer para outros usuários
+  socket.on("answer", (answer, sharerId) => {
+    if (sharerId) {
+      io.to(sharerId).emit("answer", answer);
+    } else {
+      socket.broadcast.emit("answer", answer);
+    }
   });
-  socket.on("ice-candidate", (candidate) => {
-    console.log("ice-candidate", candidate);
-    socket.broadcast.emit("ice-candidate", candidate); // Envia os candidatos ICE
+  socket.on("ice-candidate", (candidate, targetId) => {
+    if (targetId) {
+      io.to(targetId).emit("ice-candidate", candidate);
+    } else {
+      socket.broadcast.emit("ice-candidate", candidate);
+    }
+  });
+  socket.on("new-user-joined", () => {
+    console.log("Novo usuário entrou:", socket.id);
+
+    if (screenSharer) {
+      io.to(screenSharer).emit("request-screen-share", socket.id);
+    }
+  });
+  socket.on("start-screen-share", () => {
+    screenSharer = socket.id;
+    console.log("Usuário começou a compartilhar a tela:", socket.id);
+  });
+  socket.on("stop-screen-share", () => {
+    console.log("Usuário parou de compartilhar a tela:", socket.id);
+
+    screenSharer = null;
+
+    socket.broadcast.emit("stop-screen-share");
+  });
+
+  // Webcam Share
+
+  socket.on("webcam/offer", (offer, targetId) => {
+    if (targetId) {
+      io.to(targetId).emit("webcam/offer", offer);
+    } else {
+      socket.broadcast.emit("webcam/offer", offer);
+    }
+  });
+  socket.on("webcam/answer", (answer, sharerId) => {
+    if (sharerId) {
+      io.to(sharerId).emit("webcam/answer", answer);
+    } else {
+      socket.broadcast.emit("webcam/answer", answer);
+    }
+  });
+  socket.on("webcam/ice-candidate", (candidate, targetId) => {
+    if (targetId) {
+      io.to(targetId).emit("webcam/ice-candidate", candidate);
+    } else {
+      socket.broadcast.emit("webcam/ice-candidate", candidate);
+    }
+  });
+  socket.on("webcam/new-user-joined", () => {
+    console.log("Novo usuário entrou:", socket.id);
+
+    if (screenSharer) {
+      io.to(screenSharer).emit("webcam/request-screen-share", socket.id);
+    }
+  });
+  socket.on("webcam/start-screen-share", () => {
+    screenSharer = socket.id;
+    console.log("Usuário começou a compartilhar a tela:", socket.id);
+  });
+  socket.on("webcam/stop-screen-share", () => {
+    console.log("Usuário parou de compartilhar a tela:", socket.id);
+
+    screenSharer = null;
+
+    socket.broadcast.emit("webcam/stop-screen-share");
+  });
+
+  //Disconnect
+
+  socket.on("disconnect", () => {
+    if (socket.id === screenSharer) {
+      screenSharer = null;
+      console.log("Screen sharer desconectado");
+    }
+
+    if (socket.id === webcamSharer) {
+      webcamSharer = null;
+      console.log("Webcam sharer desconectado");
+    }
   });
 });
 
