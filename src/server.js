@@ -4,7 +4,7 @@ const routers = require("./routes");
 const AppError = require("./utils/AppError");
 const cors = require("cors");
 require("dotenv").config();
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -19,18 +19,18 @@ app.use((error, request, response, next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
       status: error.statusCode,
-      msg: error.msg
+      msg: error.msg,
     });
   }
   return response.status(500).json({
     status: 500,
-    msg: "Erro interno no servidor!"
+    msg: "Erro interno no servidor!",
   });
 });
 
 const options = {
   cors: true,
-  origin: ["*"]
+  origin: ["*"],
 };
 
 const httpServer = createServer(app);
@@ -38,7 +38,6 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, options);
 
 io.on("connection", (socket) => {
-  // console.log('Connection => Alguém Conectou.')
   socket.on(`status.combate`, (data) => {
     io.emit(`status.combate?${data.fichaId}`, data);
   });
@@ -94,9 +93,18 @@ io.on("connection", (socket) => {
     io.emit(`dado.rolado`, data);
     io.emit(`dado.rolado?${data.fichaId}`, data);
   });
-  // socket.on('disconnect', () => {
-  //   console.log('Disconnect => Alguém desconectou.')
-  // })
+  socket.on("offer", (data) => {
+    console.log("offer", data);
+    socket.broadcast.emit("offer", data); // Envia o SDP offer para outros usuários
+  });
+  socket.on("answer", (data) => {
+    console.log("answer", data);
+    socket.broadcast.emit("answer", data); // Envia o SDP answer para outros usuários
+  });
+  socket.on("ice-candidate", (candidate) => {
+    console.log("ice-candidate", candidate);
+    socket.broadcast.emit("ice-candidate", candidate); // Envia os candidatos ICE
+  });
 });
 
 httpServer.listen(process.env.PORT || "8080", () =>
