@@ -146,15 +146,6 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("streaming/stop-share");
   });
 
-  socket.on("disconnect", () => {
-    console.log("Usuário desconectado:", socket.id);
-
-    if (screenSharer === socket.id) {
-      screenSharer = null;
-      socket.broadcast.emit("streaming/stop-share");
-    }
-  });
-
   // Webcam Share
 
   socket.on("webcam/offer", (offer, targetId) => {
@@ -195,6 +186,21 @@ io.on("connection", (socket) => {
     screenSharer = null;
 
     socket.broadcast.emit("webcam/stop-share");
+  });
+
+  //Audio
+
+  socket.on("audio-play", (data) => {
+    io.emit("audio-play", data);
+  });
+  socket.on("audio-pause", (data) => {
+    io.emit("audio-pause", data);
+  });
+  socket.on("audio-volume", (data) => {
+    io.emit("audio-volume", data);
+  });
+  socket.on("audio-duration", (data) => {
+    io.emit("audio-duration", data);
   });
 
   //Disconnect
