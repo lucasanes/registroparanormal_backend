@@ -7,7 +7,7 @@ class VerifyTokenController {
     const verifyTokenUseCase = new VerifyTokenUseCase();
 
     const tokenIsValid = await verifyTokenUseCase.execute({
-        token
+      token
     });
     response.status(200).json(tokenIsValid);
   }

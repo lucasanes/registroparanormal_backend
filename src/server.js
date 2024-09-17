@@ -97,11 +97,11 @@ io.on("connection", (socket) => {
   // Screen Share
 
   socket.on("screen/enter-room", (peer) => {
-    socket.broadcast.emit("screen/enter-room", peer);
+    socket.broadcast.emit(`screen/enter-room?${peer.roomId}`, peer);
   })
 
   socket.on("screen/connect-with-me", (peer) => {
-    socket.to(peer.socketId).emit("screen/connect-with-me", {
+    socket.to(peer.socketId).emit(`screen/connect-with-me?${peer.roomId}`, {
       peerId: peer.peerId,
       socketId: socket.id,
       roomId: peer.roomId,
@@ -109,21 +109,21 @@ io.on("connection", (socket) => {
   })
 
   socket.on("screen/stop-share", (peer) => {
-    socket.broadcast.emit("screen/stop-share", peer);
+    socket.broadcast.emit(`screen/stop-share?${peer.roomId}`, peer);
   })
 
   socket.on("screen/leave-room", (peer) => {
-    socket.broadcast.emit("screen/leave-room", peer);
+    socket.broadcast.emit(`screen/leave-room?${peer.roomId}`, peer);
   })
 
   // Webcam Share
 
   socket.on("webcam/enter-room", (peer) => {
-    socket.broadcast.emit("webcam/enter-room", peer);
+    socket.broadcast.emit(`webcam/enter-room?${peer.roomId}`, peer);
   })
 
   socket.on("webcam/connect-with-me", (peer) => {
-    socket.to(peer.socketId).emit("webcam/connect-with-me", {
+    socket.to(peer.socketId).emit(`webcam/connect-with-me?${peer.roomId}`, {
       peerId: peer.peerId,
       socketId: socket.id,
       roomId: peer.roomId,
@@ -131,11 +131,11 @@ io.on("connection", (socket) => {
   })
 
   socket.on("webcam/stop-share", (peer) => {
-    socket.broadcast.emit("webcam/stop-share", peer);
+    socket.broadcast.emit(`webcam/stop-share?${peer.roomId}`, peer);
   })
 
   socket.on("webcam/leave-room", (peer) => {
-    socket.broadcast.emit("webcam/leave-room", peer);
+    socket.broadcast.emit(`webcam/leave-room?${peer.roomId}`, peer);
   })
 
   //Audio
