@@ -101,50 +101,15 @@ io.on("connection", (socket) => {
 
   // Screen Share
 
-  socket.on("streaming/offer", (offer, targetId) => {
-    if (targetId) {
-      io.to(targetId).emit("streaming/offer", offer, socket.id);
-    } else {
-      socket.broadcast.emit("streaming/offer", offer, socket.id);
-    }
-  });
+  socket.on("enter-room", (room) => {
+    console.log("Entrou na sala:", room);
+    socket.emit("enter-room", room);
+  })
 
-  socket.on("streaming/answer", (answer, targetId) => {
-    if (targetId) {
-      io.to(targetId).emit("streaming/answer", answer, socket.id);
-    } else {
-      socket.broadcast.emit("streaming/answer", answer, socket.id);
-    }
-  });
-
-  socket.on("streaming/ice-candidate", (candidate, targetId) => {
-    if (targetId) {
-      io.to(targetId).emit("streaming/ice-candidate", candidate, socket.id);
-    } else {
-      socket.broadcast.emit("streaming/ice-candidate", candidate, socket.id);
-    }
-  });
-
-  socket.on("streaming/new-user-joined", () => {
-    console.log("Novo usuário entrou:", socket.id);
-
-    if (screenSharer) {
-      io.to(screenSharer).emit("streaming/request-share", socket.id);
-    }
-  });
-
-  socket.on("streaming/start-share", () => {
-    screenSharer = socket.id;
-    console.log("Usuário começou a compartilhar a tela:", socket.id);
-  });
-
-  socket.on("streaming/stop-share", () => {
-    console.log("Usuário parou de compartilhar a tela:", socket.id);
-
-    screenSharer = null;
-
-    socket.broadcast.emit("streaming/stop-share");
-  });
+  socket.on("leave-room", (room) => {
+    console.log("Saiu da sala:", room);
+    socket.emit("leave-room", room);
+  })
 
   // Webcam Share
 
