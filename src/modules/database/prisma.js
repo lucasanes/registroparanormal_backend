@@ -28,21 +28,64 @@ const prisma = new PrismaClient();
 // });
 
 prisma.$use(async (params, next) => {
-  if (params.args && params.args.where) {
-    for (const key in params.args.where) {
-      if (key.includes('id') && typeof params.args.where[key] === 'string') {
-        params.args.where[key] = parseInt(params.args.where[key], 10);
+  const convertIdsInWhere = (obj) => {
+    if (obj) {
+      for (const key in obj) {
+        if (key.toLowerCase().includes('id') && typeof obj[key] === 'string') {
+          obj[key] = parseInt(obj[key], 10);
+        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+          for (const key2 in obj[key]) {
+            if (
+              key2.toLowerCase().includes('id') &&
+              typeof obj[key][key2] === 'string'
+            ) {
+              obj[key][key2] = parseInt(obj[key][key2], 10);
+            } else if (typeof obj[key][key2] === 'object' && obj[key][key2]) {
+              for (const key3 in obj[key][key2]) {
+                if (
+                  key3.toLowerCase().includes('id') &&
+                  typeof obj[key][key2][key3] === 'string'
+                ) {
+                  obj[key][key2][key3] = parseInt(obj[key][key2][key3], 10);
+                }
+              }
+            }
+          }
+        }
       }
     }
-  }
+  };
 
-  if (params.args && params.args.data) {
-    for (const key in params.args.data) {
-      if (key.includes('id') && typeof params.args.data[key] === 'string') {
-        params.args.data[key] = parseInt(params.args.data[key], 10);
+  const convertIdsInData = (obj) => {
+    if (obj) {
+      for (const key in obj) {
+        if (key.toLowerCase().includes('id') && typeof obj[key] === 'string') {
+          obj[key] = parseInt(obj[key], 10);
+        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+          for (const key2 in obj[key]) {
+            if (
+              key2.toLowerCase().includes('id') &&
+              typeof obj[key][key2] === 'string'
+            ) {
+              obj[key][key2] = parseInt(obj[key][key2], 10);
+            } else if (typeof obj[key][key2] === 'object' && obj[key][key2]) {
+              for (const key3 in obj[key][key2]) {
+                if (
+                  key3.toLowerCase().includes('id') &&
+                  typeof obj[key][key2][key3] === 'string'
+                ) {
+                  obj[key][key2][key3] = parseInt(obj[key][key2][key3], 10);
+                }
+              }
+            }
+          }
+        }
       }
     }
-  }
+  };
+
+  convertIdsInWhere(params.args.where);
+  convertIdsInData(params.args.data);
 
   const result = await next(params);
   return result;
