@@ -18,7 +18,7 @@ enum EnumRole {
 }
 
 model Recovery {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   code String
 
@@ -31,7 +31,7 @@ model Recovery {
 }
 
 model User {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome       String
   username   String   @unique
@@ -50,12 +50,12 @@ model User {
 }
 
 model Sessao {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   nome       String
   descricao  String
   created_at DateTime @default(now())
 
-  userId String
+  userId Int
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   Fichas        Ficha[]
@@ -73,26 +73,26 @@ model Sessao {
 }
 
 model Participante {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   created_at DateTime @default(now())
 
-  sessaoId String
+  sessaoId Int
   sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  userId String
+  userId Int
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("participantes")
 }
 
 model Convite {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   created_at DateTime @default(now())
 
-  sessaoId String
+  sessaoId Int
   sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   userEmail String
@@ -102,50 +102,50 @@ model Convite {
 }
 
 model Anotacao {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   nome       String
   descricao  String?
   created_at DateTime @default(now())
 
-  sessaoId String
+  sessaoId Int
   sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("anotacoes")
 }
 
 model Iniciativa {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   posicao    Int
   nome       String
   iniciativa Int
   dano       Int
   created_at DateTime @default(now())
 
-  sessaoId String
+  sessaoId Int
   sessao   Sessao @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("iniciativas")
 }
 
 model Dado {
-  id     String  @id @default(uuid())
+  id     Int  @id @default(autoincrement())
   nome   String
   valor  String
   isDano Boolean
 
   created_at DateTime @default(now())
 
-  fichaId String?
+  fichaId Int?
   ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
-  sessaoId String?
+  sessaoId Int?
   sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("dados")
 }
 
 model Item {
-  id        String  @id @default(uuid())
+  id        Int  @id @default(autoincrement())
   nome      String
   descricao String?
   espaco    Int
@@ -160,17 +160,17 @@ model Item {
 
   created_at DateTime @default(now())
 
-  sessaoId String?
+  sessaoId Int?
   sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  fichaId String?
+  fichaId Int?
   ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("itens")
 }
 
 model Arma {
-  id            String  @id @default(uuid())
+  id            Int  @id @default(autoincrement())
   nome          String
   tipo          String
   ataque        String
@@ -191,24 +191,25 @@ model Arma {
 
   created_at DateTime @default(now())
 
-  sessaoId String?
+  sessaoId Int?
   sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
-  fichaId String?
+  fichaId Int?
   ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("armas")
 }
 
 model Ficha {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   created_at DateTime @default(now())
 
   isPublic Boolean @default(false)
 
-  userId   String
+  userId   Int
   user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  sessaoId String?
+
+  sessaoId Int?
   sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   Principal     Principal[]
@@ -231,7 +232,7 @@ model Ficha {
 }
 
 model FichaNPC {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   created_at DateTime @default(now())
 
   nome          String
@@ -311,14 +312,14 @@ model FichaNPC {
   habilidades String?
   detalhes    String?
 
-  sessaoId String?
+  sessaoId Int?
   sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("fichasNPCs")
 }
 
 model FichaNPCMonstro {
-  id         String   @id @default(uuid())
+  id         Int   @id @default(autoincrement())
   created_at DateTime @default(now())
 
   nome         String
@@ -386,14 +387,14 @@ model FichaNPCMonstro {
   habilidades String?
   detalhes    String?
 
-  sessaoId String?
+  sessaoId Int?
   sessao   Sessao? @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
 
   @@map("fichasNPCsMonstros")
 }
 
 model Principal {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome           String
   jogador        String
@@ -408,14 +409,14 @@ model Principal {
   trilha         String?
   patente        String
 
-  fichaId String?
+  fichaId Int?
   ficha   Ficha?  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPrincipal")
 }
 
 model Atributo {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   agi Int
   int Int
@@ -423,14 +424,14 @@ model Atributo {
   pre Int
   for Int
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasAtributo")
 }
 
 model Status {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   combate      Boolean
   insano       Boolean
@@ -452,14 +453,14 @@ model Status {
 
   peso Int
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasStatus")
 }
 
 model Pericias {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   acrobacia     Int?
   adestramento  Int?
@@ -491,14 +492,14 @@ model Pericias {
   tecnologia    Int?
   vontade       Int?
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPericias")
 }
 
 model Defesas {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   passiva      Int?
   esquiva      Int?
@@ -518,14 +519,14 @@ model Defesas {
   frio         Int?
   quimica      Int?
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasDefesas")
 }
 
 model Personagem {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   historia            String?
   aparencia           String?
@@ -537,14 +538,14 @@ model Personagem {
   anotacoesPlayer     String?
   anotacoesPersonagem String?
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPersonagem")
 }
 
 model Portrait {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   normal          String?
   ferido          String?
@@ -553,49 +554,49 @@ model Portrait {
   insanoeferido   String?
   insanoemorrendo String?
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPortrait")
 }
 
 model Habilidade {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome      String
   descricao String
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasHabilidades")
 }
 
 model Poder {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome      String
   descricao String
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasPoderes")
 }
 
 model Proficiencia {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome String
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasProficiencias")
 }
 
 model Ritual {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   nome        String
   circulo     Int
@@ -613,7 +614,7 @@ model Ritual {
   descricao String?
   imagem    String?
 
-  fichaId String
+  fichaId Int
   ficha   Ficha  @relation(fields: [fichaId], references: [id], onDelete: Cascade)
 
   @@map("fichasRituais")
